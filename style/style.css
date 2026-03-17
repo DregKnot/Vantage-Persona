@@ -1,0 +1,295 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: rgba(255, 228, 196, 0.737);
+}
+
+.hero-carousel-container{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    color: white;
+}
+
+.carousel-background{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+    /* overlay: ; */
+}
+
+
+
+
+
+.carousel-slide{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.carousel-slide.active{
+    opacity: 1;
+}
+
+.header{
+    position: relative;
+    z-index: 3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 4rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.nav ul{
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+
+.nav a {
+    color: rgb(237, 228, 65);
+    text-decoration: none;
+    font-size: 1.2rem;
+    opacity: 0.8;
+}
+
+.hero-content-overlay{
+    position: absolute;
+    z-index: 7;
+    bottom: 5%;
+    width: 100%;
+    text-align: center;
+}
+
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Adjust 0.4 for darkness (0.1 to 0.9) */
+    z-index: 5; /* Sits above the background */
+    pointer-events: none; /* Allows clicks to pass through to any buttons below */
+}
+
+.main-title{
+    font-family: Montserrat, sans-serif;
+    font-size: 10vw;
+    font-weight: 900;
+    line-height: 0.9;
+    margin: 0;
+    letter-spacing: -5px;
+    text-transform: uppercase;
+}
+
+.hollow{
+    color: transparent;
+    -webkit-text-stroke: 1px white;
+}
+
+.sub-text{
+    position: absolute;
+    font-size: 1rem;
+    font-weight: 300;
+    letter-spacing: 3px;
+}
+
+.sub-text.left{
+    bottom: 60%;
+    left: 4rem;
+}
+
+.sub-text.right{
+    bottom: 60%;
+    right: 4rem;
+}
+
+/* ===== COLLECTION GRID ===== */
+.clothing-collection {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 440px 50px 200px auto;
+    gap: 20px;
+    max-width: 1500px;
+    width: 95%;
+    margin: 80px 50px;
+}
+
+/* ===== CARD BASE ===== */
+.collection-card {
+    position: relative;
+    overflow: visible;
+    cursor: pointer;
+    background-color: #ffd2d2;
+}
+
+/* ===== GRID PLACEMENT ===== */
+.card-suits {
+    grid-column: 1;
+    grid-row: 1 / 4;
+}
+
+.card-tops {
+    grid-column: 2;
+    grid-row: 1 / 2;
+}
+
+.card-bottoms {
+    grid-column: 3;
+    grid-row: 1 / 2;
+}
+
+.collection-info {
+    grid-column: 2 / 4;
+    grid-row: 3;
+    padding: 50px 10px;
+}
+
+/* ===== IMAGES ===== */
+.card-images {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.card-images img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: opacity 0.5s ease;
+}
+
+.img-primary {
+    z-index: 1;
+    opacity: 1;
+}
+
+.img-secondary {
+    z-index: 2;
+    opacity: 0;
+}
+
+.img-tertiary {
+    z-index: 3;
+    opacity: 0;
+}
+
+
+
+/* ===== CARD HEADING ===== */
+.card-heading {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    z-index: 10;
+    color: #ffeaeaff;
+    font-size: 48px;
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 1.1;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+    margin: 0;
+    pointer-events: none;
+}
+
+.card-tops .card-heading,
+.card-bottoms .card-heading {
+    font-size: 36px;
+}
+
+/* ===== CARD DETAILS ===== */
+.card-details {
+    position: absolute;
+    bottom: -120px;
+    left: 0;
+    right: 0;
+    padding: 5px 30px;
+    font-size: 19px;
+    color: #8a7a44;
+    line-height: 1.6;
+    background-color: rgba(255, 228, 196, 0);
+    z-index: 11;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    height: 100px;
+    box-sizing: border-box;
+}
+
+/* ===== COLLECTION INFO ===== */
+.collection-info p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.8;
+    max-width: 900px;
+    margin: 0;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+    .clothing-collection {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+    }
+    
+    .card-suits,
+    .card-tops,
+    .card-bottoms {
+        grid-column: 1;
+        grid-row: auto;
+        height: 500px;
+    }
+    
+    .collection-info {
+        grid-column: 1;
+        padding: 30px 20px;
+    }
+    
+    .card-details {
+        position: relative;
+        bottom: auto;
+        height: auto;
+        box-sizing: border-box;
+    }
+}
+
+@media (max-width: 768px) {
+    .card-heading {
+        font-size: 32px;
+        bottom: 20px;
+        left: 20px;
+    }
+    
+    .card-tops .card-heading,
+    .card-bottoms .card-heading {
+        font-size: 28px;
+    }
+    
+    .card-suits,
+    .card-tops,
+    .card-bottoms {
+        height: 400px;
+    }
+}
+
