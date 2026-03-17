@@ -121,6 +121,11 @@ body{
     right: 4rem;
 }
 
+
+
+
+
+
 /* ===== COLLECTION GRID ===== */
 .clothing-collection {
     display: grid;
@@ -212,6 +217,8 @@ body{
     margin: 0;
     pointer-events: none;
 }
+
+.card-details
 
 .card-tops .card-heading,
 .card-bottoms .card-heading {
