@@ -1,111 +1,563 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vantage Persona</title>
-    <link rel="stylesheet" href="/style/style.css">
+    <link rel="stylesheet" href="/style/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&family=Plus+Jakarta+Sans:wght@700;800&display=swap"
+      rel="stylesheet"
+    />
+
+
     <!-- <link rel="stylesheet" href="./style/sec-2.css"> -->
-</head>
-<body>
+  </head>
+  <body>
+
+
     
+    <div class="hero-carousel-container">
+        <header class="header">
+          <div class="logo">
+            <a href="/"
+              ></a>
+          </div>
+        <nav class="nav">
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#events">Events</a></li>
+            <li><a href="#lookbook">LookBook</a></li>
+            <li><a href="#Appointment">Appointment</a></li>
+          </ul>
+        </nav>
+        <div class="nav-icon">
+          <span>🔍</span>
+          <span>🛍️</span>
+          <span>👤</span>
+        </div>
+      </header>
 
-    
-
-
-        <div class="hero-carousel-container">
-          <header class="header">
-              <div class="logo">
-                  <a href="/"><img src="../pictures/Vantage personsa logo.svg" alt="Vantage Persona Logo" style="height: 50px;"></a>
-              </div>
-              <nav class="nav">
-                  <ul>
-                      <li><a href="#home">Home</a></li>
-                      <li><a href="#gallery">Gallery</a></li>
-                      <li><a href="#events">Events</a></li>
-                      <li><a href="#lookbook">LookBook</a></li>
-                      <li><a href="#Appointment">Appointment</a></li>
-                  </ul>
-              </nav>
-              <div class="nav-icon">
-                  <span>🔍</span>
-                  <span>🛍️</span>
-                  <span>👤</span>
-              </div>
-          </header>
-  
-         <div class="carousel-background">
-      <div class="carousel-slide active" style="background-image: url('../pictures/Hero1.jpeg');"></div>
-      <div class="carousel-slide" style="background-image: url('../pictures/Hero2.jpeg');"></div>
-      <div class="carousel-slide" style="background-image: url('../pictures/Hero3.jpg');"></div>
-  </div>
-  
-  <div class="hero-overlay"></div>
-  
-      <div class="hero-content-overlay">
-          <span class="sub-text left">SUMMER / AUTUMN</span>
-          <h1 class="main-title">
-              VAN<span class="hollow">TA</span>GE <br>
-              P<span class="hollow">ER</span>SONA <br>
-          </h1>
-          <span class="sub-text right">
-              2026 COLLECTION
-          </span>
+      <div class="carousel-background">
+        <div
+          class="carousel-slide active"
+          style="background-image: url(&quot;../pictures/Hero1.jpeg&quot;)"
+        ></div>
+        <div
+          class="carousel-slide"
+          style="background-image: url(&quot;../pictures/Hero2.jpeg&quot;)"
+        ></div>
+        <div
+          class="carousel-slide"
+          style="background-image: url(&quot;../pictures/Hero3.jpg&quot;)"
+        ></div>
+        <div
+          class="carousel-slide"
+          style="background-image: url(../pictures/cosmin-ursea-O03Eif76O4Y-unsplash.jpg)"
+        ></div>
       </div>
-        </div>
-  
-  
-  
-    <section class="clothing-collection">
-  
-    <!-- Large Card - Suits -->
-    <article class="collection-card card-suits">
-        <div class="card-images">
-            <img src="../pictures/mohamad-khosravi-owjsLTY-iNY-unsplash.jpg" alt="Senior man in a black suit" class="img-primary">
-            <img src="../pictures/pexels-media-11434885.jpeg" alt="Alternative suit view" class="img-secondary">
-            <img src="../pictures/albert-dera-ILip77SbmOE-unsplash.jpg" alt="Alternative suit view" class="img-secondary">
-            <img src="../pictures/nathan-ayoola-IQlhw8DnnJo-unsplash.jpg" alt="Alternative suit view" class="img-secondary">
-            <img src="../pictures/adrien-king-x4ie12OLMkY-unsplash.jpg" alt="Alternative suit view" class="img-secondary">
-            
-        </div>
-        <h3 class="card-heading">Suits &<br>Formal Wear</h3>
-    </article>
 
-    <!-- Small Card - Tops -->
-    <article class="collection-card card-tops">
-        <div class="card-images">
-            <img src="../pictures/Vantage-Experiment/mohamad-khosravi-owjsLTY-iNY-unsplash-top.jpg" alt="Man in a white button-down shirt" class="img-primary">
-            <img src="../pictures/pexels-media-15835264.jpeg" alt="Alternative shirt view" class="img-secondary">
-            <img src="../pictures/jonas-jaeken-7KZ98Z3e2Yc-unsplash-2.jpg" alt="Third shirt view" class="img-tertiary">
-            <img src="../pictures/Vantage-Experiment/pexels-josue-velasquez-282193995-16859373.jpg" alt="Third shirt view" class="img-tertiary">
-            <img src="../pictures/jonas-jaeken-7KZ98Z3e2Yc-unsplash-2.jpg" alt="Third shirt view" class="img-tertiary">
-        </div>
-        <h3 class="card-heading">Tops</h3>
-        <p class="card-details">Shirts (formal & casual) | Polo Shirts | Knitted Sweaters</p>
-    </article>
+      <div class="hero-overlay"></div>
 
-    <!-- Small Card - Bottoms -->
-    <article class="collection-card card-bottoms">
-        <div class="card-images">
-            <img src="../pictures/Vantage-Experiment/mohamad-khosravi-owjsLTY-iNY-unsplash-bottom.jpg" alt="Close-up of formal trousers and shoes" class="img-primary">
-            <img src="../pictures/pexels-jonathanborba-19456438.jpg" alt="Alternative bottoms view" class="img-secondary">
-            <img src="../pictures/pexels-moises-ribeiro-121009898-11030839.jpg" alt="Alternative bottoms view" class="img-secondary">
-            <img src="../pictures/Vantage-Experiment/pexels-praiselens-325142071-15623773.jpg" alt="Alternative bottoms view" class="img-secondary">
-            <!-- <img src="../pictures/mohamad-khosravi-owjsLTY-iNY-unsplash.jpg" alt="Alternative bottoms view" class="img-secondary"> -->
-        </div>
-        <h3 class="card-heading">Bottoms</h3>
-        <p class="card-details">Trousers (formal & casual) | Chinos | Shorts</p>
-    </article>
-
-    <!-- Collection Description -->
-    <div class="collection-info">
-        <p>Each piece in our collection reflects the perfect balance of modern elegance and timeless style. Our carefully crafted suits, shirts, and trousers are designed to enhance your natural confidence, while providing the ultimate in comfort and fit. Explore our full range of clothing, where every item is a step towards elevating your everyday style.</p>
+      <div class="hero-content-overlay">
+        <span class="sub-text left">SUMMER / AUTUMN</span>
+        <h1 class="main-title">
+          VAN<span class="hollow">TA</span>GE <br />
+          P<span class="hollow">ER</span>SONA <br />
+        </h1>
+        <span class="sub-text right"> 2026 COLLECTION </span>
+      </div>
     </div>
 
-</section>
-    
 
+
+
+
+
+
+    <section class="clothing-section container-fade">
+      <div class="clothing-collection">
+        <article class="collection-card card-suits">
+          <div class="card-images">
+            <img
+              src="../pictures/mohamad-khosravi-owjsLTY-iNY-unsplash.jpg"
+              alt="Senior man in a black suit"
+              class="img-primary"
+            />
+            <img
+              src="../pictures/pexels-media-11434885.jpeg"
+              alt="Alternative suit view"
+              class="img-secondary"
+            />
+            <img
+              src="../pictures/albert-dera-ILip77SbmOE-unsplash.jpg"
+              alt="Alternative suit view"
+              class="img-secondary"
+            />
+            <img
+              src="../pictures/nathan-ayoola-IQlhw8DnnJo-unsplash.jpg"
+              alt="Alternative suit view"
+              class="img-secondary"
+            />
+            <img
+              src="../pictures/adrien-king-x4ie12OLMkY-unsplash.jpg"
+              alt="Alternative suit view"
+              class="img-secondary"
+            />
+          </div>
+          <h3 class="card-heading">Suits &<br />Formal Wear</h3>
+        </article>
+
+        <!-- Small Card - Tops -->
+        <article class="collection-card card-tops">
+          <div class="card-images">
+            <img
+              src="../pictures/Vantage-Experiment/mohamad-khosravi-owjsLTY-iNY-unsplash-top.jpg"
+              alt="Man in a white button-down shirt"
+              class="img-primary"
+            />
+            <img
+              src="../pictures/pexels-media-15835264.jpeg"
+              alt="Alternative shirt view"
+              class="img-secondary"
+            />
+            <img
+              src="../pictures/jonas-jaeken-7KZ98Z3e2Yc-unsplash-2.jpg"
+              alt="Third shirt view"
+              class="img-tertiary"
+            />
+            <img
+              src="../pictures/Vantage-Experiment/pexels-josue-velasquez-282193995-16859373.jpg"
+              alt="Third shirt view"
+              class="img-tertiary"
+            />
+            <img
+              src="../pictures/jonas-jaeken-7KZ98Z3e2Yc-unsplash-2.jpg"
+              alt="Third shirt view"
+              class="img-tertiary"
+            />
+          </div>
+          <h3 class="card-heading">Tops</h3>
+          <p class="card-details">
+            Shirts (formal & casual) | Polo Shirts | Knitted Sweaters
+          </p>
+        </article>
+
+        <!-- Small Card - Bottoms -->
+        <article class="collection-card card-bottoms">
+          <div class="card-images">
+            <img
+              src="../pictures/Vantage-Experiment/mohamad-khosravi-owjsLTY-iNY-unsplash-bottom.jpg"
+              alt="Close-up of formal trousers and shoes"
+              class="img-primary"
+            />
+            <img
+              src="../pictures/pexels-jonathanborba-19456438.jpg"
+              alt="Alternative bottoms view"
+              class="img-secondary"
+            />
+            <img
+              src="../pictures/pexels-moises-ribeiro-121009898-11030839.jpg"
+              alt="Alternative bottoms view"
+              class="img-secondary"
+            />
+            <img
+              src="../pictures/Vantage-Experiment/pexels-praiselens-325142071-15623773.jpg"
+              alt="Alternative bottoms view"
+              class="img-secondary"
+            />
+            <!-- <img src="../pictures/mohamad-khosravi-owjsLTY-iNY-unsplash.jpg" alt="Alternative bottoms view" class="img-secondary"> -->
+          </div>
+          <h3 class="card-heading">Bottoms</h3>
+          <p class="card-details">
+            Trousers (formal & casual) | Chinos | Shorts
+          </p>
+        </article>
+
+        <!-- Collection Description -->
+        <div class="collection-info">
+          <p>
+            Each piece in our collection reflects the perfect balance of modern
+            elegance and timeless style. Our carefully crafted suits, shirts,
+            and trousers are designed to enhance your natural confidence, while
+            providing the ultimate in comfort and fit. Explore our full range of
+            clothing, where every item is a step towards elevating your everyday
+            style.
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+
+    
+    <section class="clothing-section-2 container-fade">
+
+        <section class="clothing-collection-2">
+          <!-- Large Card - Suits -->
+          <article class="collection-card-2 card-suits-2">
+            <div class="card-images">
+              <img
+                src="../pictures/peter-chirkov-JGCDLWl7hc4-unsplash.jpg"
+                alt="Senior man in a black suit"
+                class="img-primary"
+              />
+              <img
+                src="../pictures/divine-effiong-k3Srj786qtk-unsplash.jpg"
+                alt="Alternative suit view"
+                class="img-secondary"
+              />
+              <img
+                src="../pictures/dilip-poddar-M2aVniOd0i4-unsplash.jpg"
+                alt="Alternative suit view"
+                class="img-secondary"
+              />
+              <img
+                src="../pictures/albert-dera-ILip77SbmOE-unsplash.jpg"
+                alt="Alternative suit view"
+                class="img-secondary"
+              />
+              <img
+                src="../pictures/dellon-thomas-uCEmjrQSDwU-unsplash.jpg"
+                alt="Alternative suit view"
+                class="img-secondary"
+              />
+            </div>
+            <!-- <h3 class="card-heading">Suits</h3> -->
+          </article>
+    
+          <!-- Small Card - Tops -->
+          <div class="left-heading">
+           <h1 class="elegance-heading">
+    Fashion has always been the language od confidence
+    in some instances fashion is 
+    <span class="Royals" id="royalsBox">
+    <span class="word-track" id="wordTrack">
+        <span class="word">ELE<span class="red-letter">G</span>ANT</span>
+        <span class="word">CA<span class="cream-letter">S</span>UAL</span> 
+        <span class="word">DAR<span class="gold-letter">I</span>NG</span>
+        <span class="word">B<span class="purple-letter">OL</span>D</span>
+        <span class="word">ESS<span class="">EN</span>TRIC</span>
+    </span>
+</span>
+Yet is this its Zenith?
+</h1>
+          </div>
+    
+          <article class="collection-card-2 card-tops-2">
+            <div class="card-images">
+              <img
+                src="../pictures/Cooperate/mohamad-khosravi-Yz2rv8CQXiQ-unsplash.jpg"
+                alt=""
+                
+              />
+              <img
+                src="../pictures/Cooperate/dwayne-joe-Lx_rPnFwPTk-unsplash.jpg"
+                alt="Alternative shirt view"
+               
+              />
+              <img
+                src="../pictures/jonas-jaeken-7KZ98Z3e2Yc-unsplash-2.jpg"
+                alt="Third shirt view"
+                
+              />
+              <img
+                src="../pictures/Vantage-Experiment/pexels-josue-velasquez-282193995-16859373.jpg"
+                alt="Third shirt view"
+                
+              />
+              <img
+                src="../pictures/jonas-jaeken-7KZ98Z3e2Yc-unsplash-2.jpg"
+                alt="Third shirt view"
+                
+              />
+            </div>
+            <!-- <h3 class="card-heading"></h3> -->
+           
+          </article>
+    
+          <!-- Small Card - Bottoms -->
+          <article class="collection-card-2 card-bottoms-2">
+            <div class="card-images">
+              <img
+                src="../pictures/khalid-boutchich-IG89ai-3Fc8-unsplash.jpg"
+                alt="Close-up of formal trousers and shoes"
+                class="img-primary"
+              />
+              <img
+                src="../pictures/pexels-jonathanborba-19456438.jpg"
+                alt="Alternative bottoms view"
+                class="img-secondary"
+              />
+              <img
+                src="../pictures/pexels-moises-ribeiro-121009898-11030839.jpg"
+                alt="Alternative bottoms view"
+                class="img-secondary"
+              />
+              <img
+                src="../pictures/Vantage-Experiment/pexels-praiselens-325142071-15623773.jpg"
+                alt="Alternative bottoms view"
+                class="img-secondary"
+              />
+              <!-- <img src="../pictures/mohamad-khosravi-owjsLTY-iNY-unsplash.jpg" alt="Alternative bottoms view" class="img-secondary"> -->
+            </div>
+            <!-- <h3 class="card-heading">Bottoms</h3> -->
+            <!-- <p class="card-details">Trousers (formal & casual) | Chinos | Shorts</p> -->
+          </article>
+
+          <article class="collection-card-2 card-accessories-2">
+            <div class="card-images">
+              <img
+                src="../pictures/Cooperate/dilip-poddar-M2aVniOd0i4-unsplash.jpg"
+                alt="Elegant fashion accessories arrangement"
+                class="img-primary"
+              />
+              <img
+                src="../pictures/pexels-media-11434885.jpeg"
+                alt="Premium accessory close-up"
+                class="img-secondary"
+              />
+            </div>
+            <!-- <h3 class="card-heading">Accessories</h3> -->
+            <!-- <p class="card-details">Belts | Silk Ties | Leather Wallets</p> -->
+          </article>
+
+          <article class="collection-card-2 card-outerwear-2">
+            <div class="card-images">
+              <img
+                src="../pictures/chuxie-daniels-Q_OZvYusj0w-unsplash.jpg"
+                alt="Model in refined outerwear"
+                class="img-primary"
+              />
+              <img
+                src="../pictures/divine-effiong-k3Srj786qtk-unsplash.jpg"
+                alt="Tailored coat alternate view"
+                class="img-secondary"
+              />
+            </div>
+            <!-- <h3 class="card-heading">Outerwear</h3>
+            <p class="card-details">Wool Coats | Bomber Jackets | Trench Styles</p> -->
+          </article>
+
+          <article class="collection-card-2 card-footwear-2">
+            <div class="card-images">
+              <img
+                src="../pictures/pexels-jonathanborba-19456438.jpg"
+                alt="Fashion-forward men's footwear"
+                class="img-primary"
+              />
+              <img
+                src="../pictures/pexels-moises-ribeiro-121009898-11030839.jpg"
+                alt="Alternative footwear profile"
+                class="img-secondary"
+              />
+            </div>
+            <!-- <h3 class="card-heading">Footwear</h3>
+            <p class="card-details">Loafers | Dress Shoes | Minimal Sneakers</p> -->
+          </article>
+
+          <article class="collection-card-2 card-timepieces-2">
+            <div class="card-images">
+              <img
+                src="../pictures/albert-dera-ILip77SbmOE-unsplash.jpg"
+                alt="Classic watch styling with suit"
+                class="img-primary"
+              />
+              <img
+                src="../pictures/dellon-thomas-uCEmjrQSDwU-unsplash.jpg"
+                alt="Luxury watch editorial style"
+                class="img-secondary"
+              />
+            </div>
+            <!-- <h3 class="card-heading">Watches</h3>
+            <p class="card-details">Chronographs | Dress Watches | Steel Bracelets</p> -->
+          </article>
+
+          <article class="collection-card-2 card-fragrance-2">
+            <div class="card-images">
+              <img
+                src="../pictures/dilip-poddar-M2aVniOd0i4-unsplash.jpg"
+                alt="Luxury fragrance fashion mood"
+                class="img-primary"
+              />
+              <img
+                src="../pictures/mohamad-khosravi-owjsLTY-iNY-unsplash.jpg"
+                alt="Fragrance inspired style portrait"
+                class="img-secondary"
+              />
+            </div>
+            <!-- <h3 class="card-heading">Fragrances</h3>
+            <p class="card-details">Woody Notes | Citrus Layers | Signature Scents</p> -->
+          </article>
+        </section>
+    </section>
+
+
+
+
+    <!-- Section 3: Accessories & Jewelry masonry -->
+    <section class="section-3 container-fade" id="section-3" aria-labelledby="section-3-heading">
+      <div class="section-3-inner">
+        <header class="section-3-header">
+          <h2 id="section-3-heading" class="section-3-heading">
+            For some fashion is not about clothing, are we forgetting accessories and
+            Jewelries?
+          </h2>
+        </header>
+
+        <div class="section-3-grid">
+          <article class="section-3-card section-3-card--tall section-3-card--jewelry">
+            <div class="section-3-card__media">
+              <img src="../pictures/dellon-thomas-uCEmjrQSDwU-unsplash.jpg" alt="" />
+              <img src="../pictures/albert-dera-ILip77SbmOE-unsplash.jpg" alt="" />
+              <img src="../pictures/nathan-ayoola-IQlhw8DnnJo-unsplash.jpg" alt="" />
+            </div>
+            <div class="section-3-card__text">
+              <h3 class="section-3-card__title">Jewelry</h3>
+              <p class="section-3-card__sub section-3-card__sub--jewelry">Watches</p>
+            </div>
+          </article>
+
+          <article class="section-3-card section-3-card--accessory">
+            <div class="section-3-card__media">
+              <img src="../pictures/pexels-media-15835264.jpeg" alt="" />
+              <img src="../pictures/jonas-jaeken-7KZ98Z3e2Yc-unsplash-2.jpg" alt="" />
+              <img src="../pictures/Cooperate/dilip-poddar-M2aVniOd0i4-unsplash.jpg" alt="" />
+            </div>
+            <div class="section-3-card__text">
+              <h3 class="section-3-card__title">Accessories</h3>
+              <p class="section-3-card__sub section-3-card__sub--accessory">
+                <span class="acc-glass">B</span><span class="acc-brown">ag</span
+                ><span class="acc-glass">s</span>
+              </p>
+            </div>
+          </article>
+
+          <article class="section-3-card section-3-card--wide section-3-card--jewelry">
+            <div class="section-3-card__media">
+              <img src="../pictures/albert-dera-ILip77SbmOE-unsplash.jpg" alt="" />
+              <img src="../pictures/peter-chirkov-JGCDLWl7hc4-unsplash.jpg" alt="" />
+              <img src="../pictures/dilip-poddar-M2aVniOd0i4-unsplash.jpg" alt="" />
+            </div>
+            <div class="section-3-card__text">
+              <h3 class="section-3-card__title">Jewelry</h3>
+              <p class="section-3-card__sub section-3-card__sub--jewelry">Rings</p>
+            </div>
+          </article>
+
+          <article class="section-3-card section-3-card--accessory">
+            <div class="section-3-card__media">
+              <img src="../pictures/chuxie-daniels-Q_OZvYusj0w-unsplash.jpg" alt="" />
+              <img src="../pictures/divine-effiong-k3Srj786qtk-unsplash.jpg" alt="" />
+              <img src="../pictures/pexels-jonathanborba-19456438.jpg" alt="" />
+            </div>
+            <div class="section-3-card__text">
+              <h3 class="section-3-card__title">Accessories</h3>
+              <p class="section-3-card__sub section-3-card__sub--accessory">
+                <span class="acc-glass">Le</span
+                ><span class="acc-brown">ather glove</span
+                ><span class="acc-glass">s</span>
+              </p>
+            </div>
+          </article>
+
+          <article class="section-3-card section-3-card--wide section-3-card--jewelry">
+            <div class="section-3-card__media">
+              <img src="../pictures/peter-chirkov-JGCDLWl7hc4-unsplash.jpg" alt="" />
+              <img src="../pictures/khalid-boutchich-IG89ai-3Fc8-unsplash.jpg" alt="" />
+              <img src="../pictures/adrien-king-x4ie12OLMkY-unsplash.jpg" alt="" />
+            </div>
+            <div class="section-3-card__text">
+              <h3 class="section-3-card__title">Jewelry</h3>
+              <p class="section-3-card__sub section-3-card__sub--jewelry">
+                Bracelets &amp; Necklaces
+              </p>
+            </div>
+          </article>
+
+          <article class="section-3-card section-3-card--full section-3-card--accessory">
+            <div class="section-3-card__media">
+              <img src="../pictures/khalid-boutchich-IG89ai-3Fc8-unsplash.jpg" alt="" />
+              <img src="../pictures/mohamad-khosravi-owjsLTY-iNY-unsplash.jpg" alt="" />
+              <img src="../pictures/pexels-media-11434885.jpeg" alt="" />
+            </div>
+            <div class="section-3-card__text">
+              <p class="section-3-card__eyebrow">Extras</p>
+              <h3 class="section-3-card__title">Accessories</h3>
+              <p class="section-3-card__sub section-3-card__sub--accessory">
+                <span class="acc-glass">hats &amp; </span
+                ><span class="acc-brown">headgear</span
+                ><span class="acc-glass"> &amp; eyewear</span>
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+    
+    <!-- Section 4: Vantage Persona Vision (Morphing Silhouette) -->
+    <section class="section-4 container-fade" id="vision">
+      <!-- Large background text -->
+      <div class="section-4-bg-text">VANTAGE PERSONA</div>
+      
+      <div class="section-4-inner">
+        <div class="section-4-grid">
+          <!-- Col 1 (2fr): Images representing the Fusion -->
+          <div class="section-4-images">
+            <div class="vision-img-container glass-effect">
+              <img src="../pictures/peter-chirkov-JGCDLWl7hc4-unsplash.jpg" alt="Classic Sartorial Elegance" class="vision-img-1" />
+              <div class="img-label">/ CLASSIC</div>
+            </div>
+            <div class="vision-img-container glass-effect">
+              <img src="../pictures/chuxie-daniels-Q_OZvYusj0w-unsplash.jpg" alt="Modern Functional Utility" class="vision-img-2" />
+              <div class="img-label">/ FUTURISTIC</div>
+            </div>
+          </div>
+          
+          <!-- Col 2 & 3 (1fr 1fr): Content -->
+          <div class="section-4-content">
+            <!-- Large Section Heading (Static) -->
+            <h2 class="section-4-main-title">
+              WEARING VANTAGE PERSONA IS ABOUT MORE THAN JUST CLOTHING AND ACCESSORIES.
+            </h2>
+            
+            <!-- Interactive Content Area (Controlled by JS) -->
+            <div class="vision-interactive-area stage-1" id="visionInteractions">
+              <div class="interactive-heading-wrapper">
+                <h3 class="interactive-heading" id="interactiveHeading">/ SO WHY DOES THIS MATTER?</h3>
+              </div>
+              
+              <div class="vision-article" id="visionArticle">
+                <p class="vision-p highlight">
+                  Fashion has long been closely bounded by clothes and what you put on. But a new vision is rising, calling out fashion around you. That vision is Vantage Persona.
+                </p>
+                <p class="vision-p indent">
+                  The vision of Vantage Persona is rooted in the concept of the "Morphing Silhouette," a digital bridge between classic sartorial elegance and modern functional utility. The agency does not simply style clothes; it engineers identities, proving that a single individual can seamlessly transition from a high-stakes, traditional celebrity gala to the gritty, high-performance world of technical "tech-fit" apparel.
+                </p>
+                <p class="vision-p history">
+                  Founded in 2024, Vantage Persona emerged from the intersection of architectural design and bespoke tailoring. We recognized that in an era of digital twins and physical presence, the human form requires a wardrobe that is as dynamic as our digital identities.
+                </p>
+              </div>
+            </div>
+            
+            <div class="section-4-footer">
+              <a href="#about" class="more-about-link">MORE ABOUT US ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="../Section-1.js"></script>
+    <script src="../Section-2.js"></script>
+    <script src="../Section-3.js"></script>
+    <script src="../Section-4.js"></script>
     <script src="../carousel.js"></script>
     <script src="../ContainerFade.js"></script>
-</body>
+  </body>
 </html>
