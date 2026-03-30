@@ -11,47 +11,36 @@
     
     <!-- Link existing and new styles -->
     <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="../style/navbar.css">
     <link rel="stylesheet" href="../style/gallery.css">
 </head>
 <body>
+    <!-- Unified Floating Navbar -->
+    <div class="vantage-nav-container">
+        <nav class="vantage-nav">
+            <div class="nav-logo">
+                <a href="../Home/Home.html">
+                    <img src="../pictures/Vantage personsa logo.svg" alt="Logo">
+                </a>
+            </div>
+            <div class="nav-pills">
+                <a href="../Home/Home.html" class="nav-item">Home</a>
+                <a href="../Gallery/gallery.html" class="nav-item active">Gallery</a>
+                <a href="../LookBook/lookbook.html" class="nav-item">LookBook</a>
+                <a href="../Apointment/Appointment.html" class="nav-item">Appointments</a>
+            </div>
+            <div class="nav-actions">
+                <a href="../Apointment/Appointment.html" class="nav-cta">
+                    Book Now <span class="arrow-circle">↗</span>
+                </a>
+            </div>
+        </nav>
+    </div>
 
     <section class="gallery-hero">
         <div class="hero-bg">
             <img src="../pictures/Cooperate/dwayne-joe-Lx_rPnFwPTk-unsplash.jpg" alt="Gallery Hero Background">
         </div>
-
-        <nav class="navbar">
-            <div class="nav-links">
-                <a href="../Home/Home.html">Home</a>
-                <a href="#">LookBook</a>
-                <a href="#">Appointment</a>
-                <a href="#">About Us</a>
-            </div>
-
-            <div class="logo-container">
-                <a href="/">
-                    <img src="../pictures/Vantage personsa logo.svg" alt="Vantage Persona Logo">
-                </a>
-            </div>
-
-            <div class="nav-icons">
-                <!-- Search Icon -->
-                <svg viewBox="0 0 24 24" alt="Search">
-                    <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2" fill="none"></circle>
-                    <line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
-                </svg>
-                <!-- User Icon -->
-                <svg viewBox="0 0 24 24" alt="User">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2" fill="none"></path>
-                    <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2" fill="none"></circle>
-                </svg>
-                <!-- Bag Icon -->
-                <svg viewBox="0 0 24 24" alt="Bag">
-                    <rect x="5" y="8" width="14" height="12" rx="2" stroke="currentColor" stroke-width="2" fill="none"></rect>
-                    <path d="M9 11V6a3 3 0 0 1 6 0v5" stroke="currentColor" stroke-width="2"></path>
-                </svg>
-            </div>
-        </nav>
 
         <div class="hero-content">
             <h1 class="vantage-text">VANTAGE</h1>

@@ -4,49 +4,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const box = document.querySelector('.Royals');
     const track = document.getElementById('wordTrack');
 
-    // ===== CARD IMAGE GROUPS =====
-    const cardGroups = [
-        document.querySelectorAll('.card-suits-2 .card-images img'),
-        document.querySelectorAll('.card-tops-2 .card-images img'),
-        document.querySelectorAll('.card-bottoms-2 .card-images img'),
-        document.querySelectorAll('.card-accessories-2 .card-images img'),
-        document.querySelectorAll('.card-outerwear-2 .card-images img'),
-        document.querySelectorAll('.card-footwear-2 .card-images img'),
-        document.querySelectorAll('.card-timepieces-2 .card-images img'),
-        document.querySelectorAll('.card-fragrance-2 .card-images img'),
-    ];
-
+    // ===== MASTER CONTAINERS =====
+    const containers = document.querySelectorAll('.word-container');
     let current = 0;
 
-    // Set all cards to show first image initially
-    cardGroups.forEach(imgs => {
-        imgs.forEach((img, i) => {
-            img.style.opacity = i === 0 ? '1' : '0';
-            img.style.transition = 'opacity 0.6s ease';
-            img.style.position = 'absolute';
-            img.style.top = '0';
-            img.style.left = '0';
-            img.style.width = '100%';
-            img.style.height = '100%';
-            img.style.objectFit = 'cover';
-            img.style.zIndex = i === 0 ? '2' : '1';
-        });
-    });
-
-    function showImage(imgs, index) {
-        const target = index % imgs.length;
-        imgs.forEach((img, i) => {
-            img.style.opacity = i === target ? '1' : '0';
-            img.style.zIndex = i === target ? '2' : '1';
-        });
-    }
-
-    if (box && track) {
+    if (box && track && containers.length > 0) {
         const words = track.querySelectorAll('.word');
         const getWordHeight = () => words[0]?.offsetHeight || 0;
 
-        // Make sure the viewport is exactly one word tall.
+        // Make sure the viewport is exactly one word tall and fits the first word.
         box.style.height = `${getWordHeight()}px`;
+        box.style.width = `${words[0].offsetWidth}px`;
         track.style.transform = 'translateY(0px)';
 
         box.addEventListener('click', () => {
@@ -56,9 +24,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const wordHeight = getWordHeight();
             track.style.transform = `translateY(-${current * wordHeight}px)`;
             
-
-            // Swap all card images
-            cardGroups.forEach(imgs => showImage(imgs, current));
+            // Automatically grow or shrink the red box to snugly fit the new word
+            box.style.width = `${words[current].offsetWidth}px`;
+            
+            // Swap containers
+            containers.forEach((container, index) => {
+                if (index === current) {
+                    container.classList.add('active');
+                } else {
+                    container.classList.remove('active');
+                }
+            });
 
             // Alive box animation
             box.classList.remove('clicked');
@@ -69,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('resize', () => {
             const wordHeight = getWordHeight();
             box.style.height = `${wordHeight}px`;
+            box.style.width = `${words[current].offsetWidth}px`;
             track.style.transform = `translateY(-${current * wordHeight}px)`;
         });
     }

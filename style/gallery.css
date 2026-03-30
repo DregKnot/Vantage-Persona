@@ -159,7 +159,6 @@ body {
     opacity: 0.8;
 }
 
-/* Bold Fashion Section Styles */
 .bold-fashion-section {
     position: relative;
     background-color: #000;
@@ -167,14 +166,15 @@ body {
     min-height: 100vh;
     overflow: hidden;
     color: #fff;
+    z-index: 5; /* Lower than navbar but high enough for content */
 }
 
 .bold-fashion-section::before {
     content: "";
     position: absolute;
     inset: 0;
-    background-image: url('data:image/svg+xml,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)"/></svg>');
-    opacity: 0.12;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXVtbW1mz1R3d3dtbW13d3dtbW13d3dtbW13d3dtbW13d3dtbW13d3dtbW13d3dtbW13d3dtbW13d3dtbW13d3dbtZ3LAAAABnRSTlMAESIzRFVmd4iZq7u8xwAAAFpJREFUeNpjYGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGS0ADSAZGRkZGRkZGRkZGRkZGRkZGRkdAA0gGRkZGRkZGRkZGRkZGRkZGR0ADSAZGRkZGSkAADI6ADSAZGRkZE=');
+    opacity: 0.05; /* Light grain instead of heavy SVG */
     pointer-events: none;
     z-index: 1;
 }
@@ -183,7 +183,6 @@ body {
     position: relative;
     z-index: 2;
     width: 100%;
-    margin: 0 auto;
 }
 
 .fashion-header {
@@ -192,95 +191,73 @@ body {
     margin: 0 auto 60px;
     font-family: var(--body-font);
     font-size: 1.1rem;
-    letter-spacing: 2px;
+    letter-spacing: 2.5px;
     line-height: 1.6;
     text-transform: uppercase;
-    opacity: 0.9;
-    padding: 0 2rem;
+    opacity: 0.8;
 }
 
 .fashion-bold-title {
     text-align: center;
     font-family: var(--primary-font);
-    font-size: 5vw;
-    font-weight: 700;
+    font-size: 6vw;
+    font-weight: 800;
     text-transform: uppercase;
     margin-bottom: 80px;
-    line-height: 1;
+    line-height: 0.9;
 }
 
 .bold-text {
     font-family: 'UnifrakturMaguntia', cursive;
-    font-size: 15vw;
-    color: #eb0606; /* A striking red for 'BOLD' like in Duskborn image */
-    text-shadow: 0 0 30px rgba(235, 6, 6, 0.3);
+    font-size: 18vw;
+    color: #eb0606;
+    text-shadow: 0 0 50px rgba(235, 6, 6, 0.4);
     display: inline-block;
-    margin-top: -20px;
+    margin-top: -10px;
+    position: relative;
 }
 
 .masonry-grid {
     columns: 4;
-    column-gap: 20px;
-    padding: 0 4rem;
+    column-gap: 25px;
+    padding: 0 5%;
 }
 
 .masonry-item {
     break-inside: avoid;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    border-radius: 4px;
+    overflow: hidden;
 }
 
 .masonry-item img {
     width: 100%;
     height: auto;
     display: block;
-    filter: grayscale(20%); /* Subtle grayscale for consistent look */
-    transition: transform 0.4s ease, filter 0.4s ease;
+    filter: grayscale(15%) brightness(0.9);
+    transition: transform 0.6s cubic-bezier(0.2, 0, 0.2, 1), filter 0.6s ease;
+    will-change: transform; /* Hardware acceleration */
 }
 
 .masonry-item img:hover {
-    transform: scale(1.02);
-    filter: grayscale(0%);
+    transform: scale(1.05);
+    filter: grayscale(0%) brightness(1.1);
 }
 
-/* Responsive adjustments */
 @media (max-width: 1200px) {
-    .masonry-grid {
-        columns: 3;
-    }
+    .masonry-grid { columns: 3; }
 }
 
 @media (max-width: 1024px) {
-    .navbar {
-        padding: 1.5rem 2rem;
-    }
-    .nav-links {
-        display: none; /* Hide links on mobile for cleaner look */
-    }
-    .vantage-text {
-        font-size: 22vw;
-    }
-    .collection-text {
-        font-size: 10vw;
-    }
-    .masonry-grid {
-        columns: 2;
-        padding: 0 2rem;
-    }
-    .bold-text {
-        font-size: 20vw;
-    }
+    .vantage-text { font-size: 22vw; }
+    .collection-text { font-size: 10vw; }
+    .masonry-grid { columns: 2; padding: 0 2rem; }
+    .bold-text { font-size: 20vw; }
 }
 
 @media (max-width: 640px) {
-    .masonry-grid {
-        columns: 1;
-    }
-    .fashion-header {
-        font-size: 0.9rem;
-    }
-    .fashion-bold-title {
-        font-size: 8vw;
-    }
+    .masonry-grid { columns: 1; }
+    .fashion-bold-title { font-size: 10vw; }
 }
 
 /* Section 5: Fashion is Flush */
@@ -311,7 +288,7 @@ body {
     overflow: hidden;
 }
 
-/* Background overlay with image */
+/* Background overlay with image - Optimized for 60fps */
 .section-5-bg {
     position: absolute;
     inset: 0;
@@ -319,8 +296,9 @@ body {
     background-image: linear-gradient(rgba(0, 36, 102, 0.225), rgba(0, 36, 102, 0.367)), url('../pictures/Flush_section/jj-ying-7JX0-bfiuxQ-unsplash.jpg');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
-    opacity: 1.8;
+    /* Removed background-attachment: fixed because it causes lag */
+    opacity: 1;
+    will-change: transform;
 }
 
 .flush-main-title {

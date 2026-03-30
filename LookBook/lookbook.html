@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LookBook | Vantage Persona</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="../style/navbar.css">
+    <link rel="stylesheet" href="../style/lookbook.css">
+</head>
+<body class="lookbook-page">
+
+    <!-- Unified Floating Navbar -->
+    <header class="vantage-nav-container">
+        <nav class="vantage-nav">
+            <div class="nav-logo">
+                <a href="../Home/Home.html">
+                    <img src="../pictures/Vantage personsa logo.svg" alt="Logo">
+                </a>
+            </div>
+            <div class="nav-pills">
+                <a href="../Home/Home.html" class="nav-item">Home</a>
+                <a href="../Gallery/gallery.html" class="nav-item">Gallery</a>
+                <a href="../LookBook/lookbook.html" class="nav-item active">LookBook</a>
+                <a href="../Apointment/Appointment.html" class="nav-item">Appointments</a>
+            </div>
+            <div class="nav-actions">
+                <a href="../Apointment/Appointment.html" class="nav-cta">
+                    Book Now <span class="arrow-circle">↗</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="lookbook-main-container">
+        <!-- Category Selection Bar -->
+        <section class="lookbook-categories-section">
+            <div class="categories-wrapper">
+                <button class="category-btn" data-category="Abstract" style="--bg-url: url('../pictures/LookBook/Abstract/1621784b-7cbe-4cfd-8c92-82fac9435582.jpg')">
+                    <span class="btn-text">Abstract</span>
+                </button>
+                <button class="category-btn" data-category="Flower-present" style="--bg-url: url('../pictures/LookBook/Flower-present/09a57ca1-5fd7-471d-9f08-333f051b8c36.jpg')">
+                    <span class="btn-text">Flower Present</span>
+                </button>
+                <button class="category-btn" data-category="One_Nature" style="--bg-url: url('../pictures/LookBook/One_Nature/0507323c-3444-4f63-91e0-8092d25d3ee5.jpg')">
+                    <span class="btn-text">One Nature</span>
+                </button>
+                <button class="category-btn" data-category="RedArt" style="--bg-url: url('../pictures/LookBook/RedArt/1a35d8fd-4621-4374-b291-9dd845f585fe.jpg')">
+                    <span class="btn-text">RedArt</span>
+                </button>
+                <button class="category-btn" data-category="Shoes" style="--bg-url: url('../pictures/LookBook/Shoes/0f7005f9-441f-4851-8928-9f7277529da7.jpg')">
+                    <span class="btn-text">Shoes</span>
+                </button>
+                <button class="category-btn" data-category="TechFits" style="--bg-url: url('../pictures/LookBook/TechFits/36ade9fa-9c47-43c8-8fe6-782910578083.jpg')">
+                    <span class="btn-text">TechFits</span>
+                </button>
+                <button class="category-btn" data-category="TellingEyes" style="--bg-url: url('../pictures/LookBook/TellingEyes/3f802280-5495-41a7-9b7c-8e0f5658d982.jpg')">
+                    <span class="btn-text">Telling Eyes</span>
+                </button>
+                <button class="category-btn active" data-category="Work of art" style="--bg-url: url('../pictures/LookBook/Work of art/2c41aea6-6ada-403f-a99a-d66f633afde0.jpg')">
+                    <span class="btn-text">Work of Art</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Main Display Container -->
+        <section class="lookbook-display-section" id="lookbook-display">
+            <!-- Dynamic content injected by JS -->
+            <div class="display-glass-container" id="display-container">
+                <!-- Grid/Track will live here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Image Zoom Overlay -->
+    <div class="image-zoom-overlay" id="zoom-overlay">
+        <div class="zoom-content">
+            <img src="" alt="Elevated View" id="zoomed-image">
+            <button class="close-zoom">✕</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../Home.js/ContainerFade.js"></script>
+    <script src="lookbook.js"></script>
+</body>
+</html>

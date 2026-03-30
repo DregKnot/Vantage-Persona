@@ -1,0 +1,269 @@
+/* Lookbook Page Specific Styles */
+
+:root {
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --accent-red: rgba(235, 6, 6, 0.6);
+    --accent-forest: rgba(34, 139, 34, 0.6);
+    --accent-murky: rgba(85, 107, 47, 0.6);
+    --transition-speed: 0.8s;
+}
+
+body.lookbook-page {
+    background-color: #000;
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    overflow-x: hidden;
+    transition: background-color var(--transition-speed) ease;
+}
+
+/* Category Selection Bar */
+.lookbook-categories-section {
+    padding-top: 150px;
+    padding-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    z-index: 10;
+    position: relative;
+}
+
+.categories-wrapper {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 1200px;
+    padding: 0 20px;
+}
+
+.category-btn {
+    position: relative;
+    width: 180px;
+    height: 100px;
+    border-radius: 15px;
+    border: 1px solid var(--glass-border);
+    background-color: #111;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.2, 0, 0, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Background image for buttons with backdrop effect */
+.category-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--bg-url);
+    background-size: cover;
+    background-position: center;
+    opacity: 0.3;
+    filter: blur(2px) grayscale(50%);
+    transition: all 0.5s ease;
+}
+
+.category-btn::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    z-index: 1;
+}
+
+.category-btn .btn-text {
+    position: relative;
+    z-index: 2;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.7);
+    transition: color 0.4s ease;
+}
+
+.category-btn:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.category-btn:hover::before {
+    opacity: 0.6;
+    filter: blur(0) grayscale(0%);
+    transform: scale(1.1);
+}
+
+.category-btn.active {
+    width: 220px;
+    border-color: #fff;
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+}
+
+.category-btn.active .btn-text {
+    color: #fff;
+}
+
+/* Main Display Section */
+.lookbook-display-section {
+    width: 100%;
+    min-height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: stretch; /* Allows container to grow with content */
+    position: relative;
+    padding-bottom: 80px;
+}
+
+.display-glass-container {
+    width: 95%;
+    min-height: 70vh;
+    padding: 40px 0;
+    background: var(--glass-bg);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    border-radius: 40px;
+    border: 1px solid var(--glass-border);
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    transition: all var(--transition-speed) ease;
+}
+
+/* THEMATIC FILTERS */
+.theme-RedArt { background-color: rgba(40, 0, 0, 0.4) !important; }
+.theme-RedArt .display-glass-container { border-color: var(--accent-red); box-shadow: 0 0 60px rgba(235, 6, 6, 0.15); }
+
+.theme-Work_of_art { background-color: rgba(0, 30, 0, 0.4) !important; }
+.theme-Work_of_art .display-glass-container { border-color: var(--accent-forest); box-shadow: 0 0 60px rgba(34, 139, 34, 0.15); }
+
+.theme-Flower-present { background-color: rgba(20, 30, 10, 0.4) !important; }
+.theme-Flower-present .display-glass-container { border-color: var(--accent-murky); box-shadow: 0 0 60px rgba(85, 107, 47, 0.15); }
+
+/* HORIZONTAL TRACK (Work of Art) */
+.lookbook-track {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding: 0 40px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: 70vh;
+    scrollbar-width: thin;
+    scroll-snap-type: x mandatory;
+    width: 100%;
+}
+
+.track-item {
+    flex: 0 0 auto;
+    height: 85%;
+    aspect-ratio: 4 / 5;
+    border-radius: 20px;
+    overflow: hidden;
+    scroll-snap-align: center;
+    cursor: crosshair;
+    transition: transform 0.6s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.track-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.track-item:hover {
+    transform: scale(1.02);
+}
+
+/* CINEMATIC GRID (Flower Present) - Non scrollable container */
+.cinematic-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 250px;
+    gap: 20px;
+    width: 100%;
+    padding: 20px 60px;
+    pointer-events: auto;
+}
+
+.grid-item {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+.grid-item img, .grid-item video, .grid-item gif {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: crosshair;
+}
+
+/* Video Centering logic */
+.item-center {
+    /* grid-row is dynamically injected via JS based on total images to keep it dead center */
+    grid-column: 2 / span 2;
+    z-index: 10;
+    transform: scale(1.03);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+/* Image Zoom Overlay */
+.image-zoom-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.95);
+    z-index: 100000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.image-zoom-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+.zoom-content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+}
+
+.zoom-content img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+.close-zoom {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+/* Standard Grid (Default for others) */
+.lookbook-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 40px;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
