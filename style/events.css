@@ -1,0 +1,460 @@
+/* Events Page - Dark Glassmorphism Premium Aesthetic */
+
+:root {
+    --text-primary: #ffffff;
+    --text-muted: rgba(255, 255, 255, 0.6);
+    --border-glass: rgba(255, 255, 255, 0.1);
+    --bg-glass: rgba(20, 20, 20, 0.4);
+    --bg-glass-hover: rgba(40, 40, 40, 0.6);
+    --accent: #d4af37; /* Gold but keeping it subtle if needed or rely on brand red #eb0606 */
+    --brand-red: #eb0606;
+}
+
+body.events-page {
+    background-color: #050505;
+    color: var(--text-primary);
+    margin: 0;
+    padding: 0;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* ==================================
+   HERO SECTION
+=================================== */
+.events-hero {
+    position: relative;
+    height: 90vh;
+    min-height: 600px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+}
+
+.hero-overlay-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(5,5,5,1) 95%);
+    z-index: 2;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 3;
+    padding: 5% 10%;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.hero-title {
+    font-family: var(--primary-font);
+    font-size: 5.5vw;
+    font-weight: 800;
+    line-height: 1.1;
+    margin: 0 0 40px 0;
+    text-transform: uppercase;
+    color: #fff;
+    text-shadow: 0 10px 30px rgba(0,0,0,0.8);
+}
+
+.hero-meta {
+    display: flex;
+    gap: 15vh;
+}
+
+.meta-date, .meta-location {
+    font-family: var(--body-font);
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.meta-date strong, .meta-location strong {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: #fff;
+}
+
+.meta-location sup {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: var(--brand-red);
+}
+
+/* ==================================
+   FILTER BAR
+=================================== */
+.events-filter-bar {
+    width: 100%;
+    padding: 40px 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-glass);
+    background-color: #050505;
+    position: relative;
+    z-index: 10;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.filter-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.glass-select {
+    background: var(--bg-glass);
+    border: 1px solid var(--border-glass);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    appearance: none; /* Removes native dropdown arrow styling */
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.glass-select:hover {
+    border-color: rgba(255,255,255,0.4);
+    background: var(--bg-glass-hover);
+}
+
+.view-toggles {
+    display: flex;
+    gap: 10px;
+}
+
+.toggle-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    padding: 5px;
+}
+
+.toggle-btn.active {
+    color: #fff;
+    border-bottom: 2px solid var(--brand-red);
+}
+
+/* ==================================
+   EVENTS LIST
+=================================== */
+.events-list-section {
+    width: 100%;
+    padding-bottom: 100px;
+    background-color: #050505;
+}
+
+.month-group {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 5%;
+}
+
+.month-title {
+    font-family: var(--primary-font);
+    font-size: 4rem;
+    font-weight: 800;
+    margin: 0 0 40px 0;
+    text-align: center;
+    border-bottom: 1px solid var(--border-glass);
+    padding-bottom: 30px;
+    color: #fff;
+}
+
+.event-rows-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.event-row {
+    display: grid;
+    grid-template-columns: 180px 280px 1fr 50px;
+    gap: 40px;
+    padding: 40px 20px;
+    border-bottom: 1px solid var(--border-glass);
+    align-items: center;
+    transition: all 0.4s cubic-bezier(0.2, 0, 0, 1);
+    border-radius: 12px;
+}
+
+.event-row:hover {
+    background: var(--bg-glass);
+    border-bottom-color: transparent;
+    transform: translateX(10px);
+    box-shadow: -10px 10px 30px rgba(0,0,0,0.5);
+}
+
+/* Date Column */
+.col-date {
+    display: flex;
+    flex-direction: column;
+}
+
+.col-date .day {
+    font-weight: 700;
+    font-size: 1.4rem;
+    margin-bottom: 5px;
+    color: #fff;
+}
+
+.col-date .date {
+    font-family: var(--body-font);
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 15px;
+}
+
+.col-date .price {
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: #fff;
+}
+
+.col-date .price::before {
+    content: "•";
+    color: var(--brand-red);
+    margin-right: 8px;
+    font-size: 1.2rem;
+    vertical-align: middle;
+}
+
+/* Thumbnail Column */
+.thumb-wrapper {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.thumb-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+    filter: grayscale(20%);
+}
+
+.event-row:hover .thumb-wrapper img {
+    transform: scale(1.05);
+    filter: grayscale(0%);
+}
+
+/* Details Column */
+.col-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.event-name {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+    color: #fff;
+    line-height: 1.2;
+    transition: color 0.3s ease;
+}
+
+.event-row:hover .event-name {
+    color: var(--brand-red);
+}
+
+.event-location {
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin: 0 0 15px 0;
+    color: #fff;
+}
+
+.event-location sup {
+    font-size: 0.7rem;
+    color: var(--brand-red);
+    font-weight: 700;
+}
+
+.event-venue {
+    font-family: var(--body-font);
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+/* Action Arrow Column */
+.view-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid var(--border-glass);
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateX(-20px);
+}
+
+.event-row:hover .view-btn {
+    opacity: 1;
+    transform: translateX(0);
+    background: #fff;
+    color: #000;
+}
+
+/* ==================================
+   DARK BREAKOUT ROW
+=================================== */
+.event-breakout {
+    position: relative;
+    width: 100%;
+    min-height: 60vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    padding: 0 10%;
+    overflow: hidden;
+    margin: 40px 0;
+}
+
+.breakout-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0.8) 100%);
+    z-index: 1;
+}
+
+.breakout-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    gap: 80px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.breakout-date {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.breakout-date .date-range {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 20px;
+    font-family: var(--body-font);
+}
+
+.breakout-date .price {
+    font-size: 0.9rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: #fff;
+}
+
+.breakout-date .price::before {
+    content: "•";
+    color: var(--brand-red);
+    margin-right: 8px;
+    font-size: 1.2rem;
+}
+
+.breakout-details .breakout-title {
+    font-family: var(--primary-font);
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1.1;
+    color: #fff;
+    margin: 0 0 15px 0;
+    text-shadow: 0 10px 30px rgba(0,0,0,0.8);
+}
+
+.breakout-title sup {
+    font-size: 1rem;
+    color: var(--brand-red);
+}
+
+.breakout-venue {
+    font-family: var(--body-font);
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+}
+
+/* ==================================
+   RESPONSIVE DESIGN
+=================================== */
+@media (max-width: 1024px) {
+    .events-filter-bar {
+        flex-direction: column;
+        gap: 20px;
+        align-items: flex-start;
+    }
+    
+    .event-row {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 30px 0;
+        border-radius: 0;
+    }
+    
+    .event-row:hover {
+        transform: none;
+        box-shadow: none;
+        background: transparent;
+        border-bottom-color: var(--border-glass);
+    }
+    
+    .view-btn {
+        display: none;
+    }
+
+    .breakout-content {
+        flex-direction: column;
+        gap: 30px;
+    }
+}

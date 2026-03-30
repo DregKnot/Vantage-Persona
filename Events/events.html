@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events | Vantage Persona</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&family=Plus+Jakarta+Sans:wght@200;300;400;600;700;800&family=Jim+Nightshade&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="../style/navbar.css">
+    <link rel="stylesheet" href="../style/events.css">
+</head>
+<body class="events-page dark-theme">
+
+    <!-- Unified Floating Navbar -->
+    <div class="vantage-nav-container">
+        <nav class="vantage-nav">
+            <div class="nav-logo">
+                <a href="../Home/Home.html">
+                    <img src="../pictures/Vantage personsa logo.svg" alt="Logo">
+                </a>
+            </div>
+            <div class="nav-pills">
+                <a href="../Home/Home.html" class="nav-item">Home</a>
+                <a href="../Gallery/gallery.html" class="nav-item">Gallery</a>
+                <a href="../LookBook/lookbook.html" class="nav-item">LookBook</a>
+                <a href="../Events/events.html" class="nav-item active">Events</a>
+                <a href="../Apointment/Appointment.html" class="nav-item">Appointments</a>
+            </div>
+            <div class="nav-actions">
+                <a href="../Apointment/Appointment.html" class="nav-cta">
+                    Book Now <span class="arrow-circle">↗</span>
+                </a>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Main Content wrapper -->
+    <main class="events-main">
+        
+        <!-- Hero Section -->
+        <section class="events-hero">
+            <div class="hero-bg" style="background-image: url('../pictures/Party/karsten-winegeart-UicC_FIozPc-unsplash.jpg');"></div>
+            <div class="hero-overlay-gradient"></div>
+            <div class="hero-content">
+                <h1 class="hero-title">Groove on<br>the Grass</h1>
+                <div class="hero-meta">
+                    <div class="meta-date">
+                        <strong>Saturday</strong><br>
+                        April 18, 2026
+                    </div>
+                    <div class="meta-location">
+                        <strong>Emirates Golf Club</strong><br>
+                        Dubai <sup>UAE</sup>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filter Bar -->
+        <section class="events-filter-bar container-fade">
+            <div class="filter-group left">
+                <span class="label">EVENTS IN</span>
+                <select class="glass-select">
+                    <option>2026</option>
+                    <option>2027</option>
+                </select>
+            </div>
+            <div class="filter-group center">
+                <div class="filter-item">
+                    <span class="label">PRICE</span>
+                    <select class="glass-select">
+                        <option>SHOW ALL</option>
+                        <option>FREE</option>
+                        <option>AED 250+</option>
+                    </select>
+                </div>
+                <div class="filter-item">
+                    <span class="label">CATEGORIES</span>
+                    <select class="glass-select">
+                        <option>SHOW ALL</option>
+                        <option>FASHION</option>
+                        <option>MOTORSPORT</option>
+                        <option>CULTURE</option>
+                    </select>
+                </div>
+            </div>
+            <div class="filter-group right">
+                <span class="label">FIND</span>
+                <div class="view-toggles">
+                    <button class="toggle-btn active">LIST</button>
+                    <button class="toggle-btn">GRID</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Events List Container -->
+        <section class="events-list-section">
+            
+            <!-- Month Group -->
+            <div class="month-group container-fade">
+                <h2 class="month-title">MARCH</h2>
+                
+                <div class="event-rows-container">
+                    
+                    <!-- Event Row 1 -->
+                    <article class="event-row">
+                        <div class="row-col col-date">
+                            <span class="day">Friday</span>
+                            <span class="date">Apr 10, 2026</span>
+                            <span class="price">AED 250+</span>
+                        </div>
+                        <div class="row-col col-thumb">
+                            <div class="thumb-wrapper">
+                                <img src="../pictures/Party/eyitayo-adekoya-oJmQ4oFtvbM-unsplash.jpg" alt="Rick Ross Live">
+                            </div>
+                        </div>
+                        <div class="row-col col-details">
+                            <h3 class="event-name">Vantage Gala Live</h3>
+                            <h4 class="event-location">Dubai <sup>UAE</sup></h4>
+                            <p class="event-venue">At Al Habtoor Polo Resort/Club</p>
+                        </div>
+                        <div class="row-col col-action">
+                            <a href="#" class="view-btn">➜</a>
+                        </div>
+                    </article>
+
+                    <!-- Event Row 2 -->
+                    <article class="event-row">
+                        <div class="row-col col-date">
+                            <span class="day">Saturday</span>
+                            <span class="date">Apr 18, 2026</span>
+                            <span class="price">FREE</span>
+                        </div>
+                        <div class="row-col col-thumb">
+                            <div class="thumb-wrapper">
+                                <img src="../pictures/Party/joren-aranas-nmuyqgSOpEE-unsplash.jpg" alt="Groove on the grass">
+                            </div>
+                        </div>
+                        <div class="row-col col-details">
+                            <h3 class="event-name">Groove on the Grass</h3>
+                            <h4 class="event-location">Dubai <sup>UAE</sup></h4>
+                            <p class="event-venue">At Emirates Golf Club</p>
+                        </div>
+                        <div class="row-col col-action">
+                            <a href="#" class="view-btn">➜</a>
+                        </div>
+                    </article>
+
+                    <!-- Event Row 3 -->
+                    <article class="event-row">
+                        <div class="row-col col-date">
+                            <span class="day">April 24 – </span>
+                            <span class="date">April 26</span>
+                            <span class="price">AED 250+</span>
+                        </div>
+                        <div class="row-col col-thumb">
+                            <div class="thumb-wrapper">
+                                <img src="../pictures/Rides/talia-zsJZhl-dZMU-unsplash.jpg" alt="Julius Gold Cup">
+                            </div>
+                        </div>
+                        <div class="row-col col-details">
+                            <h3 class="event-name">Julius Baer Gold Cup</h3>
+                            <h4 class="event-location">Downtown Dubai <sup>UAE</sup></h4>
+                            <p class="event-venue">At Al Habtoor Polo Resort/Club</p>
+                        </div>
+                        <div class="row-col col-action">
+                            <a href="#" class="view-btn">➜</a>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+
+            <!-- Dark Breakout Row -->
+            <div class="event-breakout" style="background-image: url('../pictures/Rides/redcharlie-vQVWIsIBafA-unsplash.jpg');">
+                <div class="breakout-overlay"></div>
+                <div class="breakout-content">
+                    <div class="breakout-date">
+                        <span class="date-range">May 1 – May 3</span>
+                        <span class="price">AED 310+</span>
+                    </div>
+                    <div class="breakout-details">
+                        <h2 class="breakout-title">Formula 1 Grand Prix<br>Abu Dhabi <sup>UAE</sup></h2>
+                        <p class="breakout-venue">Yas Marina Circuit</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Month Group Part 2 -->
+            <div class="month-group container-fade" style="margin-top: 60px;">
+                <h2 class="month-title">MAY</h2>
+                <div class="event-rows-container">
+                    
+                    <!-- Event Row 4 -->
+                    <article class="event-row">
+                        <div class="row-col col-date">
+                            <span class="day">Friday</span>
+                            <span class="date">May 15, 2026</span>
+                            <span class="price">AED 210+</span>
+                        </div>
+                        <div class="row-col col-thumb">
+                            <div class="thumb-wrapper">
+                                <img src="../pictures/Rides/dustin-bowdige-1EXroB7f6bw-unsplash.jpg" alt="Waterbike">
+                            </div>
+                        </div>
+                        <div class="row-col col-details">
+                            <h3 class="event-name">UAE Hydro Series</h3>
+                            <h4 class="event-location">Dubai <sup>UAE</sup></h4>
+                            <p class="event-venue">At Al Habtoor Polo Resort/Club</p>
+                        </div>
+                        <div class="row-col col-action">
+                            <a href="#" class="view-btn">➜</a>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- SITE FOOTER -->
+    <footer class="site-footer container-fade">
+      <div class="footer-lower">
+        <h1 class="footer-brand-huge">VANTAGE PERSONA</h1>
+        <nav class="footer-nav">
+          <a href="../Home/Home.html" class="footer-link">Home</a>
+          <a href="../Gallery/gallery.html" class="footer-link">Gallery</a>
+          <a href="../LookBook/lookbook.html" class="footer-link">Look Book</a>
+          <a href="../Events/events.html" class="footer-link">Events</a>
+          <a href="../Apointment/Appointment.html" class="footer-link">Appointments</a>
+        </nav>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../Home.js/ContainerFade.js"></script>
+</body>
+</html>

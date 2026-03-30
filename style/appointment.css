@@ -983,3 +983,124 @@
         font-size: 2.2rem;
     }
 }
+
+/* Testimonial Section */
+.testimonial-section {
+    padding: 100px 5%;
+    background-color: #050505;
+    position: relative;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.testimonial-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.testimonial-headline {
+    font-family: var(--primary-font);
+    font-size: 3rem;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 60px;
+    text-transform: uppercase;
+}
+
+/* Infinte Scroll Marquee Magic */
+.marquee-wrapper {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    /* Optional: Fading edges */
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.testimonial-track {
+    display: flex;
+    gap: 40px;
+    width: max-content;
+    animation: scroll 40s linear infinite;
+}
+
+/* Pause animation on hover */
+.marquee-wrapper:hover .testimonial-track {
+    animation-play-state: paused;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        /* Translates exactly half the track (the original set) so it loops perfectly */
+        transform: translateX(calc(-50% - 20px));
+    }
+}
+
+.testimonial-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.4s ease, border-color 0.4s ease;
+    
+    /* Fixed width for marquee cards */
+    width: 450px;
+    flex-shrink: 0;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.rating {
+    color: #d4af37; /* Gold stars */
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+.testimonial-card .message {
+    font-family: var(--body-font);
+    font-size: 1.1rem;
+    color: #e0e0e0;
+    line-height: 1.8;
+    font-style: italic;
+    margin-bottom: 30px;
+    flex-grow: 1;
+}
+
+.customer-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.customer-info .name {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    color: #fff;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.customer-info .location {
+    font-family: var(--body-font);
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+@media (max-width: 768px) {
+    .testimonial-headline { font-size: 2.5rem; }
+    .testimonial-card { 
+        padding: 30px; 
+        width: 320px; /* Smaller cards on mobile */
+    }
+}

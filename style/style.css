@@ -1070,6 +1070,142 @@ body {
     }
 }
 
+/* =========================================
+   BOARD OF TRUSTEES (Endless Scroll)
+   ========================================= */
+.board-section {
+    width: 100%;
+    padding: 100px 0;
+    background-color: var(--black-bg, #000);
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+    border-top: 1px solid rgba(255, 255, 255, 0.05); /* Subtle separation */
+}
+
+.board-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.board-headline {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    margin: 0;
+}
+
+.board-subheadline {
+    font-family: 'Jura', sans-serif;
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 15px;
+    letter-spacing: 2px;
+}
+
+.board-marquee-wrapper {
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    /* Soft fade off the edges so images don't clip harshly */
+    -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+}
+
+.board-track {
+    display: flex;
+    gap: 30px;
+    width: max-content;
+    animation: boardScroll 60s linear infinite;
+}
+
+/* Pause scroll when the user hovers to look closer at an executive */
+.board-marquee-wrapper:hover .board-track {
+    animation-play-state: paused;
+}
+
+@keyframes boardScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-50% - 15px)); }
+}
+
+.board-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 380px; /* Fixed vertical portrait size */
+    flex-shrink: 0;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 24px;
+    transition: transform 0.4s ease, border-color 0.4s ease;
+}
+
+.board-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.board-portrait-wrapper {
+    width: 100%;
+    height: 450px; /* Tall aspect ratio for premium photos */
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 25px;
+    background-color: #111;
+}
+
+.board-portrait-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(80%); /* Executive / Editorial vibe */
+    transition: filter 0.5s ease, transform 0.8s ease;
+}
+
+.board-card:hover .board-portrait-wrapper img {
+    filter: grayscale(0%);
+    transform: scale(1.05);
+}
+
+.board-info {
+    text-align: center;
+    width: 100%;
+}
+
+.board-name {
+    font-family: inherit;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 0 0 5px 0;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.board-role {
+    font-family: 'Jura', sans-serif;
+    font-size: 0.95rem;
+    color: #d4af37; /* Gold accent */
+    margin: 0;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+@media (max-width: 768px) {
+    .board-card {
+        width: 320px;
+        padding: 20px;
+    }
+    .board-portrait-wrapper {
+        height: 380px;
+    }
+}
+
 /* ========== SITE FOOTER Styling Refined ========== */
 .site-footer {
     width: 100%;

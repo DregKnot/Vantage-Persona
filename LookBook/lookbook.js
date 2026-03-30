@@ -3,12 +3,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const categoryBtns = document.querySelectorAll('.category-btn');
     const zoomOverlay = document.getElementById('zoom-overlay');
     const zoomedImage = document.getElementById('zoomed-image');
+    const zoomInfoPanel = document.getElementById('zoom-info-panel');
     const closeZoom = document.querySelector('.close-zoom');
+
+    // Track currently active category for popup context
+    let activeCategory = 'Work of art';
 
     // Folder Data Mapping
     const lookbookData = {
         'Abstract': {
             type: 'grid',
+            paragraph: 'Limits?',
+            h3: 'We are Mataphysical',
+            h2: '#Be Impressionistic',
+            popup: {
+                label: 'Event Night',
+                description: 'An abstract evening curated by Vantage Persona. Immersive lights, textures, and silhouettes collide in a sensory experience.',
+                priceUSD: '$320',
+                priceNGN: '₦480,000',
+                priceSuffix: ' / night'
+            },
             images: [
                 '1621784b-7cbe-4cfd-8c92-82fac9435582.jpg',
                 '2ba7c649-78c7-40e6-892a-a2a3d5486134.jpg',
@@ -18,8 +32,52 @@ document.addEventListener('DOMContentLoaded', () => {
                 'dcc35b2b-e66b-48a9-8bd1-2c2a8dc3f06d.jpg'
             ]
         },
+        'Astral': {
+            type: 'grid',
+            paragraph: 'Magic with cameras and editing tools..',
+            h2: 'The sparkles will be Etherial',
+            h3: '#The Astral Effect',
+            popup: {
+                label: 'Photoshoot Package',
+                description: 'Ethereal photography sessions with expert editing. Every frame is sculpted to feel otherworldly.',
+                priceUSD: '$230',
+                priceNGN: '₦345,000',
+                priceSuffix: ''
+            },
+            images: [
+                '02c8f69f-09ff-4cfd-9d25-c98afd07384e.jpg',
+                '12171e2e-3c17-4ea1-813c-2e77171a0252.jpg',
+                '121c70a4-6c71-4188-8d54-89d3bdadcb46.jpg',
+                '3b216f7f-9653-499a-ade4-62e5510f1736.jpg',
+                '45582118-d619-46f5-b52f-9e5e0bbd2237.jpg',
+                '4fcddd5b-54d4-4fb9-971a-b749ebc1379e.jpg',
+                '5840b519-c043-4604-aabe-159b13a2998d.jpg',
+                '6cb59410-6259-44d6-a98b-580f2a282385.jpg',
+                '747fe063-3cd7-4e3a-b5fd-670ae9a042fa.jpg',
+                '84740da6-2e26-463b-b315-c03e8e9dfb40.jpg',
+                '8c90cebd-237c-4616-8e18-6bc4b68334ee.jpg',
+                'a92f1ed2-0227-425c-a829-a8bb38366cc9.jpg',
+                'bad3270b-6c33-4518-94a3-c496c27d7821.jpg',
+                'bb831dc6-8414-4cee-8a4a-1ea9eef665a4 (1).jpg',
+                'c903ca27-3282-4c7f-90e2-acded157b763.jpg',
+                'debe8dbf-3cc0-4607-afcb-0992d0e6021e.jpg',
+                'e16f0f34-31b7-443a-a63f-17cf90de026f.jpg',
+                'e1fe747b-740d-4c2f-a6b8-0d376e8fc55f.jpg',
+                'f801733e-cb31-43ba-b7de-b88384a9e08f.jpg'
+            ]
+        },
         'Flower-present': {
             type: 'cinematic',
+            paragraph: 'The Bloom of the Present etched my past',
+            h3: 'I Bloom From mine own wither',
+            h2: '#Desperate shine of a dying light',
+            popup: {
+                label: 'Event Photoshoot',
+                description: 'Floral-themed editorial sessions blending nature with high fashion. Each petal tells a story.',
+                priceUSD: '$290',
+                priceNGN: '₦435,000',
+                priceSuffix: ''
+            },
             video: '5e35f214-0917-4c2d-8ebd-6808cba22a8b.gif',
             images: [
                 '09a57ca1-5fd7-471d-9f08-333f051b8c36.jpg',
@@ -42,6 +100,16 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         'One_Nature': {
             type: 'grid',
+            paragraph: 'You are as beautiful as the earth around you',
+            h3: 'Oneness with Slowly Throbbing life',
+            h2: '#I am as the Green Backyards',
+            popup: {
+                label: 'Styled Session',
+                description: 'Nature-inspired styling sessions where your wardrobe merges with the organic beauty around you.',
+                priceUSD: '$240',
+                priceNGN: '₦360,000',
+                priceSuffix: ''
+            },
             images: [
                 '0507323c-3444-4f63-91e0-8092d25d3ee5.jpg',
                 '2a885903-24c6-445d-8a95-64f2a07326c2.jpg',
@@ -51,8 +119,61 @@ document.addEventListener('DOMContentLoaded', () => {
                 'ce5a0f0e-7ace-4347-8431-e4c68e943e5e.jpg'
             ]
         },
+        'Our Fits': {
+            type: 'grid',
+            h2: 'Fits and Combos from Vantage',
+            paragraph: 'We care too much about fashion to gatekeep this masterpiece',
+            popup: {
+                label: 'Dress Combo',
+                description: 'Complete outfit combinations styled by Vantage Persona. Head-to-toe coordination that speaks volumes.',
+                priceUSD: '$480',
+                priceNGN: '₦720,000',
+                priceSuffix: ''
+            },
+            images: [
+                '0221fb8f-28e8-4cda-b2e6-8892659af828.jpg',
+                '03dc1e97-4892-4e36-ae96-8a6493f0835d.jpg',
+                '0759601d-27ca-411a-b4de-d70c054352eb.jpg',
+                '0b15dee0-c72a-4c70-b076-5ed6a483850b.jpg',
+                '0c2d93d7-1a54-41bb-a495-8ff0afdb77cd.jpg',
+                '0eefe786-6789-4c85-9c3d-ef48894c6ebb.jpg',
+                '1ec7ed67-4599-410a-a8e5-4506c12c6595.jpg',
+                '1f06c032-052e-4535-8cba-27d437473f25.jpg',
+                '2f958a50-1564-4b2f-8dea-cc591ddbcd3d.jpg',
+                '493acded-7cac-4774-b73b-0b980708b281.jpg',
+                '4bb894f9-02ac-4cbd-9af1-f83dbd1617d6.jpg',
+                '67ee2075-73b0-4649-8e0f-62277f4a478e.jpg',
+                '6e46ba21-7b00-4176-b505-ee3f131e9f93.jpg',
+                '6ed5083b-657f-4e27-8bbd-380e1d52d135.jpg',
+                '8210f944-b783-4b77-81fc-55fb4b10bd19.jpg',
+                '85b72190-42ce-45a8-9288-de6dd87c7f79.jpg',
+                '8e26c377-6913-4872-b823-8ffa90afff43.jpg',
+                '941743c5-1b3a-4fe9-a019-8daed2840284.jpg',
+                '9a6d07cc-4e63-4190-8246-d856ce1efa71.jpg',
+                'a8525fed-7f66-43dc-8e89-27f2e2043ec7.jpg',
+                'ad4d7fd5-f3f2-4319-a4d9-8fdaaccc65d3.jpg',
+                'c9658e4a-7ad9-459c-9b91-d4cce8ae8bc5.jpg',
+                'd63fe87b-36c5-4b38-8da3-e5ebd0adfe00.jpg',
+                'df1b2612-e343-4da0-b30b-3b03f1c52d3d.jpg',
+                'e74515ae-38ec-460d-a8e1-aa03233a752e.jpg',
+                'f169a251-4c11-4869-a526-6bd444144737.jpg',
+                'f302ae17-e580-4ab8-b442-299c1c35f2df.jpg',
+                'f609b01f-1866-48b1-9735-ff68aa7945d8.jpg',
+                'f7245ab3-e05b-491f-b87a-0d9cb1360c60.jpg'
+            ]
+        },
         'RedArt': {
             type: 'grid',
+            paragraph: 'Client Loved our last work and brought some friends over',
+            h3: 'Red is Incroyable',
+            h2: '#Rust is every shade of red',
+            popup: {
+                label: 'Dress Combo',
+                description: 'Bold crimson ensembles crafted for maximum visual impact. Every shade of red, redefined.',
+                priceUSD: '$640',
+                priceNGN: '₦960,000',
+                priceSuffix: ''
+            },
             images: [
                 '1a35d8fd-4621-4374-b291-9dd845f585fe.jpg',
                 '1e787d04-f1c8-494a-8e53-76b57bdae274.jpg',
@@ -78,6 +199,14 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         'Shoes': {
             type: 'grid',
+            paragraph: 'We offer shoes like this and more, trust us, just mention it, we know it',
+            popup: {
+                label: 'Pairs From',
+                description: 'Premium footwear curated and sourced by Vantage Persona. Name it, we know it.',
+                priceUSD: '$160',
+                priceNGN: '₦240,000',
+                priceSuffix: ''
+            },
             images: [
                 '074f1cba-ae9e-4fcd-985c-0ee9c4e57bd3.mp4',
                 '0f7005f9-441f-4851-8928-9f7277529da7.jpg',
@@ -93,6 +222,16 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         'TechFits': {
             type: 'grid',
+            paragraph: 'The Future rests in the hands of the Cyberpunks',
+            h3: 'Our Casual is Cyberpunk',
+            h4: '#2040 fits',
+            popup: {
+                label: 'Tech Fit Set',
+                description: 'Functional, breathable, and unapologetically futuristic. Engineered for the cyberpunk generation.',
+                priceUSD: '$420',
+                priceNGN: '₦630,000',
+                priceSuffix: ''
+            },
             images: [
                 '36ade9fa-9c47-43c8-8fe6-782910578083.jpg',
                 '3e86e010-dcfd-484d-a9e7-febeeed556d0.jpg',
@@ -116,6 +255,16 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         'TellingEyes': {
             type: 'grid',
+            paragraph: 'We make your eyes speak the words...',
+            h3: 'Look Therein and tell me what you see',
+            h2: '#I Harbor',
+            popup: {
+                label: 'Styled Photoshoot',
+                description: 'Editorial eye-focused photography that captures raw emotion through expert styling and lighting.',
+                priceUSD: '$250',
+                priceNGN: '₦375,000',
+                priceSuffix: ''
+            },
             images: [
                 '3f802280-5495-41a7-9b7c-8e0f5658d982.jpg',
                 '68c24c53-5e5d-4cc5-be25-456156994dc1.jpg',
@@ -132,8 +281,41 @@ document.addEventListener('DOMContentLoaded', () => {
                 'ef13efd1-ca56-41a8-92c7-dc61ba658c3b.jpg'
             ]
         },
+        'The Fitted': {
+            type: 'grid',
+            paragraph: 'Bespoke tailoring at its finest. Every stitch, every seam — engineered for you.',
+            h3: 'Precision in Every Thread',
+            h2: '#The Fitted Collection',
+            popup: null, // Showcase only — no pricing
+            images: [
+                '1db24eec-462f-41f6-a449-87a2dfb53d02.jpg',
+                '3cf651a8-8a1b-49f5-99a9-22ad8ff69bd5.jpg',
+                '4ad3dc85-f534-4685-a1f4-4a4b0c720cb7.jpg',
+                '6743a26a-cdb8-482c-932b-a3026221e75c.jpg',
+                '73d43d1c-bc99-438b-8de6-db54893a6c5a.jpg',
+                '77edf140-688b-42eb-aeca-00789d32adef.jpg',
+                '8f98bf72-3492-4f47-b261-891d8e4a7715.jpg',
+                '9802421e-9a4e-4d95-9d9a-6fac3dad266f.jpg',
+                '9ccaa662-a5fa-468c-8714-5ed1b20ee96a.jpg',
+                'b56994eb-0df6-4444-992e-8d8bfa3110d7.jpg',
+                'caa9856b-b2f1-4d5d-a944-71bf4c48ad66.jpg',
+                'cc994ccf-81e1-4b92-9769-358955d4c3dd.jpg',
+                'db2f945e-b002-4317-91ac-3dfd0be4c005.jpg',
+                'ef7876c7-85bd-4896-9378-f177f8b22b78.jpg'
+            ]
+        },
         'Work of art': {
             type: 'track',
+            paragraph: 'Fashion is a work of art and we are intricate about making you look the part.',
+            h3: 'Photoshoped in illinois',
+            h2: '#We are Art, we are Abstract',
+            popup: {
+                label: 'Dress Combo',
+                description: 'Wearable art designed to transform you into a living masterpiece. Intricate, bold, unforgettable.',
+                priceUSD: '$750',
+                priceNGN: '₦1,125,000',
+                priceSuffix: ''
+            },
             images: [
                 '2c41aea6-6ada-403f-a99a-d66f633afde0.jpg',
                 '61b4e087-d26f-4eae-b43a-a6fdbdf279cb.jpg',
@@ -148,14 +330,57 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // Build the info panel HTML for the popup
+    function buildInfoPanel(categoryName) {
+        const data = lookbookData[categoryName];
+        if (!data) return '';
+
+        const displayName = categoryName.replace(/_/g, ' ');
+
+        // If no popup data (showcase only like The Fitted)
+        if (!data.popup) {
+            return `
+                <p class="zoom-collection-label">Collection</p>
+                <h2 class="zoom-collection-name">${displayName}</h2>
+                <p class="zoom-description">${data.paragraph || 'A curated visual experience from Vantage Persona.'}</p>
+                <p class="zoom-showcase-label">✦ Showcase Only ✦</p>
+                <a href="../Apointment/Appointment.html" class="zoom-cta-btn">Book a Consultation →</a>
+            `;
+        }
+
+        const p = data.popup;
+        return `
+            <p class="zoom-collection-label">Collection</p>
+            <h2 class="zoom-collection-name">${displayName}</h2>
+            <p class="zoom-description">${p.description}</p>
+            <div class="zoom-pricing">
+                <p class="zoom-price-label">${p.label} — Starting from</p>
+                <p class="zoom-price-usd">${p.priceUSD}${p.priceSuffix}</p>
+                <p class="zoom-price-ngn">${p.priceNGN}${p.priceSuffix}</p>
+            </div>
+            <a href="../Apointment/Appointment.html" class="zoom-cta-btn">Book a Consultation →</a>
+        `;
+    }
+
     function renderCategory(categoryName) {
         const data = lookbookData[categoryName];
         if (!data) return;
 
+        activeCategory = categoryName;
+
         // Update Theme
         document.body.className = `lookbook-page theme-${categoryName.replace(/ /g, '_')}`;
         
-        displayContainer.innerHTML = ''; // Clear current
+        // Render Intro Text
+        const introContainer = document.getElementById('category-intro');
+        introContainer.innerHTML = ''; // Clear prior text
+        
+        if (data.paragraph) introContainer.innerHTML += `<p class="intro-paragraph">${data.paragraph}</p>`;
+        if (data.h3) introContainer.innerHTML += `<h3 class="intro-subheading">${data.h3}</h3>`;
+        if (data.h2) introContainer.innerHTML += `<h2 class="intro-heading">${data.h2}</h2>`;
+        if (data.h4) introContainer.innerHTML += `<h4 class="intro-heading-small">${data.h4}</h4>`;
+
+        displayContainer.innerHTML = ''; // Clear current images
         
         if (data.type === 'track') {
             const track = document.createElement('div');
@@ -173,16 +398,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const grid = document.createElement('div');
             grid.className = 'cinematic-grid';
             
-            // Calculate total rows needed based on 4 columns
-            // Video takes 4 slots (span 2x2). Total slots needed = images.length + 4.
             const totalSlots = data.images.length + 4;
             let totalRows = Math.ceil(totalSlots / 4);
-            if (totalRows < 2) totalRows = 2; // minimum 2 rows
-            
-            // Find the perfect middle row for the video
+            if (totalRows < 2) totalRows = 2;
             const middleRow = Math.max(1, Math.floor(totalRows / 2));
 
-            // Add Centerpiece (GIF/Video)
             const centerItem = document.createElement('div');
             centerItem.className = 'grid-item item-center';
             centerItem.style.gridRow = `${middleRow} / span 2`;
@@ -190,7 +410,6 @@ document.addEventListener('DOMContentLoaded', () => {
             centerItem.addEventListener('dblclick', () => openZoom(`../pictures/LookBook/${categoryName}/${data.video}`));
             grid.appendChild(centerItem);
 
-            // Add ALL surrounding images
             data.images.forEach(img => {
                 const item = document.createElement('div');
                 item.className = 'grid-item';
@@ -206,7 +425,6 @@ document.addEventListener('DOMContentLoaded', () => {
             data.images.forEach(img => {
                 const item = document.createElement('div');
                 item.className = 'grid-item';
-                // Handle mixed media like mp4
                 if (img.endsWith('.mp4')) {
                     item.innerHTML = `<video src="../pictures/LookBook/${categoryName}/${img}" autoplay loop muted playsinline></video>`;
                 } else {
@@ -221,6 +439,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function openZoom(src) {
         zoomedImage.src = src;
+        zoomInfoPanel.innerHTML = buildInfoPanel(activeCategory);
         zoomOverlay.classList.add('active');
     }
 
