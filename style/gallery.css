@@ -2,7 +2,7 @@
 
 @font-face {
     font-family: 'KingsCross';
-    src: url('../pictures/Flush_section/kingscross_extracted/KingsCross.ttf') format('truetype');
+    src: url('/pictures/Flush_section/kingscross_extracted/KingsCross.ttf') format('truetype');
 }
 
 :root {
@@ -293,7 +293,7 @@ body {
     position: absolute;
     inset: 0;
     z-index: 1;
-    background-image: linear-gradient(rgba(0, 36, 102, 0.225), rgba(0, 36, 102, 0.367)), url('../pictures/Flush_section/jj-ying-7JX0-bfiuxQ-unsplash.jpg');
+    background-image: linear-gradient(rgba(0, 36, 102, 0.225), rgba(0, 36, 102, 0.367)), url('/pictures/Flush_section/jj-ying-7JX0-bfiuxQ-unsplash.jpg');
     background-size: cover;
     background-position: center;
     /* Removed background-attachment: fixed because it causes lag */
