@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vantage | DOM Structure Map</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&family=Plus+Jakarta+Sans:wght@200;300;400;600;700;800&family=JetBrains+Mono:wght@300;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --accent: #2eaadc; /* Vantage Blue */
+            --accent-alt: #ffffff;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+            --node-tag: #569cd6;
+            --node-id: #9cdcfe;
+            --node-class: #ce9178;
+        }
+
+        body {
+            background: var(--bg-dark);
+            color: #ccc;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .map-header {
+            padding: 40px 60px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            background: linear-gradient(to bottom, rgba(0,0,0,1), transparent);
+        }
+
+        .header-left h1 {
+            font-family: 'Jura', sans-serif;
+            font-size: 2.5rem;
+            letter-spacing: 0.1em;
+            margin: 0;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        .header-left p {
+            margin: 10px 0 0;
+            font-size: 0.9rem;
+            opacity: 0.6;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+        }
+
+        .source-selector {
+            display: flex;
+            gap: 15px;
+        }
+
+        .source-btn {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            color: rgba(255, 255, 255, 0.6);
+            padding: 10px 20px;
+            cursor: pointer;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .source-btn:hover {
+            border-color: var(--accent);
+            color: white;
+        }
+
+        .source-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: black;
+        }
+
+        /* The DOM Tree container */
+        #dom-tree-container {
+            flex: 1;
+            padding: 40px 60px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            overflow: auto;
+        }
+
+        .tree-root {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .tree-node {
+            margin: 5px 0;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        /* Tree connecting lines */
+        .tree-node::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: var(--border);
+        }
+
+        .tree-node::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 15px;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .node-content {
+            display: inline-flex;
+            gap: 10px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
+            cursor: default;
+        }
+
+        .node-content:hover {
+            background: rgba(46, 170, 220, 0.1);
+            border-color: rgba(46, 170, 220, 0.3);
+        }
+
+        .node-tag { color: var(--node-tag); font-weight: 500; }
+        .node-id { color: var(--node-id); }
+        .node-class { color: var(--node-class); font-style: italic; font-size: 0.9em; }
+
+        .hidden-iframe {
+            display: none;
+        }
+
+        .loading-overlay {
+            position: fixed;
+            inset: 0;
+            background: var(--bg-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .loading-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--border);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .map-header {
+                padding: 20px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+            #dom-tree-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="loading-overlay" id="loading">
+        <div class="spinner"></div>
+    </div>
+
+    <header class="map-header">
+        <div class="header-left">
+            <p>Project Analysis</p>
+            <h1>DOM Structure Blueprint</h1>
+        </div>
+        <div class="source-selector">
+            <button class="source-btn active" onclick="loadPage('/Home/Home.html', this)">Home</button>
+            <button class="source-btn" onclick="loadPage('/Events/events.html', this)">Events</button>
+            <button class="source-btn" onclick="loadPage('/Gallery/gallery.html', this)">Gallery</button>
+            <button class="source-btn" onclick="loadPage('/LookBook/lookbook.html', this)">LookBook</button>
+            <button class="source-btn" onclick="loadPage('/Apointment/Appointment.html', this)">Appointments</button>
+        </div>
+    </header>
+
+    <main id="dom-tree-container">
+        <!-- Tree will be injected here -->
+    </main>
+
+    <iframe id="page-loader" class="hidden-iframe"></iframe>
+
+    <script>
+        const treeContainer = document.getElementById('dom-tree-container');
+        const loader = document.getElementById('page-loader');
+        const loadingOverlay = document.getElementById('loading');
+
+        /**
+         * The Recursive "DOM Object Model" traversal function.
+         */
+        function mapDOM(node) {
+            // Only capture Element nodes (skip text, comments, scripts)
+            if (node.nodeType !== Node.ELEMENT_NODE) return null;
+            if (['SCRIPT', 'STYLE', 'NOSCRIPT'].includes(node.tagName)) return null;
+
+            const elementData = {
+                tag: node.tagName.toLowerCase(),
+                id: node.id ? `#${node.id}` : null,
+                classes: Array.from(node.classList).map(c => `.${c}`),
+                children: []
+            };
+
+            // Recursively process all generic child nodes
+            for (let i = 0; i < node.children.length; i++) {
+                const childMap = mapDOM(node.children[i]);
+                if (childMap) {
+                    elementData.children.push(childMap);
+                }
+            }
+
+            return elementData;
+        }
+
+        /**
+         * Renders the mapped JSON object into HTML structure
+         */
+        function renderTree(nodeData) {
+            if (!nodeData) return document.createElement('li');
+            
+            const li = document.createElement('li');
+            li.className = 'tree-node';
+
+            const content = document.createElement('div');
+            content.className = 'node-content';
+            
+            let html = `<span class="node-tag">&lt;${nodeData.tag}&gt;</span>`;
+            if (nodeData.id) html += ` <span class="node-id">${nodeData.id}</span>`;
+            if (nodeData.classes.length) html += ` <span class="node-class">${nodeData.classes.join(' ')}</span>`;
+            
+            content.innerHTML = html;
+            li.appendChild(content);
+
+            if (nodeData.children && nodeData.children.length > 0) {
+                const ul = document.createElement('ul');
+                ul.className = 'tree-root';
+                nodeData.children.forEach(child => {
+                    const childLi = renderTree(child);
+                    if (childLi) ul.appendChild(childLi);
+                });
+                li.appendChild(ul);
+            }
+
+            return li;
+        }
+
+        /**
+         * Main function to trigger the analysis
+         */
+        function loadPage(url, btnElement) {
+            // UI Updates
+            document.querySelectorAll('.source-btn').forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+            loadingOverlay.classList.add('active');
+            treeContainer.innerHTML = '';
+
+            // Load iframe
+            loader.src = url;
+            
+            loader.onload = () => {
+                setTimeout(() => { // Slight delay for dynamic content to settle
+                    try {
+                        const targetDoc = loader.contentDocument || loader.contentWindow.document;
+                        const rootNode = mapDOM(targetDoc.body);
+                        
+                        if (rootNode) {
+                            const rootUl = document.createElement('ul');
+                            rootUl.className = 'tree-root';
+                            rootUl.appendChild(renderTree(rootNode));
+                            treeContainer.appendChild(rootUl);
+                        } else {
+                             treeContainer.innerHTML = `<div style="color:red">No DOM content found in the loaded page.</div>`;
+                        }
+                    } catch (e) {
+                        treeContainer.innerHTML = `<div style="color:red">Error accessing iframe. Please ensure files are served via a web server.</div>`;
+                        console.error(e);
+                    }
+                    loadingOverlay.classList.remove('active');
+                }, 500);
+            };
+        }
+
+        // Initial Load
+        window.onload = () => {
+             loadPage('/Home/Home.html', document.querySelector('.source-btn.active'));
+        };
+    </script>
+</body>
+</html>
