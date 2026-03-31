@@ -421,23 +421,56 @@ body.is-scrolling .ticker-track {
         padding: 30px 20px;
     }
 
-    .card-details {
+    .card-heading {
         position: relative !important;
         bottom: auto !important;
         left: auto !important;
-        right: auto !important;
-        height: auto !important;
+        color: #333 !important;
+        text-shadow: none !important;
+        font-size: 24px !important; /* Slightly smaller for tighter layout */
+        padding: 30px 20px 5px 20px !important;
         text-align: center;
-        padding: 20px 20px 40px 20px !important;
-        box-sizing: border-box;
-        display: block !important; /* Ensure it flows naturally */
+        margin: 0;
+        pointer-events: none;
     }
 
-    .card-heading {
-        font-size: 36px !important;
-        bottom: 20px !important;
-        left: 20px !important;
+    /* Hero Fix - Stack sub-text above/below title */
+    .hero-content-overlay {
+        bottom: 10% !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0 20px;
     }
+
+    .sub-text.left, .sub-text.right {
+        position: relative !important;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        text-align: center;
+        width: 100%;
+        margin: 1.5rem 0;
+        font-size: 0.8rem;
+        letter-spacing: 4px;
+        opacity: 0.8;
+    }
+
+    .sub-text.left {
+         order: -1; /* Above the title */
+    }
+
+    .sub-text.right {
+         order: 1; /* Below the title */
+    }
+
+    .main-title {
+        font-size: 14vw !important; /* Scale title appropriately */
+        letter-spacing: -2px !important;
+        line-height: 1 !important;
+    }
+
 }
 
 .clothing-section-2 {

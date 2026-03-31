@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
             type: 'grid',
             paragraph: 'Limits?',
             h3: 'We are Metaphysical',
-            h2: '#Be Impressionistic',
+            h2: '#Be <br> Impressi- <br> onistic',
             popup: {
                 label: 'Event Night',
                 description: 'An abstract evening curated by Vantage Persona. Immersive lights, textures, and silhouettes collide in a sensory experience.',
@@ -453,6 +453,7 @@ document.addEventListener('DOMContentLoaded', () => {
             data.images.forEach(img => {
                 const item = document.createElement('div');
                 item.className = 'track-item';
+                item.setAttribute('data-hint', 'Double tap to zoom');
                 item.innerHTML = `<img src="/pictures/LookBook/${categoryName}/${img}" loading="lazy">`;
                 addInteraction(item, `/pictures/LookBook/${categoryName}/${img}`);
                 track.appendChild(item);
@@ -470,6 +471,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const centerItem = document.createElement('div');
             centerItem.className = 'grid-item item-center';
+            centerItem.setAttribute('data-hint', 'Double tap to zoom');
             centerItem.style.gridRow = `${middleRow} / span 2`;
             centerItem.innerHTML = `<img src="/pictures/LookBook/${categoryName}/${data.video}" loading="lazy">`;
             addInteraction(centerItem, `/pictures/LookBook/${categoryName}/${data.video}`);
@@ -478,6 +480,7 @@ document.addEventListener('DOMContentLoaded', () => {
             data.images.forEach(img => {
                 const item = document.createElement('div');
                 item.className = 'grid-item';
+                item.setAttribute('data-hint', 'Double tap to zoom');
                 item.innerHTML = `<img src="/pictures/LookBook/${categoryName}/${img}" loading="lazy">`;
                 addInteraction(item, `/pictures/LookBook/${categoryName}/${img}`);
                 grid.appendChild(item);
@@ -490,6 +493,7 @@ document.addEventListener('DOMContentLoaded', () => {
             data.images.forEach(img => {
                 const item = document.createElement('div');
                 item.className = 'grid-item';
+                item.setAttribute('data-hint', 'Double tap to zoom');
                 if (img.endsWith('.mp4')) {
                     item.innerHTML = `<video src="/pictures/LookBook/${categoryName}/${img}" autoplay loop muted playsinline></video>`;
                 } else {

@@ -154,12 +154,14 @@ body.lookbook-page {
 
 .intro-heading {
     font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 3.5rem;
+    font-size: clamp(2.5rem, 10vw, 3.5rem);
     font-weight: 800;
     color: #fff;
-    margin: 0;
+    margin: 0 auto;
     text-transform: uppercase;
-    line-height: 1.1;
+    line-height: 0.95;
+    max-width: 90vw;
+    word-wrap: break-word;
 }
 
 .intro-heading-small {
@@ -514,7 +516,27 @@ body.lookbook-page {
         background: rgba(0,0,0,0.5);
         backdrop-filter: blur(10px);
     }
+
+    /* Cinematic Grid (Flower Present) Mobile Fix */
+    .cinematic-grid {
+        grid-template-columns: 1fr !important; /* Stack vertically */
+        grid-auto-rows: auto !important;
+        padding: 20px !important;
+        gap: 15px !important;
+    }
+
+    .grid-item {
+        height: 400px !important; /* Fixed height for consistency */
+    }
+
+    .item-center {
+        grid-column: auto !important; /* Reset centering logic */
+        grid-row: auto !important;
+        transform: scale(1) !important;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important;
+    }
 }
+
 
 /* Standard Grid (Default for others) */
 .lookbook-grid {
