@@ -94,27 +94,28 @@ class VantageNavigator {
     }
 
     bindSectionObservers() {
-        if (this.isMobile) return; // Mobile has its own badge system
+        if (this.isMobile) return; 
 
         const observerOptions = { threshold: 0.3 };
         const sectionObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    const hintText = entry.target.getAttribute('data-hint');
+                    const hintText = entry.target.getAttribute('data-auto-hint') || entry.target.getAttribute('data-hint');
                     if (hintText) {
-                        // Show hint for 4 seconds when entering the section
                         this.showHint(hintText, 4000);
-                        // Optional: only show once per scroll session
-                        // sectionObserver.unobserve(entry.target); 
+                        // Optional: unobserve if we only want one-shot auto prompts
+                        // sectionObserver.unobserve(entry.target);
                     }
                 }
             });
         }, observerOptions);
 
-        // Specifically observe Section 2 for the "Ephemeral Auto-Hint"
-        const section2 = document.querySelector('.clothing-section-2');
-        if (section2) sectionObserver.observe(section2);
+        // Detect any element tagged for auto-hinting
+        document.querySelectorAll('[data-auto-hint]').forEach(el => {
+            sectionObserver.observe(el);
+        });
     }
+
 
     showHint(text, duration = null) {
         if (!this.hintElement || !text) return;
