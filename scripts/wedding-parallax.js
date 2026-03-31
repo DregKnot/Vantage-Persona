@@ -11,6 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!triggers.length || !imgTrack || !bgTrack) return;
 
+    // Skip parallax logic on mobile/tablet
+    if (window.innerWidth < 1024) return;
+
     // Trigger exactly when the invisible trigger containers cross the dead center of the screen
     const observerOptions = {
         root: null,

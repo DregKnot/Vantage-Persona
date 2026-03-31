@@ -1,7 +1,7 @@
 /* Unified Floating Navbar (Velara Style) */
 .vantage-nav-container {
     position: fixed;
-    top: 25px;
+    top: 57px; /* 25px original + 32px ticker height */
     left: 50%;
     transform: translateX(-50%);
     width: 90%;
@@ -124,9 +124,137 @@
     color: #fff;
 }
 
+/* =========================================
+   HAMBURGER MENU (Mobile)
+   ========================================= */
+.nav-hamburger {
+    display: none; /* Hidden on desktop */
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    position: relative;
+    z-index: 10;
+    padding: 0;
+}
+
+.nav-hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #fff;
+    margin: 0 auto;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.nav-hamburger span:nth-child(1) { transform: translateY(-6px); }
+.nav-hamburger span:nth-child(3) { transform: translateY(6px); }
+
+/* Hamburger → X animation when open */
+.nav-hamburger.open span:nth-child(1) {
+    transform: translateY(0) rotate(45deg);
+}
+.nav-hamburger.open span:nth-child(2) {
+    opacity: 0;
+}
+.nav-hamburger.open span:nth-child(3) {
+    transform: translateY(0) rotate(-45deg);
+}
+
+/* Mobile slide-down menu */
+.mobile-nav-menu {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.97);
+    backdrop-filter: blur(30px);
+    z-index: 99998;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.mobile-nav-menu.open {
+    display: flex;
+    opacity: 1;
+    pointer-events: all;
+}
+
+.mobile-nav-link {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    padding: 15px 30px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.mobile-nav-link:hover,
+.mobile-nav-link.active {
+    color: #fff;
+    background: rgba(255,255,255,0.08);
+}
+
+.mobile-nav-cta {
+    margin-top: 30px;
+    display: inline-block;
+    padding: 16px 40px;
+    background: #fff;
+    color: #000;
+    text-decoration: none;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.mobile-nav-cta:hover {
+    background: #eb0606;
+    color: #fff;
+}
+
 /* Mobile Responsiveness */
 @media (max-width: 1024px) {
     .nav-pills {
-        display: none; /* We could hide pills and use a hamburger menu in real production */
+        display: none;
+    }
+
+    .nav-actions {
+        display: none;
+    }
+
+    .nav-hamburger {
+        display: block;
+    }
+
+    .vantage-nav {
+        padding: 0 20px;
+        height: 70px;
+    }
+
+    .nav-logo img {
+        height: 85px;
+    }
+}
+
+@media (max-width: 480px) {
+    .vantage-nav-container {
+        width: 95%;
     }
 }

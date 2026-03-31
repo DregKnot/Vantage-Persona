@@ -1,0 +1,30 @@
+### Step-by-Step Process: Section 2 Mobile Grid Fix
+
+This document outlines the technical steps taken to resolve the "stacking" and "span" issues in the Section 2 image grid on mobile/tablet devices.
+
+---
+
+#### 1. Breaking the Container Walls (display: contents)
+The HTML structure has images split into two separate containers: `.left-images` and `.word-masonry`. In a CSS Grid, children must be direct siblings to interact with each other (like sitting side-by-side).
+- **The Fix**: Applied `display: contents !important` to both containers. This makes the containers "invisible" to the grid, allowing the images inside to act as direct siblings of each other in the main Section 2 grid.
+
+#### 2. Neutralizing Legacy Desktop Layouts
+I identified that certain images had classes like `.large`, `.medium`, and `.small`. These classes were hardcoded for the Desktop Masonry layout (e.g., `grid-column: span 2` or `grid-row: span 3`).
+- **The Fix**: Inside the mobile media query (`max-width: 1024px`), I performed a "Heavy Reset" by setting all these classes to `grid-column: auto !important` and `grid-row: auto !important`. This stripped away their desktop identities so they could flow into the 50/50 mobile layout.
+
+#### 3. Restoring the Natural Flow (grid-column: auto)
+After clearing the desktop rules, I forced all images to use a natural grid flow.
+- **The Fix**: Set `grid-column: auto !important` for all image wrappers. This ensures the browser automatically places Image 1 in Col 1, Image 2 in Col 2 (side-by-side), and so on.
+
+#### 4. Precision Targeting for the Featured Anchor
+The goal was for the 5th (last) image to span both columns at the bottom.
+- **The Challenge**: Some categories have a hidden "Future" text row, which makes `:last-child` selectors unreliable.
+- **The Fix**: Targeted the specific masonry child using `.word-masonry > .word-img:last-child`. Since masonry images always follow the left-images in the DOM, this precisely targets the 5th image. I then applied `grid-column: 1 / 3 !important` (spanning both columns) and increased its height to `380px` for a prominent featured look.
+
+#### 5. Cleaning Up Spacing (gap & grid-template)
+To fix the "rows pushed far apart" issue:
+- **The Fix**: Switched from `grid-auto-rows` (which can create phantom empty rows) to `grid-template-rows: auto`. This allowed the grid to collapse tightly around the images. I then set a clean `15px` gap for a sharp, professional finish.
+
+---
+**Summary for Developers:**
+Always use `display: contents` when children need to interact across different parent wrappers in a CSS Grid, and remember to neutralize desktop-specific spanning classes when switching to a simplified mobile flow.

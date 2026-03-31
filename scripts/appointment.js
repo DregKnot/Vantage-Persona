@@ -35,8 +35,38 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Hide tooltips when clicking anywhere else
     document.addEventListener('click', () => {
         document.querySelectorAll('.tooltip-text').forEach(t => t.classList.remove('show'));
     });
+
+    // Mission/Vision Tab Switching
+    const tabContainer = document.getElementById('mission-tabs');
+    const missionContent = document.getElementById('content-mission');
+    const visionContent = document.getElementById('content-vision');
+
+    if (tabContainer) {
+        const tabs = tabContainer.querySelectorAll('.mission-pill');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const target = tab.getAttribute('data-tab');
+
+                // Update tab styling
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                // Toggle content blocks
+                if (target === 'mission') {
+                    visionContent.classList.remove('active');
+                    setTimeout(() => {
+                        missionContent.classList.add('active');
+                    }, 50);
+                } else {
+                    missionContent.classList.remove('active');
+                    setTimeout(() => {
+                        visionContent.classList.add('active');
+                    }, 50);
+                }
+            });
+        });
+    }
 });

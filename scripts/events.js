@@ -39,6 +39,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Use passive listener for better scroll performance
     window.addEventListener('scroll', onScroll, { passive: true });
+
+    // --- NEW: Scroll Detector for Lag Elimination ---
+    let scrollTimer = null;
+    const scrollStopThreshold = 250; // ms to wait before resuming animations
+    
+    window.addEventListener('scroll', () => {
+        // Add "is-scrolling" class to body when scrolling starts
+        if (!document.body.classList.contains('is-scrolling')) {
+            document.body.classList.add('is-scrolling');
+        }
+
+        // Clear existing timer and restart
+        window.clearTimeout(scrollTimer);
+
+        scrollTimer = setTimeout(() => {
+            // Remove class once scrolling has stopped
+            document.body.classList.remove('is-scrolling');
+        }, scrollStopThreshold);
+    }, { passive: true });
     
     // Trigger initially to set positions on load
     applyParallax();

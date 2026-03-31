@@ -380,8 +380,8 @@ body {
 
 .flush-image-wrapper {
     position: relative;
-    width: 1080px;
-    max-width: 100%;
+    width: 65vw;
+    max-width: 1400px;
     aspect-ratio: 1080 / 1350;
     border-radius: 15px;
     overflow: hidden;
@@ -681,15 +681,79 @@ body {
 }
 
 @media (max-width: 1024px) {
-    .wedding-sticky-container {
-        flex-direction: column;
+    .wedding-pin-wrapper {
+        height: auto !important; /* Disable multi-viewport scroll */
+        padding-bottom: 100px;
     }
-    .wedding-left-images { width: 100%; height: 50vh; }
-    .wedding-right-text { width: 100%; height: 50vh; }
-    .wedding-trigger { height: 50vh; }
-    .large-bg-number { font-size: 50vw; top: 10%; }
-    .wedding-text-slide .main-heading { font-size: 3.5rem; }
-    .wedding-text-track { height: 200px; }
+
+    .wedding-sticky-container {
+        display: grid !important;
+        grid-template-columns: 1fr;
+        position: relative !important;
+        height: auto !important;
+        overflow: visible !important;
+    }
+
+    /* Interleave Track Components */
+    .wedding-left-images, 
+    .wedding-image-track, 
+    .wedding-right-text, 
+    .wedding-text-track {
+        display: contents !important;
+    }
+
+    /* Column 1: Image 01, Row 2: Text 01, etc. */
+    .wedding-img-slide:nth-child(1) { grid-row: 1; }
+    .wedding-text-slide:nth-child(1) { grid-row: 2; }
+    .wedding-img-slide:nth-child(2) { grid-row: 3; }
+    .wedding-text-slide:nth-child(2) { grid-row: 4; }
+    .wedding-img-slide:nth-child(3) { grid-row: 5; }
+    .wedding-text-slide:nth-child(3) { grid-row: 6; }
+
+    .wedding-img-slide {
+        height: 60vh !important;
+        width: 100% !important;
+    }
+
+    .wedding-right-text {
+        padding: 40px 0;
+    }
+
+    .wedding-text-slide {
+        position: relative !important;
+        opacity: 1 !important;
+        transform: none !important;
+        pointer-events: auto !important;
+        padding: 60px 20px !important;
+        width: 100% !important;
+        box-sizing: border-box;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .wedding-text-slide .main-heading {
+        font-size: 3.5rem !important;
+        text-align: center;
+    }
+
+    .wedding-description {
+        text-align: center;
+        max-width: 100% !important;
+        padding: 0 10%;
+    }
+
+    .wedding-read-more {
+        display: block;
+        width: fit-content;
+        margin: 0 auto;
+    }
+
+    .large-bg-number {
+        display: none; /* Crowds mobile text too much */
+    }
+
+    .wedding-bg-track {
+        display: none; /* Use solid black background for clean mobile list */
+    }
 }
 
 @media (max-width: 768px) {

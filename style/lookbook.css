@@ -229,6 +229,7 @@ body.lookbook-page {
     scroll-snap-align: center;
     cursor: crosshair;
     transition: transform 0.6s cubic-bezier(0.2, 0, 0, 1);
+    touch-action: manipulation;
 }
 
 .track-item img {
@@ -257,6 +258,7 @@ body.lookbook-page {
     border-radius: 15px;
     overflow: hidden;
     transition: all 0.4s ease;
+    touch-action: manipulation;
 }
 
 .grid-item img, .grid-item video, .grid-item gif {
@@ -458,14 +460,59 @@ body.lookbook-page {
 }
 
 @media (max-width: 768px) {
+    .image-zoom-overlay {
+        padding: 0; /* Full screen on mobile */
+    }
     .zoom-content {
+        display: flex;
+        flex-direction: column;
         grid-template-columns: 1fr;
-        grid-template-rows: 50vh auto;
-        max-height: 95vh;
-        overflow-y: auto;
+        grid-template-rows: unset;
+        max-height: 100vh;
+        height: 100vh;
+        width: 100vw;
+        border-radius: 0;
+        border: none;
+    }
+    .zoom-image-panel {
+        height: 70vh;
+        max-height: 70vh;
+        flex: 0 0 70vh;
     }
     .zoom-info-panel {
-        padding: 30px 20px;
+        height: 30vh;
+        flex: 1;
+        padding: 25px 20px;
+        border-left: none;
+        border-top: 1px solid rgba(255,255,255,0.1);
+        justify-content: flex-start;
+        gap: 15px;
+    }
+    .zoom-description {
+        margin-bottom: 20px;
+        font-size: 0.85rem;
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    .zoom-pricing {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+    .zoom-price-usd {
+        font-size: 1.6rem;
+    }
+    .zoom-cta-btn {
+        padding: 12px;
+        font-size: 0.8rem;
+    }
+    .close-zoom {
+        top: 20px;
+        right: 20px;
+        background: rgba(0,0,0,0.5);
+        backdrop-filter: blur(10px);
     }
 }
 

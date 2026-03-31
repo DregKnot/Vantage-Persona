@@ -16,6 +16,8 @@ body.events-page {
     margin: 0;
     padding: 0;
     font-family: 'Plus Jakarta Sans', sans-serif;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 /* ==================================
@@ -212,7 +214,15 @@ body.events-page {
     border-bottom: 1px solid var(--border-glass);
     align-items: center;
     transition: all 0.4s cubic-bezier(0.2, 0, 0, 1);
+    transition-delay: 0.1s; /* Add delay for "intentional" feel */
     border-radius: 12px;
+}
+
+/* Prevent hover flicker and lag during scroll */
+body.is-scrolling .event-row {
+    pointer-events: none;
+    background: transparent !important;
+    transform: none !important;
 }
 
 .event-row:hover {

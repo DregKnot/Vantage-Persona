@@ -9,12 +9,31 @@ document.addEventListener('DOMContentLoaded', () => {
     // Track currently active category for popup context
     let activeCategory = 'Work of art';
 
+    // Helper: Responsive Double Tap / Double Click handler
+    function addInteraction(element, src) {
+        let lastTap = 0;
+        
+        // Mobile Double Tap
+        element.addEventListener('touchend', (e) => {
+            const currentTime = new Date().getTime();
+            const tapLength = currentTime - lastTap;
+            if (tapLength < 300 && tapLength > 0) {
+                e.preventDefault();
+                openZoom(src);
+            }
+            lastTap = currentTime;
+        });
+
+        // Desktop Double Click
+        element.addEventListener('dblclick', () => openZoom(src));
+    }
+
     // Folder Data Mapping
     const lookbookData = {
         'Abstract': {
             type: 'grid',
             paragraph: 'Limits?',
-            h3: 'We are Mataphysical',
+            h3: 'We are Metaphysical',
             h2: '#Be Impressionistic',
             popup: {
                 label: 'Event Night',
@@ -353,7 +372,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'Work of art': {
             type: 'track',
             paragraph: 'Fashion is a work of art and we are intricate about making you look the part.',
-            h3: 'Photoshoped in illinois',
+            h3: 'Photoshoot in Illinois',
             h2: '#We are Art, we are Abstract',
             popup: {
                 label: 'Dress Combo',
@@ -435,7 +454,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const item = document.createElement('div');
                 item.className = 'track-item';
                 item.innerHTML = `<img src="/pictures/LookBook/${categoryName}/${img}" loading="lazy">`;
-                item.addEventListener('dblclick', () => openZoom(`/pictures/LookBook/${categoryName}/${img}`));
+                addInteraction(item, `/pictures/LookBook/${categoryName}/${img}`);
                 track.appendChild(item);
             });
             displayContainer.appendChild(track);
@@ -453,14 +472,14 @@ document.addEventListener('DOMContentLoaded', () => {
             centerItem.className = 'grid-item item-center';
             centerItem.style.gridRow = `${middleRow} / span 2`;
             centerItem.innerHTML = `<img src="/pictures/LookBook/${categoryName}/${data.video}" loading="lazy">`;
-            centerItem.addEventListener('dblclick', () => openZoom(`/pictures/LookBook/${categoryName}/${data.video}`));
+            addInteraction(centerItem, `/pictures/LookBook/${categoryName}/${data.video}`);
             grid.appendChild(centerItem);
 
             data.images.forEach(img => {
                 const item = document.createElement('div');
                 item.className = 'grid-item';
                 item.innerHTML = `<img src="/pictures/LookBook/${categoryName}/${img}" loading="lazy">`;
-                item.addEventListener('dblclick', () => openZoom(`/pictures/LookBook/${categoryName}/${img}`));
+                addInteraction(item, `/pictures/LookBook/${categoryName}/${img}`);
                 grid.appendChild(item);
             });
             displayContainer.appendChild(grid);
@@ -476,7 +495,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     item.innerHTML = `<img src="/pictures/LookBook/${categoryName}/${img}" loading="lazy">`;
                 }
-                item.addEventListener('dblclick', () => openZoom(`/pictures/LookBook/${categoryName}/${img}`));
+                addInteraction(item, `/pictures/LookBook/${categoryName}/${img}`);
                 standardGrid.appendChild(item);
             });
             displayContainer.appendChild(standardGrid);
