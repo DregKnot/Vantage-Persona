@@ -1,0 +1,97 @@
+/* Vantage Navigator - Interaction Hints Styles */
+
+:root {
+    --hint-bg: rgba(0, 0, 0, 0.85);
+    --hint-border: rgba(255, 255, 255, 0.15);
+    --hint-text: #fff;
+    --hint-accent: #d4af37; /* Gold accent */
+}
+
+/* --- Desktop Cursor Follower --- */
+.vantage-cursor-hint {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 1000000; /* Higher than everything */
+    padding: 10px 18px;
+    background: var(--hint-bg);
+    border: 1px solid var(--hint-border);
+    border-radius: 40px; /* Pill shape */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.2, 0, 0.2, 1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    white-space: nowrap;
+}
+
+.vantage-cursor-hint.active {
+    opacity: 1;
+    transform: translate(-50%, -120%) scale(1); /* Offset slightly from cursor */
+}
+
+.hint-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--hint-accent);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--hint-accent);
+    animation: hintPulse 2s infinite;
+}
+
+.hint-text {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--hint-text);
+}
+
+@keyframes hintPulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.5); opacity: 0.5; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* --- Mobile Hint Badges --- */
+.mobile-hint-badge {
+    display: none; /* Desktop hidden by default */
+}
+
+@media (max-width: 768px) {
+    .vantage-cursor-hint {
+        display: none !important; /* Kill the follower on touch */
+    }
+
+    .mobile-hint-badge {
+        display: flex;
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--hint-bg);
+        border: 1px solid var(--hint-border);
+        padding: 8px 14px;
+        border-radius: 20px;
+        z-index: 100;
+        align-items: center;
+        gap: 8px;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        pointer-events: none;
+    }
+
+    .mobile-hint-badge.visible {
+        opacity: 1;
+    }
+
+    .mobile-hint-badge .hint-text {
+        font-size: 0.65rem;
+    }
+}

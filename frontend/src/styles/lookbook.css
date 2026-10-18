@@ -1,0 +1,551 @@
+/* Lookbook Page Specific Styles */
+
+:root {
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --accent-red: rgba(235, 6, 6, 0.6);
+    --accent-forest: rgba(34, 139, 34, 0.6);
+    --accent-murky: rgba(85, 107, 47, 0.6);
+    --transition-speed: 0.8s;
+}
+
+body.lookbook-page {
+    background-color: #000;
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    overflow-x: hidden;
+    transition: background-color var(--transition-speed) ease;
+}
+
+/* Category Selection Bar */
+.lookbook-categories-section {
+    padding-top: 150px;
+    padding-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    z-index: 10;
+    position: relative;
+}
+
+.categories-wrapper {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 1200px;
+    padding: 0 20px;
+}
+
+.category-btn {
+    position: relative;
+    width: 180px;
+    height: 100px;
+    border-radius: 15px;
+    border: 1px solid var(--glass-border);
+    background-color: #111;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.2, 0, 0, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Background image for buttons with backdrop effect */
+.category-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--bg-url);
+    background-size: cover;
+    background-position: center;
+    opacity: 0.3;
+    filter: blur(2px) grayscale(50%);
+    transition: all 0.5s ease;
+}
+
+.category-btn::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    z-index: 1;
+}
+
+.category-btn .btn-text {
+    position: relative;
+    z-index: 2;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.7);
+    transition: color 0.4s ease;
+}
+
+.category-btn:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.category-btn:hover::before {
+    opacity: 0.6;
+    filter: blur(0) grayscale(0%);
+    transform: scale(1.1);
+}
+
+.category-btn.active {
+    width: 220px;
+    border-color: #fff;
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+}
+
+.category-btn.active .btn-text {
+    color: #fff;
+}
+
+/* Main Display Section */
+.lookbook-display-section {
+    width: 100%;
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center; /* Centers children horizontally */
+    position: relative;
+    padding-bottom: 80px;
+}
+
+/* Category Intro Text Styling */
+.lookbook-category-intro {
+    width: 90%;
+    max-width: 1200px;
+    text-align: center;
+    margin-bottom: 40px;
+    animation: fadeIn 0.6s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.intro-paragraph {
+    font-family: var(--body-font);
+    font-size: 1.15rem;
+    color: #dfdfdf;
+    font-weight: 300;
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.intro-subheading {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.intro-heading {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: clamp(2.5rem, 10vw, 3.5rem);
+    font-weight: 800;
+    color: #fff;
+    margin: 0 auto;
+    text-transform: uppercase;
+    line-height: 0.95;
+    max-width: 90vw;
+    word-wrap: break-word;
+}
+
+.intro-heading-small {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.display-glass-container {
+    width: 95%;
+    min-height: 70vh;
+    padding: 40px 0;
+    background: var(--glass-bg);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    border-radius: 40px;
+    border: 1px solid var(--glass-border);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    transition: all var(--transition-speed) ease;
+}
+
+.theme-RedArt { background-color: rgba(40, 0, 0, 0.4) !important; }
+.theme-RedArt .display-glass-container { border-color: var(--accent-red); box-shadow: 0 0 60px rgba(235, 6, 6, 0.15); }
+
+.theme-Work_of_art { background-color: rgba(0, 30, 0, 0.4) !important; }
+.theme-Work_of_art .display-glass-container { border-color: var(--accent-forest); box-shadow: 0 0 60px rgba(34, 139, 34, 0.15); }
+
+.theme-Flower-present { background-color: rgba(20, 30, 10, 0.4) !important; }
+.theme-Flower-present .display-glass-container { border-color: var(--accent-murky); box-shadow: 0 0 60px rgba(85, 107, 47, 0.15); }
+
+.theme-Astral { background-color: rgba(10, 0, 40, 0.5) !important; }
+.theme-Astral .display-glass-container { border-color: rgba(150, 100, 255, 0.4); box-shadow: 0 0 60px rgba(150, 100, 255, 0.12); }
+
+.theme-Our_Fits { background-color: rgba(5, 20, 30, 0.5) !important; }
+.theme-Our_Fits .display-glass-container { border-color: rgba(100, 180, 255, 0.3); box-shadow: 0 0 60px rgba(100, 180, 255, 0.1); }
+
+.theme-The_Fitted { background-color: rgba(15, 15, 15, 0.6) !important; }
+.theme-The_Fitted .display-glass-container { border-color: rgba(200, 180, 140, 0.3); box-shadow: 0 0 60px rgba(200, 180, 140, 0.08); }
+
+/* HORIZONTAL TRACK (Work of Art) */
+.lookbook-track {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding: 0 40px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: 70vh;
+    scrollbar-width: thin;
+    scroll-snap-type: x mandatory;
+    width: 100%;
+}
+
+.track-item {
+    flex: 0 0 auto;
+    height: 85%;
+    aspect-ratio: 4 / 5;
+    border-radius: 20px;
+    overflow: hidden;
+    scroll-snap-align: center;
+    cursor: crosshair;
+    transition: transform 0.6s cubic-bezier(0.2, 0, 0, 1);
+    touch-action: manipulation;
+}
+
+.track-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.track-item:hover {
+    transform: scale(1.02);
+}
+
+/* CINEMATIC GRID (Flower Present) - Non scrollable container */
+.cinematic-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 250px;
+    gap: 20px;
+    width: 100%;
+    padding: 20px 60px;
+    pointer-events: auto;
+}
+
+.grid-item {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    touch-action: manipulation;
+}
+
+.grid-item img, .grid-item video, .grid-item gif {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: crosshair;
+}
+
+/* Video Centering logic */
+.item-center {
+    /* grid-row is dynamically injected via JS based on total images to keep it dead center */
+    grid-column: 2 / span 2;
+    z-index: 10;
+    transform: scale(1.03);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+/* ================================
+   IMAGE DETAIL POPUP MODAL
+================================ */
+.image-zoom-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.92);
+    backdrop-filter: blur(8px);
+    z-index: 100000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    padding: 20px;
+}
+
+.image-zoom-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+/* Two-column split layout */
+.zoom-content {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    max-width: 1100px;
+    max-height: 90vh;
+    width: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 40px 100px rgba(0,0,0,0.8);
+}
+
+/* Left: Image panel */
+.zoom-image-panel {
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    max-height: 90vh;
+}
+
+.zoom-image-panel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Right: Info panel */
+.zoom-info-panel {
+    background: rgba(12, 12, 12, 0.97);
+    backdrop-filter: blur(20px);
+    border-left: 1px solid rgba(255,255,255,0.08);
+    padding: 50px 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: auto;
+}
+
+.zoom-collection-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin: 0 0 10px 0;
+}
+
+.zoom-collection-name {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #fff;
+    margin: 0 0 20px 0;
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+
+.zoom-description {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.7;
+    margin: 0 0 40px 0;
+    flex-grow: 1;
+}
+
+/* Pricing block */
+.zoom-pricing {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 30px;
+}
+
+.zoom-price-label {
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin: 0 0 12px 0;
+}
+
+.zoom-price-usd {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #fff;
+    margin: 0 0 4px 0;
+    line-height: 1;
+}
+
+.zoom-price-ngn {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.45);
+    font-weight: 500;
+    margin: 0;
+}
+
+/* CTA Button */
+.zoom-cta-btn {
+    display: block;
+    text-align: center;
+    background: #fff;
+    color: #000;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 16px 24px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.zoom-cta-btn:hover {
+    background: rgba(235, 6, 6, 0.9);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(235,6,6,0.3);
+}
+
+/* Close button */
+.close-zoom {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: background 0.3s ease;
+}
+
+.close-zoom:hover {
+    background: rgba(235, 6, 6, 0.7);
+}
+
+/* Showcase-only panel (no price) */
+.zoom-showcase-label {
+    font-size: 0.85rem;
+    text-align: center;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 20px 0;
+    border-top: 1px solid rgba(255,255,255,0.07);
+}
+
+@media (max-width: 768px) {
+    .image-zoom-overlay {
+        padding: 0; /* Full screen on mobile */
+    }
+    .zoom-content {
+        display: flex;
+        flex-direction: column;
+        grid-template-columns: 1fr;
+        grid-template-rows: unset;
+        max-height: 100vh;
+        height: 100vh;
+        width: 100vw;
+        border-radius: 0;
+        border: none;
+    }
+    .zoom-image-panel {
+        height: 70vh;
+        max-height: 70vh;
+        flex: 0 0 70vh;
+    }
+    .zoom-info-panel {
+        height: 30vh;
+        flex: 1;
+        padding: 25px 20px;
+        border-left: none;
+        border-top: 1px solid rgba(255,255,255,0.1);
+        justify-content: flex-start;
+        gap: 15px;
+    }
+    .zoom-description {
+        margin-bottom: 20px;
+        font-size: 0.85rem;
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    .zoom-pricing {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+    .zoom-price-usd {
+        font-size: 1.6rem;
+    }
+    .zoom-cta-btn {
+        padding: 12px;
+        font-size: 0.8rem;
+    }
+    .close-zoom {
+        top: 20px;
+        right: 20px;
+        background: rgba(0,0,0,0.5);
+        backdrop-filter: blur(10px);
+    }
+
+    /* Cinematic Grid (Flower Present) Mobile Fix */
+    .cinematic-grid {
+        grid-template-columns: 1fr !important; /* Stack vertically */
+        grid-auto-rows: auto !important;
+        padding: 20px !important;
+        gap: 15px !important;
+    }
+
+    .grid-item {
+        height: 400px !important; /* Fixed height for consistency */
+    }
+
+    .item-center {
+        grid-column: auto !important; /* Reset centering logic */
+        grid-row: auto !important;
+        transform: scale(1) !important;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important;
+    }
+}
+
+
+/* Standard Grid (Default for others) */
+.lookbook-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 40px;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
