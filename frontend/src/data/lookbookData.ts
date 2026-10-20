@@ -293,7 +293,6 @@ export const lookbookData: Record<string, LookbookCategory> = {
                 'c063332c-b223-4cd8-b401-e738104e0a7a.webp',
                 'c78f109c-37fc-44c2-b02c-dd3444468996.webp',
                 'd8c822a1-2f50-4018-902c-ab76a5237e1e.webp',
-                'd8c822a1-2f50-4018-902c-ab76a5237e1e.webp',
                 'e680ec62-1a9f-478c-b1d9-18be0a2e0bcb.webp',
                 'e7a654b0-dbdc-4ac5-ae0a-62b4dae853c1.webp',
                 'eb547de6-6bdd-4f8d-9227-d12dcd2fb895.webp',

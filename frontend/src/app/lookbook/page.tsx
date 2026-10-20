@@ -121,11 +121,11 @@ export default function LookBookPage() {
           {/* GRID VIEW */}
           {currentData.type === "grid" && (
             <div className="lookbook-grid">
-              {currentData.images.map((img) => {
+              {currentData.images.map((img, idx) => {
                 const src = `/pictures/LookBook/${activeCategory}/${img}`;
                 return (
                   <div
-                    key={img}
+                    key={`${img}-${idx}`}
                     className="lookbook-grid-item"
                     data-hint="Double click to inspect"
                     onDoubleClick={() => openZoom(src)}
