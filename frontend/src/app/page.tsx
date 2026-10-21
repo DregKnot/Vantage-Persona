@@ -1,5 +1,5 @@
 import React from "react";
-import HeroCarousel from "@/components/home/HeroCarousel";
+import HeroSection from "@/components/home/HeroSection";
 import ClothingSection from "@/components/home/ClothingSection";
 import WordCyclerSection from "@/components/home/WordCyclerSection";
 import AccessoriesSection from "@/components/home/AccessoriesSection";
@@ -15,7 +15,7 @@ export default function Home() {
         id="home-internal-css"
         dangerouslySetInnerHTML={{ __html: homeStyles }}
       />
-      <HeroCarousel />
+      <HeroSection />
       <ClothingSection />
       <WordCyclerSection />
       <AccessoriesSection />
