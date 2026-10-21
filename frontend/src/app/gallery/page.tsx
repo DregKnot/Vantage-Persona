@@ -1,9 +1,73 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import "@/styles/gallery.css";
+import React, { useState } from "react";
+import { galleryStyles } from "@/styles/galleryStyles";
+
+interface SlitImage {
+  src: string;
+  alt: string;
+  tag: string;
+}
+
+interface AbstractItem {
+  id: string;
+  index?: string;
+  title?: string;
+  subtitle?: string;
+  src?: string;
+  layout?: "tall-monolith" | "wide-panorama" | "offset-down" | "offset-up" | "standard" | "focus-square";
+  isPause?: boolean;
+  quote?: string;
+  meta?: string;
+  coords?: string;
+}
 
 export default function GalleryPage() {
+  // Act I: BOLD Section Interactive States
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [activeLightbox, setActiveLightbox] = useState<{
+    src: string;
+    title: string;
+    index: string;
+    subtitle?: string;
+  } | null>(null);
+
+  // Curated Slit Images (Intense eye gazes, cheekbones, sculpted collars)
+  const slitImages: SlitImage[] = [
+    { src: "/pictures/BlackModels/pexels-media-11434885.webp", alt: "Gaze of Intent", tag: "LOOK 01 // GAZE" },
+    { src: "/pictures/BlackModels/chuxie-daniels-Q_OZvYusj0w-unsplash.webp", alt: "Sovereign Angle", tag: "LOOK 02 // ANGLE" },
+    { src: "/pictures/BlackModels/apex-360-ioRBT9swcK8-unsplash.webp", alt: "Sculpted Profile", tag: "LOOK 03 // SCULPT" },
+    { src: "/pictures/BlackModels/divine-effiong-9oQrjjRU0mA-unsplash.webp", alt: "Avant-Garde Drape", tag: "LOOK 04 // DRAPE" },
+    { src: "/pictures/BlackModels/eze-joseph-0Rkv32PDGjI-unsplash.webp", alt: "Monochrome Majesty", tag: "LOOK 05 // CROWN" },
+    { src: "/pictures/BlackModels/pexels-media-13646260.webp", alt: "Piercing Focus", tag: "LOOK 06 // SILHOUETTE" },
+    { src: "/pictures/BlackModels/pexels-media-28453251.webp", alt: "Raw Texture", tag: "LOOK 07 // TEXTURE" },
+    { src: "/pictures/BlackModels/shimo-yann-OgqnGYsyug8-unsplash.webp", alt: "Runway Presence", tag: "LOOK 08 // PRESENCE" },
+  ];
+
+  // Curated Abstract Grid Looks with Asymmetric Layout Roles & Typographic Pauses
+  const abstractArchive: AbstractItem[] = [
+    { id: "01", index: "№ 01", title: "Sculpted Obsidian", subtitle: "Avant-Garde Tailoring", src: "/pictures/BlackModels/apex-360-9UX-VAXPD4s-unsplash.webp", layout: "tall-monolith" },
+    { id: "02", index: "№ 02", title: "Angular Tension", subtitle: "Structured Woolen Cut", src: "/pictures/BlackModels/chuxie-daniels-nM-075GyuF0-unsplash.webp", layout: "offset-down" },
+    { id: "03", index: "№ 03", title: "Raw Velvet Silhouette", subtitle: "Monochrome Archive", src: "/pictures/BlackModels/divine-effiong-k3Srj786qtk-unsplash.webp", layout: "offset-up" },
+    { id: "04", index: "№ 04", title: "Cinematic Horizon", subtitle: "Widescreen Drape", src: "/pictures/BlackModels/pexels-media-11551370.webp", layout: "wide-panorama" },
+    { id: "pause-1", isPause: true, quote: "“Fashion is not an ornament; it is the tension between volume and void.”", meta: "VP / ATELIER PRINCIPLE", coords: "06°30'N 03°24'E" },
+    { id: "05", index: "№ 05", title: "Imperial Collar", subtitle: "High Neckline Architecture", src: "/pictures/BlackModels/pexels-media-13434107.webp", layout: "standard" },
+    { id: "06", index: "№ 06", title: "Tactile Contrast", subtitle: "Shearling & Leather", src: "/pictures/BlackModels/pexels-media-13548964.webp", layout: "focus-square" },
+    { id: "07", index: "№ 07", title: "Monolithic Stature", subtitle: "Monumental Form", src: "/pictures/BlackModels/pexels-media-25311494.webp", layout: "tall-monolith" },
+    { id: "08", index: "№ 08", title: "Kinetic Duality", subtitle: "Movement in Wool", src: "/pictures/BlackModels/pexels-media-2562497.webp", layout: "offset-down" },
+    { id: "09", index: "№ 09", title: "Nocturne Presence", subtitle: "Deep Shadow Profile", src: "/pictures/BlackModels/pexels-media-31407391.webp", layout: "wide-panorama" },
+    { id: "10", index: "№ 10", title: "The Gilded Stare", subtitle: "Piercing Minimalist Cut", src: "/pictures/BlackModels/pexels-media-33204975.webp", layout: "standard" },
+    { id: "pause-2", isPause: true, quote: "“Not always in the suit. Where presence ends, persona begins.”", meta: "ACT I // MANIFESTO", coords: "MAISON VP 2026" },
+    { id: "11", index: "№ 11", title: "Avant-Garde Veil", subtitle: "Fabric Deconstruction", src: "/pictures/BlackModels/pexels-media-34938822.webp", layout: "tall-monolith" },
+    { id: "12", index: "№ 12", title: "Architectural Lapel", subtitle: "Double-Breasted Crest", src: "/pictures/BlackModels/pexels-media-34938833.webp", layout: "focus-square" },
+    { id: "13", index: "№ 13", title: "Sovereign Strut", subtitle: "Cinematic Pan", src: "/pictures/BlackModels/pexels-media-34938839.webp", layout: "wide-panorama" },
+    { id: "14", index: "№ 14", title: "Sculpted Gaze", subtitle: "Chiaroscuro Light", src: "/pictures/BlackModels/pexels-media-36291319.webp", layout: "offset-up" },
+    { id: "15", index: "№ 15", title: "Raw Fiber Form", subtitle: "Heavy Weight Drape", src: "/pictures/BlackModels/pexels-media-36445249.webp", layout: "standard" },
+    { id: "16", index: "№ 16", title: "The Modern Sovereign", subtitle: "Flawless Silhouette", src: "/pictures/BlackModels/pexels-media-36514633.webp", layout: "offset-down" },
+    { id: "17", index: "№ 17", title: "Asymmetrical Coat", subtitle: "Sculpted Wool", src: "/pictures/BlackModels/pexels-media-36547359.webp", layout: "wide-panorama" },
+    { id: "18", index: "№ 18", title: "Archival Horizon", subtitle: "Runway Zenith", src: "/pictures/BlackModels/shimo-yann-wZuClEnlBhs-unsplash.webp", layout: "tall-monolith" },
+  ];
+
   // Flush Section State Management
   const flushStates = [
     {
@@ -93,34 +157,14 @@ export default function GalleryPage() {
 
   const [weddingIdx, setWeddingIdx] = useState(0);
 
-  // BlackModels grid
-  const blackModels = [
-    "apex-360-9UX-VAXPD4s-unsplash.webp",
-    "apex-360-ioRBT9swcK8-unsplash.webp",
-    "chuxie-daniels-Q_OZvYusj0w-unsplash.webp",
-    "chuxie-daniels-nM-075GyuF0-unsplash.webp",
-    "divine-effiong-9oQrjjRU0mA-unsplash.webp",
-    "divine-effiong-k3Srj786qtk-unsplash.webp",
-    "eze-joseph-0Rkv32PDGjI-unsplash.webp",
-    "pexels-media-11434885.webp",
-    "pexels-media-11551370.webp",
-    "pexels-media-13434107.webp",
-    "pexels-media-13548964.webp",
-    "pexels-media-13646260.webp",
-    "pexels-media-25311494.webp",
-    "pexels-media-2562497.webp",
-    "pexels-media-28453251.webp",
-    "pexels-media-31407391.webp",
-    "pexels-media-33204975.webp",
-    "pexels-media-34938822.webp",
-    "pexels-media-34938833.webp",
-    "pexels-media-34938839.webp",
-    "shimo-yann-OgqnGYsyug8-unsplash.webp",
-    "shimo-yann-wZuClEnlBhs-unsplash.webp",
-  ];
-
   return (
     <main className="gallery-page-container">
+      {/* Internal CSS embedded directly within Gallery Page */}
+      <style
+        id="gallery-internal-css"
+        dangerouslySetInnerHTML={{ __html: galleryStyles }}
+      />
+
       {/* Hero Section */}
       <section className="gallery-hero">
         <div className="hero-bg">
@@ -136,30 +180,173 @@ export default function GalleryPage() {
         <div className="year-text">2026</div>
       </section>
 
-      {/* Bold Fashion Section */}
-      <section className="bold-fashion-section" data-auto-hint="Double click images to explore in detail">
-        <div className="grainy-overlay"></div>
+      {/* =========================================================================
+         ACT I: FASHION IS BOLD (Cinematic Ryoku-Style Slit Aperture & Abstract Grid)
+         ========================================================================= */}
+      <section className="bold-fashion-section" id="bold-section" aria-label="Fashion is BOLD Archive">
         <div className="bold-fashion-content">
-          <header className="fashion-header">
-            many say fashion is sophisticated and almost always elegant and they are right but fashion is not always in the suit, fashion is diverse, fashion is wild
-          </header>
-
-          <div className="fashion-bold-title">
-            Fashion is <br />
-            <span className="bold-text">BOLD</span>
+          {/* Top Metadata Navigation */}
+          <div className="bold-meta-bar">
+            <div className="bold-meta-badge">
+              <span className="bold-meta-dot">✦</span>
+              <span>LOOKBOOK 01 // ACT I</span>
+            </div>
+            <div className="bold-meta-subtitle">THE AVANT-GARDE APERTURE</div>
           </div>
 
-          <div className="masonry-grid">
-            {blackModels.map((m, idx) => (
-              <div key={m} className="masonry-item" data-hint="Double tap to zoom">
-                <img src={`/pictures/BlackModels/${m}`} alt={`Model ${idx + 1}`} loading="lazy" />
+          {/* The Ryoku-Style Cinematic Slit Aperture Stage */}
+          <div className="bold-aperture-stage">
+            {/* Upper Typographic Slice */}
+            <div className="bold-typo-slice bold-typo-top" aria-hidden="true">
+              <span className="bold-massive-text">BOLD</span>
+            </div>
+
+            {/* The Horizontal Letterbox Slit Window with Gliding Series of Images */}
+            <div
+              className="bold-slit-window"
+              onClick={() => setIsExpanded((prev) => !prev)}
+              role="button"
+              tabIndex={0}
+              title="Click to deconstruct archive into abstract grid"
+              aria-expanded={isExpanded}
+            >
+              <div className="bold-slit-track">
+                {/* Loop sequence twice for smooth endless horizontal drift */}
+                {[...slitImages, ...slitImages].map((img, idx) => (
+                  <div key={idx} className="bold-slit-item">
+                    <img src={img.src} alt={img.alt} loading="lazy" />
+                    <div className="bold-slit-overlay" aria-hidden="true" />
+                    <span className="bold-slit-tag">{img.tag}</span>
+                  </div>
+                ))}
               </div>
-            ))}
+
+              {/* Floating Expand CTA Pill */}
+              <div className="bold-slit-cta">
+                <span className="cta-icon">✦</span>
+                <span className="cta-text">
+                  {isExpanded ? "COLLAPSE APERTURE" : "CLICK TO DECONSTRUCT ARCHIVE"}
+                </span>
+                <span className="cta-counter">24 LOOKS</span>
+              </div>
+            </div>
+
+            {/* Lower Typographic Slice */}
+            <div className="bold-typo-slice bold-typo-bottom" aria-hidden="true">
+              <span className="bold-massive-text">BOLD</span>
+            </div>
+
+            {/* Editorial Manifesto (Bottom Right matching reference styling) */}
+            <div className="bold-editorial-manifesto">
+              <p className="manifesto-line">NOT ALWAYS IN THE SUIT.</p>
+              <p className="manifesto-line">FASHION IS DIVERSE.</p>
+              <p className="manifesto-line highlight">FASHION IS BOLD.</p>
+            </div>
           </div>
+
+          {/* =====================================================================
+             THE ASYMMETRICAL ABSTRACT GRID (REVEALED ON CLICK)
+             ===================================================================== */}
+          {isExpanded && (
+            <div className="bold-abstract-section" id="abstract-grid-view">
+              {/* Sticky Architectural Toolbar */}
+              <div className="bold-abstract-toolbar">
+                <div className="toolbar-left">
+                  <span className="toolbar-tag">DECONSTRUCTED ATELIER ARCHIVE</span>
+                  <span className="toolbar-count">24 CURATED SILHOUETTES</span>
+                </div>
+                <button
+                  type="button"
+                  className="toolbar-collapse-btn"
+                  onClick={() => setIsExpanded(false)}
+                  aria-label="Collapse to aperture"
+                >
+                  <span>✕</span>
+                  <span>COLLAPSE TO APERTURE</span>
+                </button>
+              </div>
+
+              {/* The Abstract Asymmetrical Masonry Grid */}
+              <div className="bold-abstract-grid">
+                {abstractArchive.map((item) => {
+                  if (item.isPause) {
+                    return (
+                      <article key={item.id} className="abstract-card graphic-pause">
+                        <div className="pause-meta-header">
+                          <span>{item.meta}</span>
+                          <span>✦</span>
+                        </div>
+                        <blockquote className="pause-quote">{item.quote}</blockquote>
+                        <div className="pause-footer-coords">{item.coords}</div>
+                      </article>
+                    );
+                  }
+
+                  return (
+                    <article
+                      key={item.id}
+                      className={`abstract-card ${item.layout || "standard"}`}
+                      onClick={() =>
+                        setActiveLightbox({
+                          src: item.src!,
+                          title: item.title!,
+                          index: item.index!,
+                          subtitle: item.subtitle,
+                        })
+                      }
+                      role="button"
+                      tabIndex={0}
+                      title={`Inspect ${item.title}`}
+                    >
+                      <img src={item.src!} alt={item.title!} loading="lazy" />
+                      <div className="abstract-card-info">
+                        <div>
+                          <span className="abstract-card-index">{item.index}</span>
+                          <h3 className="abstract-card-title">{item.title}</h3>
+                        </div>
+                        <span className="abstract-zoom-hint">FOCUS ↗</span>
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* Fullscreen Lightbox Focus Modal */}
+          {activeLightbox && (
+            <div
+              className="bold-lightbox-backdrop"
+              onClick={() => setActiveLightbox(null)}
+              role="dialog"
+              aria-modal="true"
+            >
+              <div
+                className="bold-lightbox-content"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button
+                  type="button"
+                  className="bold-lightbox-close"
+                  onClick={() => setActiveLightbox(null)}
+                  aria-label="Close Focus View"
+                >
+                  ✕ CLOSE
+                </button>
+                <img src={activeLightbox.src} alt={activeLightbox.title} />
+                <div className="bold-lightbox-caption">
+                  <p>{activeLightbox.index} &bull; {activeLightbox.subtitle}</p>
+                  <h4>{activeLightbox.title}</h4>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
-      {/* Fashion is Flush Section */}
+      {/* =========================================================================
+         ACT II: FASHION IS FLUSH
+         ========================================================================= */}
       <section className="section-5 container-fade" id="flush">
         <div className="flush-header-section">
           <h1 className="flush-main-title">
@@ -212,7 +399,9 @@ export default function GalleryPage() {
         </div>
       </section>
 
-      {/* Pinned Wedding Section */}
+      {/* =========================================================================
+         ACT III: THE WEDDING COLLECTION
+         ========================================================================= */}
       <section className="wedding-pin-wrapper container-fade" id="wedding-collection" data-auto-hint="Explore wedding collection">
         <div className="wedding-sticky-container" style={{ position: "relative" }}>
           <div className="wedding-left-images">
@@ -248,15 +437,17 @@ export default function GalleryPage() {
                         key={s.index}
                         onClick={() => setWeddingIdx(idx)}
                         style={{
-                          background: idx === weddingIdx ? "#2eaadc" : "rgba(255,255,255,0.1)",
-                          color: "#fff",
-                          border: "none",
-                          padding: "8px 16px",
+                          background: idx === weddingIdx ? "#d4af37" : "rgba(255,255,255,0.08)",
+                          color: idx === weddingIdx ? "#0d0a08" : "#fff",
+                          border: idx === weddingIdx ? "1px solid #f8e3b4" : "1px solid rgba(255,255,255,0.15)",
+                          padding: "8px 18px",
                           borderRadius: "20px",
                           cursor: "pointer",
                           fontFamily: "var(--font-plus-jakarta)",
                           fontSize: "0.85rem",
-                          letterSpacing: "0.05em",
+                          fontWeight: 700,
+                          letterSpacing: "0.08em",
+                          transition: "all 0.3s ease",
                         }}
                       >
                         {s.index} — {s.title}

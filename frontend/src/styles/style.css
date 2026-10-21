@@ -15,7 +15,7 @@ html,
 body {
     margin: 0;
     padding: 0;
-    background-color: rgba(255, 228, 196, 0.737);
+    background-color: #0d0a08;
     width: 100%;
     /* overflow-x: hidden; */ /* Removing to fix difficult scroll */
     scroll-behavior: smooth;
@@ -99,7 +99,9 @@ body.is-scrolling .ticker-track {
 /* ========== SITE FOOTER Styling Refined ========== */
 .site-footer {
     width: 100%;
-    margin-top: 150px;
+    margin-top: 0;
+    position: relative;
+    z-index: 10;
 }
 
 .footer-upper {
@@ -184,7 +186,8 @@ body.is-scrolling .ticker-track {
 }
 
 .footer-lower {
-    background-color: #211812; /* Darker charcoal/brown color */
+    background: linear-gradient(180deg, #000000 0%, #15100c 50%, #1f1712 100%);
+    border-top: 1px solid rgba(214, 180, 120, 0.16);
     padding: 120px 0 60px;
     text-align: center;
     position: relative;

@@ -1,0 +1,1321 @@
+// Automatically extracted internal CSS for Gallery Page
+export const galleryStyles: string = `/* Gallery Page Specific Styles */
+
+@font-face {
+    font-family: 'KingsCross';
+    src: url('/pictures/Flush_section/kingscross_extracted/KingsCross.ttf') format('truetype');
+}
+
+:root {
+    --primary-font: 'Plus Jakarta Sans', sans-serif;
+    --accent-font: 'Jim Nightshade', cursive;
+    --body-font: 'Jura', sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    color: #fff;
+    font-family: var(--body-font);
+    overflow-x: hidden;
+}
+
+.gallery-hero {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 150vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%; /* Pushing the view down slightly to see more of the men's backs */
+    filter: brightness(0.9);
+}
+
+.navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 4rem;
+    box-sizing: border-box;
+    z-index: 10;
+}
+
+.nav-links {
+    display: flex;
+    gap: 3rem;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.nav-links a:hover {
+    opacity: 1;
+}
+
+.logo-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    /* object-fit: cover; */
+    top: 1rem;
+}
+
+.logo-container img {
+    height: 8.5rem; 
+    object-fit: cover;
+     background-size: cover;
+}
+
+.nav-icons {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.nav-icons svg {
+    width: 20px;
+    height: 20px;
+    fill: #fff;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.nav-icons svg:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.hero-content {
+    position: absolute;
+    bottom: 5vh;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    pointer-events: none;
+}
+
+.vantage-text {
+    font-family: var(--primary-font);
+    font-size: 18vw;
+    font-weight: 800;
+    line-height: 0.8;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: -1vw;
+    color: rgba(255, 255, 255, 1);
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
+}
+
+.collection-text {
+    font-family: var(--accent-font);
+    font-size: 8vw;
+    color: #fff;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    z-index: 2;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.year-text {
+    position: absolute;
+    bottom: 2rem;
+    right: 4rem;
+    font-family: var(--primary-font);
+    font-size: 1.5rem;
+    font-weight: 300;
+    opacity: 0.8;
+}
+
+/* =========================================================================
+   ACT I: FASHION IS BOLD (Cinematic Ryoku-Style Slit Aperture & Abstract Grid)
+   ========================================================================= */
+.bold-fashion-section {
+    position: relative;
+    background-color: #080605;
+    padding: 110px 0 130px;
+    min-height: 100vh;
+    overflow: hidden;
+    color: #fff;
+    z-index: 5;
+    border-top: 1px solid rgba(214, 180, 120, 0.16);
+    border-bottom: 1px solid rgba(214, 180, 120, 0.16);
+}
+
+.bold-fashion-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXVtbW1mz1R3d3dtbW13d3dtbW13d3dtbW13d3dtbW13d3dtbW13d3dtbW13d3dtbW13d3dtbW13d3dbtZ3LAAAABnRSTlMAESIzRFVmd4iZq7u8xwAAAFpJREFUeNpjYGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGS0ADSAZGRkZGRkZGRkZGRkZGRkZGRkdAA0gGRkZGRkZGRkZGRkZGRkZGR0ADSAZGRkZGSkAADI6ADSAZGRkZE=');
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.bold-fashion-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+}
+
+/* Metadata Header Bar */
+.bold-meta-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+    width: 100%;
+    margin-bottom: 24px;
+}
+
+.bold-meta-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-jura), monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #d4af37;
+    background: rgba(214, 180, 120, 0.08);
+    border: 1px solid rgba(214, 180, 120, 0.35);
+    padding: 6px 16px;
+    border-radius: 999px;
+}
+
+.bold-meta-dot {
+    font-size: 0.65rem;
+    color: #d4af37;
+}
+
+.bold-meta-subtitle {
+    font-family: var(--font-jura), monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(240, 230, 215, 0.6);
+}
+
+/* =========================================================================
+   RYOKU-STYLE CINEMATIC SLIT APERTURE STAGE
+   ========================================================================= */
+.bold-aperture-stage {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0 50px;
+    user-select: none;
+}
+
+/* Split Huge Typography */
+.bold-typo-slice {
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 0.75;
+}
+
+.bold-typo-top {
+    height: clamp(80px, 14vw, 190px);
+    align-items: flex-end;
+}
+
+.bold-typo-bottom {
+    height: clamp(80px, 14vw, 190px);
+    align-items: flex-start;
+}
+
+.bold-massive-text {
+    font-family: "Cinzel", "Plus Jakarta Sans", sans-serif;
+    font-size: clamp(6.5rem, 23vw, 26rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #f2ede4;
+    text-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
+    transform: translateY(0);
+}
+
+.bold-typo-top .bold-massive-text {
+    transform: translateY(22%);
+}
+
+.bold-typo-bottom .bold-massive-text {
+    transform: translateY(-22%);
+}
+
+/* The Horizontal Slit Window */
+.bold-slit-window {
+    width: 100%;
+    height: clamp(160px, 24vw, 270px);
+    position: relative;
+    overflow: hidden;
+    background: #000;
+    border-top: 1.5px solid rgba(214, 180, 120, 0.45);
+    border-bottom: 1.5px solid rgba(214, 180, 120, 0.45);
+    cursor: pointer;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), inset 0 0 30px rgba(0, 0, 0, 0.9);
+    transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.bold-slit-window:hover {
+    border-color: #f8e3b4;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(212, 175, 55, 0.22);
+}
+
+.bold-slit-track {
+    display: flex;
+    gap: 20px;
+    width: max-content;
+    height: 100%;
+    animation: slitGlide 45s linear infinite;
+    align-items: center;
+    will-change: transform;
+}
+
+.bold-slit-window:hover .bold-slit-track {
+    animation-play-state: paused;
+}
+
+@keyframes slitGlide {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-50% - 10px)); }
+}
+
+.bold-slit-item {
+    height: 100%;
+    width: clamp(280px, 32vw, 440px);
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.bold-slit-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 32%;
+    filter: grayscale(85%) contrast(1.12);
+    transition: filter 0.5s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bold-slit-window:hover .bold-slit-item img {
+    filter: grayscale(20%) contrast(1.05);
+}
+
+.bold-slit-item:hover img {
+    filter: grayscale(0%) contrast(1.02);
+    transform: scale(1.06);
+}
+
+.bold-slit-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, transparent 40%, transparent 60%, rgba(0, 0, 0, 0.6) 100%);
+    pointer-events: none;
+}
+
+.bold-slit-tag {
+    position: absolute;
+    bottom: 10px;
+    left: 12px;
+    z-index: 4;
+    display: inline-flex;
+    align-items: center;
+    background: rgba(14, 11, 8, 0.88);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(214, 180, 120, 0.35);
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-family: var(--font-jura), monospace;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #f8e3b4;
+}
+
+/* Floating Expand Callout */
+.bold-slit-cta {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 28px;
+    background: rgba(14, 11, 8, 0.9);
+    backdrop-filter: blur(14px);
+    border: 1.5px solid rgba(214, 180, 120, 0.65);
+    border-radius: 999px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.8), 0 0 25px rgba(212, 175, 55, 0.25);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+}
+
+.bold-slit-window:hover .bold-slit-cta {
+    transform: translate(-50%, -50%) scale(1.05);
+    background: rgba(24, 19, 14, 0.96);
+    border-color: #f8e3b4;
+    box-shadow: 0 14px 45px rgba(0, 0, 0, 0.9), 0 0 35px rgba(212, 175, 55, 0.35);
+}
+
+.cta-icon {
+    font-size: 0.85rem;
+    color: #d4af37;
+}
+
+.cta-text {
+    font-family: var(--font-jura), sans-serif;
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.cta-counter {
+    font-family: var(--font-jura), monospace;
+    font-size: 0.68rem;
+    font-weight: 800;
+    color: #d4af37;
+    background: rgba(214, 180, 120, 0.15);
+    padding: 3px 8px;
+    border-radius: 999px;
+    border: 1px solid rgba(214, 180, 120, 0.35);
+}
+
+/* Editorial Manifesto at Bottom Right */
+.bold-editorial-manifesto {
+    align-self: flex-end;
+    margin-top: 24px;
+    padding-right: 5%;
+    text-align: right;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: clamp(0.95rem, 1.4vw, 1.35rem);
+    font-weight: 800;
+    line-height: 1.3;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: rgba(240, 230, 215, 0.82);
+}
+
+.bold-editorial-manifesto .manifesto-line {
+    margin: 0;
+}
+
+.bold-editorial-manifesto .highlight {
+    color: #d4af37;
+    letter-spacing: 0.06em;
+    text-shadow: 0 0 25px rgba(212, 175, 55, 0.3);
+}
+
+/* =========================================================================
+   THE ASYMMETRICAL ABSTRACT GRID (DECONSTRUCTED ATELIER ARCHIVE)
+   ========================================================================= */
+.bold-abstract-section {
+    width: 100%;
+    margin-top: 60px;
+    animation: fadeInSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeInSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.bold-abstract-toolbar {
+    position: sticky;
+    top: 42px;
+    z-index: 30;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 24px;
+    background: rgba(14, 11, 8, 0.94);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(214, 180, 120, 0.28);
+    border-radius: 16px;
+    margin: 0 5% 45px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+.toolbar-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.toolbar-tag {
+    font-family: var(--font-jura), monospace;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #f8e3b4;
+}
+
+.toolbar-count {
+    font-family: var(--font-jura), monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #d4af37;
+    background: rgba(214, 180, 120, 0.12);
+    border: 1px solid rgba(214, 180, 120, 0.35);
+    padding: 3px 10px;
+    border-radius: 999px;
+}
+
+.toolbar-collapse-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 20px;
+    border-radius: 999px;
+    background: rgba(214, 180, 120, 0.12);
+    border: 1px solid rgba(214, 180, 120, 0.45);
+    color: #f8e3b4;
+    cursor: pointer;
+    font-family: var(--font-jura), sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+.toolbar-collapse-btn:hover {
+    background: #d4af37;
+    color: #0d0a08;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35);
+}
+
+/* The Abstract Asymmetrical Grid */
+.bold-abstract-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+    padding: 0 5%;
+    width: 100%;
+}
+
+.abstract-card {
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+    background: rgba(22, 17, 13, 0.78);
+    border: 1px solid rgba(214, 180, 120, 0.18);
+    transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
+}
+
+.abstract-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(214, 180, 120, 0.65);
+    box-shadow: 0 22px 55px rgba(0, 0, 0, 0.65), 0 0 35px rgba(212, 175, 55, 0.18);
+}
+
+.abstract-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(80%) contrast(1.1);
+    transition: filter 0.6s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.abstract-card:hover img {
+    filter: grayscale(0%) contrast(1.02);
+    transform: scale(1.05);
+}
+
+/* Variant: Tall Monolith */
+.abstract-card.tall-monolith {
+    grid-row: span 2;
+    min-height: 640px;
+}
+
+/* Variant: Wide Panorama */
+.abstract-card.wide-panorama {
+    grid-column: span 2;
+    min-height: 330px;
+}
+
+/* Variant: Asymmetric Stagger Offsets */
+.abstract-card.offset-down {
+    margin-top: 55px;
+    min-height: 440px;
+}
+
+.abstract-card.offset-up {
+    margin-top: -30px;
+    min-height: 430px;
+}
+
+.abstract-card.standard {
+    min-height: 390px;
+}
+
+.abstract-card.focus-square {
+    aspect-ratio: 1 / 1;
+    min-height: 320px;
+}
+
+/* Card Metadata Pill */
+.abstract-card-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 24px 18px 14px;
+    background: linear-gradient(180deg, transparent 0%, rgba(12, 9, 7, 0.92) 100%);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    pointer-events: none;
+}
+
+.abstract-card-index {
+    font-family: var(--font-jura), monospace;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #f8e3b4;
+}
+
+.abstract-card-title {
+    font-family: "Cinzel", var(--font-jura), serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #fff;
+    margin: 2px 0 0;
+    letter-spacing: 0.04em;
+}
+
+.abstract-zoom-hint {
+    font-size: 0.72rem;
+    color: #d4af37;
+    opacity: 0;
+    transform: translateX(-5px);
+    transition: all 0.3s ease;
+}
+
+.abstract-card:hover .abstract-zoom-hint {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Abstract Graphic Typographic Pause Blocks */
+.abstract-card.graphic-pause {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 32px 28px;
+    background: linear-gradient(145deg, rgba(28, 22, 17, 0.94), rgba(15, 12, 9, 0.98));
+    border: 1px solid rgba(214, 180, 120, 0.3);
+    min-height: 330px;
+    cursor: default;
+}
+
+.abstract-card.graphic-pause:hover {
+    transform: none;
+    border-color: rgba(214, 180, 120, 0.5);
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.5);
+}
+
+.pause-meta-header {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-jura), monospace;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #d4af37;
+}
+
+.pause-quote {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+    line-height: 1.5;
+    color: #f4ede3;
+    margin: 20px 0;
+}
+
+.pause-footer-coords {
+    font-family: var(--font-jura), monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: rgba(240, 230, 215, 0.5);
+    text-transform: uppercase;
+}
+
+/* Lightbox Focus View */
+.bold-lightbox-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 9999999;
+    background: rgba(6, 5, 4, 0.96);
+    backdrop-filter: blur(24px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    animation: fadeIn 0.3s ease;
+}
+
+.bold-lightbox-content {
+    position: relative;
+    max-width: 900px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bold-lightbox-content img {
+    max-width: 100%;
+    max-height: 75vh;
+    object-fit: contain;
+    border-radius: 12px;
+    border: 1px solid rgba(214, 180, 120, 0.35);
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.9);
+}
+
+.bold-lightbox-caption {
+    margin-top: 18px;
+    text-align: center;
+}
+
+.bold-lightbox-caption h4 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.3rem;
+    color: #f8efe4;
+    margin: 0 0 4px;
+}
+
+.bold-lightbox-caption p {
+    font-family: var(--font-jura);
+    font-size: 0.85rem;
+    color: #d4af37;
+    margin: 0;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.bold-lightbox-close {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-size: 1.2rem;
+    padding: 6px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-family: var(--font-jura);
+    transition: all 0.3s ease;
+}
+
+.bold-lightbox-close:hover {
+    border-color: #d4af37;
+    color: #d4af37;
+}
+
+@media (max-width: 1200px) {
+    .bold-abstract-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .bold-abstract-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+    .abstract-card.tall-monolith {
+        grid-row: span 1;
+        min-height: 440px;
+    }
+    .abstract-card.wide-panorama {
+        grid-column: span 2;
+        min-height: 260px;
+    }
+    .abstract-card.offset-down,
+    .abstract-card.offset-up {
+        margin-top: 0;
+    }
+}
+
+@media (max-width: 600px) {
+    .bold-abstract-grid {
+        grid-template-columns: 1fr;
+    }
+    .abstract-card.wide-panorama {
+        grid-column: span 1;
+    }
+    .bold-editorial-manifesto {
+        text-align: center;
+        padding-right: 0;
+    }
+}
+
+/* Section 5: Fashion is Flush */
+.section-5 {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.flush-header-section {
+    background-color: #000;
+    width: 100%;
+    padding: 100px 0;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 5;
+}
+
+.flush-content-section {
+    position: relative;
+    min-height: 1100px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 0;
+    overflow: hidden;
+}
+
+/* Background overlay with image - Optimized for 60fps */
+.section-5-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background-image: linear-gradient(rgba(0, 36, 102, 0.225), rgba(0, 36, 102, 0.367)), url('/pictures/Flush_section/jj-ying-7JX0-bfiuxQ-unsplash.webp');
+    background-size: cover;
+    background-position: center;
+    /* Removed background-attachment: fixed because it causes lag */
+    opacity: 1;
+    will-change: transform;
+}
+
+.flush-main-title {
+    position: relative;
+    z-index: 6;
+    text-align: center;
+    font-family: var(--primary-font);
+    font-size: 6vw;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.kings-cross {
+    font-family: 'KingsCross', serif;
+    font-size: 15vw;
+    color: #fff;
+    text-transform: none;
+    display: block;
+    margin-top: -20px;
+    text-shadow: 
+        rgba(0, 0, 0, 0.17) 0px -23px 25px, 
+        rgba(0, 0, 0, 0.15) 0px -36px 30px, 
+        rgba(0, 0, 0, 0.1) 0px -79px 40px, 
+        rgba(0, 0, 0, 0.06) 0px 2px 1px, 
+        rgba(0, 0, 0, 0.09) 0px 4px 2px, 
+        rgba(0, 0, 0, 0.09) 0px 8px 4px, 
+        rgba(0, 0, 0, 0.09) 0px 16px 8px, 
+        rgba(0, 0, 0, 0.09) 0px 32px 16px,
+        rgba(65, 105, 225, 0.8) 0px 0px 40px,
+        rgba(65, 105, 225, 0.5) 0px 0px 80px;
+}
+
+.flush-container {
+    position: relative;
+    z-index: 2;
+    width: 90%;
+    max-width: 2400px;
+    min-height: 1000px;
+    display: flex;
+    justify-content: center;
+    gap: 0;
+}
+
+.flush-text-side {
+    flex: 1;
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 4px solid #808080; /* Vertical Grey Divider */
+}
+
+.flush-text-side h2 {
+    font-family: var(--primary-font);
+    font-size: 3.5rem;
+    color: #4169E1; /* Royal Blue */
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+}
+
+.flush-text-side p {
+    font-family: var(--body-font);
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: #efeae4;
+    opacity: 0.9;
+    max-width: 600px;
+}
+
+.flush-image-side {
+    flex: 1;
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.flush-image-wrapper {
+    position: relative;
+    width: 65vw;
+    max-width: 1400px;
+    aspect-ratio: 1080 / 1350;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: box-shadow 0.4s ease;
+    cursor: pointer;
+}
+
+.flush-image-wrapper:hover {
+    box-shadow: 0 0 50px rgba(65, 105, 225, 0.6); /* Royal Blue Glow */
+}
+
+.flush-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+}
+
+/* Button at the top of the image container */
+.change-img-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+    background-color: rgba(65, 105, 225, 0.8);
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-family: var(--primary-font);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    backdrop-filter: blur(5px);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.change-img-btn:hover {
+    background-color: #4169E1;
+    transform: translateY(-2px);
+}
+
+/* Animations for snappy swapping */
+.flush-fade-out {
+    opacity: 0 !important;
+    transform: scale(0.97);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1600px) {
+    .flush-image-wrapper {
+        width: 800px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .flush-container {
+        flex-direction: column;
+    }
+    .flush-text-side {
+        border-right: none;
+        border-bottom: 4px solid #808080;
+        padding: 2rem;
+    }
+    .flush-image-side {
+        padding: 2rem;
+    }
+    .flush-image-wrapper {
+        width: 100%;
+    }
+}
+
+/* Section 6: Pinned Wedding Parallax */
+.wedding-pin-wrapper {
+    position: relative;
+    width: 100%;
+    height: 400vh; /* 4 screens of scrolling for 3 distinct states and exit gap */
+    background-color: #000;
+}
+
+.wedding-triggers {
+    position: absolute;
+    top: 0; 
+    left: 0; 
+    width: 20px; 
+    height: 300vh;
+    pointer-events: none; 
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+}
+
+.wedding-trigger {
+    height: 100vh; /* Exactly mirrors viewport distance */
+}
+
+.wedding-sticky-container {
+    position: sticky;
+    top: 0;
+    height: 100vh; /* Viewport lock */
+    width: 100%;
+    display: flex;
+    overflow: hidden;
+    color: #fff;
+    max-width: 2560px;
+    margin: 0 auto;
+}
+
+.wedding-left-images {
+    width: 60%;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+    box-shadow: 20px 0 50px rgba(0,0,0,0.5); /* Drop shadow onto right text side */
+}
+
+/* Central magical track that translates vertically */
+.wedding-image-track {
+    display: flex;
+    flex-direction: column;
+    height: 300vh; /* 3 images * 100vh */
+    width: 100%;
+    transition: transform 1.2s cubic-bezier(0.8, 0, 0.2, 1);
+    will-change: transform;
+}
+
+.wedding-img-slide {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+}
+
+.wedding-img-slide img {
+    height: 100%; 
+    width: 100%; 
+    object-fit: cover;
+}
+
+.wedding-right-text {
+    width: 40%;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Continuous sliding background track trick */
+.wedding-bg-track {
+    position: absolute;
+    top: 0; left: 0; 
+    width: 100%; 
+    height: 300vh;
+    display: flex;
+    flex-direction: column;
+    transition: transform 1.2s cubic-bezier(0.8, 0, 0.2, 1);
+    z-index: -1;
+    will-change: transform;
+}
+
+.wedding-bg-slide {
+    height: 100vh;
+    width: 100%;
+}
+
+.bg-slide-0 { background: #1a1c1d; }
+.bg-slide-1 { background: linear-gradient(to bottom, #1a1c1d, #422828); }
+.bg-slide-2 { background: linear-gradient(to bottom, #422828, #192736); }
+
+/* Static Left-number overlay */
+.large-bg-number {
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    transform: translateY(-50%);
+    font-size: 30vw;
+    font-family: var(--primary-font);
+    font-weight: 800;
+    opacity: 0.04;
+    z-index: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    line-height: 0.8;
+}
+
+.wedding-text-content-area {
+    padding: 0 15%;
+    position: relative;
+    z-index: 2;
+}
+
+.wedding-sub-heading {
+    font-family: var(--primary-font);
+    font-size: 0.9rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #bbb;
+    margin-bottom: 2rem;
+}
+
+.wedding-text-track {
+    position: relative;
+    height: 250px;
+    width: 100%;
+}
+
+.wedding-text-slide {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1s ease, transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+    pointer-events: none;
+}
+
+.wedding-text-slide.active-text {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    transition-delay: 0.2s; /* Wait for background/image tracks to settle */
+}
+
+.wedding-text-slide .main-heading {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 6rem;
+    font-weight: 400;
+    margin: 0 0 1.5rem 0;
+}
+
+.wedding-description {
+    font-family: var(--body-font);
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #e2e2e2;
+    margin-bottom: 2.5rem;
+}
+
+.wedding-read-more {
+    font-family: var(--primary-font);
+    font-size: 0.85rem;
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border-bottom: 1px solid rgba(255,255,255,0.4);
+    padding-bottom: 5px;
+    transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.wedding-read-more:hover {
+    color: #ef7637;
+    border-color: #ef7637;
+}
+
+/* Floating Detail Cards */
+.wedding-floating-card {
+    position: absolute;
+    background-color: rgba(30, 32, 35, 0.85);
+    backdrop-filter: blur(12px);
+    padding: 1.5rem 2rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+}
+
+.card-label {
+    font-family: var(--primary-font);
+    font-size: 0.70rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.4rem;
+    color: #ef7637; /* Orange accent */
+}
+
+.card-title {
+    font-family: var(--body-font);
+    font-size: 1.05rem;
+    color: #fff;
+}
+
+.top-right-card { top: 15%; right: 10%; }
+.bottom-left-card { bottom: 15%; left: 10%; }
+.center-right-card { top: 40%; right: 15%; }
+
+/* Responsive Constraints */
+@media (max-width: 1200px) {
+    .wedding-text-content-area { padding: 0 8%; }
+    .wedding-text-slide .main-heading { font-size: 4rem; }
+    .large-bg-number { font-size: 40vw; }
+}
+
+@media (max-width: 1024px) {
+    .wedding-pin-wrapper {
+        height: auto !important; /* Disable multi-viewport scroll */
+        padding-bottom: 100px;
+    }
+
+    .wedding-sticky-container {
+        display: grid !important;
+        grid-template-columns: 1fr;
+        position: relative !important;
+        height: auto !important;
+        overflow: visible !important;
+    }
+
+    /* Interleave Track Components */
+    .wedding-left-images, 
+    .wedding-image-track, 
+    .wedding-right-text, 
+    .wedding-text-track {
+        display: contents !important;
+    }
+
+    /* Column 1: Image 01, Row 2: Text 01, etc. */
+    .wedding-img-slide:nth-child(1) { grid-row: 1; }
+    .wedding-text-slide:nth-child(1) { grid-row: 2; }
+    .wedding-img-slide:nth-child(2) { grid-row: 3; }
+    .wedding-text-slide:nth-child(2) { grid-row: 4; }
+    .wedding-img-slide:nth-child(3) { grid-row: 5; }
+    .wedding-text-slide:nth-child(3) { grid-row: 6; }
+
+    .wedding-img-slide {
+        height: 60vh !important;
+        width: 100% !important;
+    }
+
+    .wedding-right-text {
+        padding: 40px 0;
+    }
+
+    .wedding-text-slide {
+        position: relative !important;
+        opacity: 1 !important;
+        transform: none !important;
+        pointer-events: auto !important;
+        padding: 60px 20px !important;
+        width: 100% !important;
+        box-sizing: border-box;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .wedding-text-slide .main-heading {
+        font-size: 3.5rem !important;
+        text-align: center;
+    }
+
+    .wedding-description {
+        text-align: center;
+        max-width: 100% !important;
+        padding: 0 10%;
+    }
+
+    .wedding-read-more {
+        display: block;
+        width: fit-content;
+        margin: 0 auto;
+    }
+
+    .large-bg-number {
+        display: none; /* Crowds mobile text too much */
+    }
+
+    .wedding-bg-track {
+        display: none; /* Use solid black background for clean mobile list */
+    }
+}
+
+@media (max-width: 768px) {
+    .wedding-text-slide .main-heading { font-size: 3rem; }
+    .wedding-description { font-size: 1rem; }
+    .wedding-floating-card { padding: 1rem 1.5rem; }
+    .card-title { font-size: 0.9rem; }
+}
+`;

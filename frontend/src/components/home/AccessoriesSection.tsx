@@ -4,13 +4,13 @@ import React, { useState } from "react";
 
 interface AccessCardProps {
   className: string;
+  eyebrow: string;
   title: string;
-  sub: React.ReactNode;
-  eyebrow?: string;
+  sub: string;
   images: string[];
 }
 
-function AccessCard({ className, title, sub, eyebrow, images }: AccessCardProps) {
+function AccessCard({ className, eyebrow, title, sub, images }: AccessCardProps) {
   const [currentIdx, setCurrentIdx] = useState(0);
 
   const handleClick = () => {
@@ -20,30 +20,46 @@ function AccessCard({ className, title, sub, eyebrow, images }: AccessCardProps)
   return (
     <article
       className={`section-3-card ${className}`}
-      data-hint="Click to change view"
+      data-hint="Click to explore alternate looks"
       onClick={handleClick}
-      style={{ cursor: "pointer" }}
+      role="button"
+      tabIndex={0}
+      title="Click to rotate through looks"
     >
       <div className="section-3-card__media">
+        {/* Floating perspective counter */}
+        <div className="section-3-card__badge">
+          <span>LOOK {String(currentIdx + 1).padStart(2, "0")} / {String(images.length).padStart(2, "0")}</span>
+          <span className="badge-arrow">✦</span>
+        </div>
+
         {images.map((src, idx) => (
           <img
             key={src}
             src={src}
-            alt={title}
+            alt={`${title} - Look ${idx + 1}`}
             style={{
               opacity: idx === currentIdx ? 1 : 0,
               zIndex: idx === currentIdx ? 2 : 1,
-              transition: "opacity 0.4s ease",
             }}
           />
         ))}
       </div>
+
       <div className="section-3-card__text">
-        {eyebrow && <p className="section-3-card__eyebrow">{eyebrow}</p>}
+        <p className="section-3-card__eyebrow">{eyebrow}</p>
         <h3 className="section-3-card__title">{title}</h3>
-        <p className={`section-3-card__sub ${className.includes("jewelry") ? "section-3-card__sub--jewelry" : "section-3-card__sub--accessory"}`}>
-          {sub}
-        </p>
+        <p className="section-3-card__sub">{sub}</p>
+
+        {/* Visual progress pips */}
+        <div className="section-3-card__dots" aria-hidden="true">
+          {images.map((_, idx) => (
+            <span
+              key={idx}
+              className={`section-3-card__dot${idx === currentIdx ? " active" : ""}`}
+            />
+          ))}
+        </div>
       </div>
     </article>
   );
@@ -108,53 +124,61 @@ export default function AccessoriesSection() {
     <section className="section-3 container-fade" id="section-3" aria-labelledby="section-3-heading">
       <div className="section-3-inner">
         <header className="section-3-header">
+          <div className="section-3-badge-row">
+            <span className="section-3-tag">VAULT &amp; ORNAMENTATION</span>
+            <span className="section-3-counter">06 CURATED DISCIPLINES</span>
+          </div>
           <h2 id="section-3-heading" className="section-3-heading">
-            Like i said, style and design, and the best of our collection that
-            points at these principles are the Accessories and Jewelries
+            An ensemble is conceived in fabric, but immortalized in detail. Where horology, sculpted metals, and leathercraft define the sovereign silhouette.
           </h2>
         </header>
 
         <div className="section-3-grid">
           <AccessCard
             className="section-3-card--tall section-3-card--jewelry"
-            title="Jewelry"
-            sub="Watches"
+            eyebrow="Horology &amp; Calibers"
+            title="Precision Timepieces"
+            sub="Automatic movements, sapphire crystals &amp; chronographs"
             images={watches}
           />
 
           <AccessCard
             className="section-3-card--tall section-3-card--accessory"
-            title="Accessories"
-            sub={<><span className="acc-glass">B</span><span className="acc-brown">ag</span><span className="acc-glass">s</span></>}
+            eyebrow="Haute Leathercraft"
+            title="Architectural Bags"
+            sub="Full-grain calfskin, structured silhouettes &amp; weekender carry"
             images={bags}
           />
 
           <AccessCard
             className="section-3-card--wide section-3-card--jewelry"
-            title="Jewelry"
-            sub="Rings"
+            eyebrow="Precious Metals"
+            title="Signet &amp; Band Rings"
+            sub="Hand-cast sterling, sovereign crests &amp; sculpted gold"
             images={rings}
           />
 
           <AccessCard
             className="section-3-card--accessory"
-            title="Accessories"
-            sub={<><span className="acc-glass">Le</span><span className="acc-brown">ather glove</span><span className="acc-glass">s</span></>}
+            eyebrow="Sartorial Leather"
+            title="Nappa Leather Gloves"
+            sub="Hand-stitched seams, cashmere lining &amp; bespoke driving cuts"
             images={gloves}
           />
 
           <AccessCard
             className="section-3-card--wide section-3-card--jewelry"
-            title="Jewelry"
-            sub="Bracelets & Necklaces"
+            eyebrow="Fine Jewelry"
+            title="Bracelets &amp; Chains"
+            sub="Cuban links, raw textured silver &amp; minimalist chokers"
             images={bracelets}
           />
 
           <AccessCard
             className="section-3-card--full section-3-card--accessory"
-            eyebrow="Extras"
-            title="Accessories"
-            sub={<><span className="acc-glass">hats &amp; </span><span className="acc-brown">headgear</span><span className="acc-glass"> &amp; eyewear</span></>}
+            eyebrow="Bespoke Optics &amp; Crowns"
+            title="Headwear &amp; Sculpted Eyewear"
+            sub="Hand-finished Italian acetate, UV lenses &amp; structured brimwear"
             images={eyewear}
           />
         </div>
