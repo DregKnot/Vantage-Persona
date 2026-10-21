@@ -161,12 +161,17 @@ body {
 }
 
 /* =========================================================================
-   ACT I: FASHION IS BOLD (Cinematic Ryoku-Style Slit Aperture & Abstract Grid)
+   ACT I: FASHION IS BOLD (Single Sliced Exaggerated BOLD with In-Between Expansion)
    ========================================================================= */
+:root {
+    --bold-word-size: clamp(6.5rem, 20vw, 24rem);
+    --bold-half-height: calc(var(--bold-word-size) * 0.44);
+}
+
 .bold-fashion-section {
     position: relative;
-    background-color: #080605;
-    padding: 110px 0 130px;
+    background-color: #070504;
+    padding: 100px 0 120px;
     min-height: 100vh;
     overflow: hidden;
     color: #fff;
@@ -198,7 +203,7 @@ body {
     align-items: center;
     padding: 0 5%;
     width: 100%;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
 }
 
 .bold-meta-badge {
@@ -232,62 +237,72 @@ body {
 }
 
 /* =========================================================================
-   RYOKU-STYLE CINEMATIC SLIT APERTURE STAGE
+   THE UNIFIED SLICED "BOLD" APERTURE CONTAINER
    ========================================================================= */
-.bold-aperture-stage {
-    position: relative;
+.bold-split-container {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    margin: 20px 0 50px;
+    position: relative;
     user-select: none;
 }
 
-/* Split Huge Typography */
-.bold-typo-slice {
+/* TOP SLICE (EXACT UPPER 50% OF BOLD) */
+.bold-half-slice {
     width: 100%;
     overflow: hidden;
     display: flex;
     justify-content: center;
-    align-items: center;
-    line-height: 0.75;
+    height: var(--bold-half-height);
+    pointer-events: none;
+    line-height: var(--bold-word-size);
 }
 
-.bold-typo-top {
-    height: clamp(80px, 14vw, 190px);
-    align-items: flex-end;
-}
-
-.bold-typo-bottom {
-    height: clamp(80px, 14vw, 190px);
+.bold-slice-top {
     align-items: flex-start;
 }
 
-.bold-massive-text {
+.bold-slice-top .bold-word-inner {
+    transform: translateY(0);
+}
+
+/* BOTTOM SLICE (EXACT LOWER 50% OF BOLD) */
+.bold-slice-bottom {
+    align-items: flex-start;
+}
+
+.bold-slice-bottom .bold-word-inner {
+    transform: translateY(calc(-1 * var(--bold-half-height)));
+}
+
+.bold-word-inner {
     font-family: "Cinzel", "Plus Jakarta Sans", sans-serif;
-    font-size: clamp(6.5rem, 23vw, 26rem);
+    font-size: var(--bold-word-size);
     font-weight: 900;
+    line-height: var(--bold-word-size);
     text-transform: uppercase;
     letter-spacing: 0.12em;
     color: #f2ede4;
     text-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
-    transform: translateY(0);
+    margin: 0;
+    display: inline-block;
+    white-space: nowrap;
 }
 
-.bold-typo-top .bold-massive-text {
-    transform: translateY(22%);
+/* =========================================================================
+   IN-BETWEEN AREA (Houses the Slit Slideshow or the Whole Abstract Grid)
+   ========================================================================= */
+.bold-inbetween-area {
+    width: 100%;
+    position: relative;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.bold-typo-bottom .bold-massive-text {
-    transform: translateY(-22%);
-}
-
-/* The Horizontal Slit Window */
+/* 1. COLLAPSED STATE: SLIT WINDOW SLIDESHOW */
 .bold-slit-window {
     width: 100%;
-    height: clamp(160px, 24vw, 270px);
+    height: clamp(170px, 24vw, 270px);
     position: relative;
     overflow: hidden;
     background: #000;
@@ -376,7 +391,6 @@ body {
     color: #f8e3b4;
 }
 
-/* Floating Expand Callout */
 .bold-slit-cta {
     position: absolute;
     top: 50%;
@@ -428,52 +442,19 @@ body {
     border: 1px solid rgba(214, 180, 120, 0.35);
 }
 
-/* Editorial Manifesto at Bottom Right */
-.bold-editorial-manifesto {
-    align-self: flex-end;
-    margin-top: 24px;
-    padding-right: 5%;
-    text-align: right;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: clamp(0.95rem, 1.4vw, 1.35rem);
-    font-weight: 800;
-    line-height: 1.3;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: rgba(240, 230, 215, 0.82);
-}
-
-.bold-editorial-manifesto .manifesto-line {
-    margin: 0;
-}
-
-.bold-editorial-manifesto .highlight {
-    color: #d4af37;
-    letter-spacing: 0.06em;
-    text-shadow: 0 0 25px rgba(212, 175, 55, 0.3);
-}
-
 /* =========================================================================
-   THE ASYMMETRICAL ABSTRACT GRID (DECONSTRUCTED ATELIER ARCHIVE)
+   2. EXPANDED STATE: THE ABSTRACT ASYMMETRICAL GRID (INSIDE THE BOLD SLICE)
    ========================================================================= */
-.bold-abstract-section {
+.bold-inside-grid-wrapper {
     width: 100%;
-    margin-top: 60px;
+    padding: 40px 0 60px;
+    background: linear-gradient(180deg, rgba(7, 5, 4, 0.95) 0%, rgba(14, 11, 8, 0.85) 50%, rgba(7, 5, 4, 0.95) 100%);
+    border-top: 1.5px solid rgba(214, 180, 120, 0.4);
+    border-bottom: 1.5px solid rgba(214, 180, 120, 0.4);
     animation: fadeInSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@keyframes fadeInSlideUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.bold-abstract-toolbar {
+.bold-inside-toolbar {
     position: sticky;
     top: 42px;
     z-index: 30;
@@ -485,7 +466,7 @@ body {
     backdrop-filter: blur(16px);
     border: 1px solid rgba(214, 180, 120, 0.28);
     border-radius: 16px;
-    margin: 0 5% 45px;
+    margin: 0 5% 40px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
 }
 
@@ -542,7 +523,7 @@ body {
     box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35);
 }
 
-/* The Abstract Asymmetrical Grid */
+/* The Abstract Grid Inside */
 .bold-abstract-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -582,19 +563,17 @@ body {
     transform: scale(1.05);
 }
 
-/* Variant: Tall Monolith */
+/* Asymmetric Grid Layout Variants */
 .abstract-card.tall-monolith {
     grid-row: span 2;
     min-height: 640px;
 }
 
-/* Variant: Wide Panorama */
 .abstract-card.wide-panorama {
     grid-column: span 2;
     min-height: 330px;
 }
 
-/* Variant: Asymmetric Stagger Offsets */
 .abstract-card.offset-down {
     margin-top: 55px;
     min-height: 440px;
@@ -659,7 +638,57 @@ body {
     transform: translateX(0);
 }
 
-/* Abstract Graphic Typographic Pause Blocks */
+/* 3. NOISE EFFECT & EMPTY SPACES */
+.abstract-card.noise-void {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 32px 28px;
+    background: radial-gradient(circle at 30% 30%, rgba(35, 27, 20, 0.6) 0%, rgba(10, 8, 6, 0.95) 100%);
+    border: 1px dashed rgba(214, 180, 120, 0.25);
+    min-height: 320px;
+    position: relative;
+    cursor: default;
+}
+
+.abstract-card.noise-void::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXVtbW1mz1R3d3dtbW13d3dtbW13d3dtbW13d3dtbW13d3dtbW13d3dtbW13d3dtbW13d3dtbW13d3dbtZ3LAAAABnRSTlMAESIzRFVmd4iZq7u8xwAAAFpJREFUeNpjYGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGS0ADSAZGRkZGRkZGRkZGRkZGRkZGRkdAA0gGRkZGRkZGRkZGRkZGRkZGR0ADSAZGRkZGSkAADI6ADSAZGRkZE=');
+    opacity: 0.08;
+    pointer-events: none;
+}
+
+.void-header {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-jura), monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    color: rgba(214, 180, 120, 0.7);
+    text-transform: uppercase;
+}
+
+.void-body {
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    color: rgba(240, 230, 215, 0.45);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.void-footer {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-jura), monospace;
+    font-size: 0.65rem;
+    color: rgba(214, 180, 120, 0.5);
+    letter-spacing: 0.18em;
+}
+
+/* Typographic Pause Cards */
 .abstract-card.graphic-pause {
     display: flex;
     flex-direction: column;
@@ -703,6 +732,37 @@ body {
     letter-spacing: 0.2em;
     color: rgba(240, 230, 215, 0.5);
     text-transform: uppercase;
+}
+
+.bold-inside-bottom-bar {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+/* Editorial Manifesto at Bottom Right */
+.bold-editorial-manifesto {
+    align-self: flex-end;
+    margin-top: 24px;
+    padding-right: 5%;
+    text-align: right;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: clamp(0.95rem, 1.4vw, 1.35rem);
+    font-weight: 800;
+    line-height: 1.3;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: rgba(240, 230, 215, 0.82);
+}
+
+.bold-editorial-manifesto .manifesto-line {
+    margin: 0;
+}
+
+.bold-editorial-manifesto .highlight {
+    color: #d4af37;
+    letter-spacing: 0.06em;
+    text-shadow: 0 0 25px rgba(212, 175, 55, 0.3);
 }
 
 /* Lightbox Focus View */
@@ -816,7 +876,6 @@ body {
     }
 }
 
-/* Section 5: Fashion is Flush */
 .section-5 {
     display: flex;
     flex-direction: column;
