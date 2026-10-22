@@ -37,7 +37,7 @@ export default function HeroSection() {
         <div
           className="hero-bg-image"
           style={{
-            backgroundImage: "url('/pictures/pexels-joerg-hartmann-626385254-28388982.jpg')",
+            backgroundImage: "url('/pictures/pexels-joerg-hartmann-626385254-28388982.webp')",
             transform: `scale(1.1) translate3d(${-mouseOffset.x * 0.4}px, ${-mouseOffset.y * 0.4}px, 0)`,
           }}
         />
