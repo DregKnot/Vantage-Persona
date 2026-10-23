@@ -552,30 +552,34 @@ body {
     box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35);
 }
 
-/* The Abstract Grid Inside */
+/* The Abstract Grid Inside - High-Density Dense Packing (Zero Gaps) */
 .bold-abstract-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 28px;
-    padding: 0 5%;
+    grid-auto-flow: dense; /* Automatically backfills any vacant cell so zero empty spaces appear */
+    gap: 20px;
+    padding: 0 4%;
     width: 100%;
+    box-sizing: border-box;
 }
 
 .abstract-card {
     position: relative;
-    border-radius: 14px;
+    border-radius: 12px;
     overflow: hidden;
-    background: rgba(22, 17, 13, 0.78);
+    background: rgba(22, 17, 13, 0.85);
     border: 1px solid rgba(214, 180, 120, 0.18);
-    transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
     cursor: pointer;
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+    content-visibility: auto; /* Browser optimization: skips paint work for off-screen cards */
+    contain-intrinsic-size: 340px;
 }
 
 .abstract-card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-5px);
     border-color: rgba(214, 180, 120, 0.65);
-    box-shadow: 0 22px 55px rgba(0, 0, 0, 0.65), 0 0 35px rgba(212, 175, 55, 0.18);
+    box-shadow: 0 16px 38px rgba(0, 0, 0, 0.65), 0 0 25px rgba(212, 175, 55, 0.18);
 }
 
 .abstract-card img {
@@ -584,42 +588,45 @@ body {
     object-fit: cover;
     display: block;
     filter: grayscale(80%) contrast(1.1);
-    transition: filter 0.6s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: filter 0.5s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .abstract-card:hover img {
     filter: grayscale(0%) contrast(1.02);
-    transform: scale(1.05);
+    transform: scale(1.04);
 }
 
-/* Asymmetric Grid Layout Variants */
+/* 1. Marquee Hero Monolith (Reduced to only 2 marquee anchors) */
 .abstract-card.tall-monolith {
     grid-row: span 2;
-    min-height: 640px;
+    min-height: 560px;
 }
 
+/* 2. Panoramic Widescreen Cut (Reduced to only 2 cinematic breathers) */
 .abstract-card.wide-panorama {
     grid-column: span 2;
-    min-height: 330px;
+    min-height: 280px;
+    aspect-ratio: 16 / 9;
 }
 
-.abstract-card.offset-down {
-    margin-top: 55px;
-    min-height: 440px;
-}
-
-.abstract-card.offset-up {
-    margin-top: -30px;
-    min-height: 430px;
-}
-
+/* 3. Standard Portrait Card (Primary backbone) */
 .abstract-card.standard {
-    min-height: 390px;
+    min-height: 350px;
+    aspect-ratio: 3 / 4;
 }
 
+/* 4. Compact Tiles & Focus Squares (Smaller grids that pack densely) */
+.abstract-card.compact-tile,
 .abstract-card.focus-square {
+    min-height: 260px;
     aspect-ratio: 1 / 1;
-    min-height: 320px;
+}
+
+/* Reset legacy offsets to ensure clean aligned packing */
+.abstract-card.offset-down,
+.abstract-card.offset-up {
+    margin-top: 0 !important;
+    min-height: 340px;
 }
 
 /* Card Metadata Pill */
@@ -711,11 +718,11 @@ body {
 @keyframes voidStreamScroll {
     0% { transform: translateY(0); }
     100% { transform: translateY(-33.333333%); }
+}
 
 @keyframes voidStreamScrollHorizontal {
     0% { transform: translateX(0); }
     100% { transform: translateX(-33.333333%); }
-}
 }
 
 .void-stream-thumb {
@@ -736,11 +743,15 @@ body {
     position: absolute;
     inset: 0;
     z-index: 2;
-    background: linear-gradient(145deg, rgba(214, 180, 120, 0.42) 0%, rgba(225, 110, 45, 0.25) 60%, rgba(212, 175, 55, 0.35) 100%);
-    mix-blend-mode: color;
-    opacity: 0;
-    will-change: opacity;
-    transition: opacity 2.0s cubic-bezier(0.16, 1, 0.3, 1);
+    background: linear-gradient(145deg, rgba(214, 180, 120, 0.25) 0%, rgba(225, 110, 45, 0.15) 60%, rgba(212, 175, 55, 0.2) 100%);
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.void-thumb-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.6) 100%);
     pointer-events: none;
 }
 

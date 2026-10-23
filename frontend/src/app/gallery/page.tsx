@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-import { galleryStyles } from "@/styles/galleryStyles";
+import React from "react";
+import "@/styles/gallery.css";
 import SmoothScrollProvider from "@/components/gallery/SmoothScrollProvider";
 import BoldSection from "@/components/gallery/BoldSection";
 import Flush from "@/components/gallery/Flush";
@@ -11,11 +11,6 @@ export default function GalleryPage() {
   return (
     <SmoothScrollProvider>
       <main className="gallery-page-container">
-        {/* Internal CSS embedded directly within Gallery Page */}
-        <style
-          id="gallery-internal-css"
-          dangerouslySetInnerHTML={{ __html: galleryStyles }}
-        />
 
         {/* Hero Section */}
         <section className="gallery-hero">

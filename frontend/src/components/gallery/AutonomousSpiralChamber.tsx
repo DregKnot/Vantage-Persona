@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 interface AutonomousSpiralChamberProps {
   id?: string;
@@ -12,11 +12,10 @@ interface AutonomousSpiralChamberProps {
 
 /**
  * Autonomous Spiral Kinetic Chamber (3D Helical Fashion Vortex)
- * - Thumbnails spiral continuously down a 3D helical vortex
- * - Seamless mathematical periodicity: 8 cards per revolution, 16 cards total
- * - Hardware-accelerated dual-layer GPU hue compositing
- * - Zero React re-renders during active scroll via passive ref class toggles
- * - Strictly non-interactive ("Bold obeys no rule")
+ * - Optimized with micro-thumbnails (/pictures/BlackModels/micro/)
+ * - Single image layer per card, smooth GPU compositing
+ * - Pauses 3D animation when scrolled off-screen
+ * - Zero scroll listener layout thrashing
  */
 export default function AutonomousSpiralChamber({
   id = "spiral-void",
@@ -26,54 +25,41 @@ export default function AutonomousSpiralChamber({
   streamSpeed = "22s",
 }: AutonomousSpiralChamberProps) {
   const chamberRef = useRef<HTMLDivElement>(null);
-  const statusTextRef = useRef<HTMLSpanElement>(null);
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    let scrollTimeout: NodeJS.Timeout | null = null;
-    let isScrollingActive = false;
+    const el = chamberRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") return;
 
-    const handleScroll = () => {
-      if (!isScrollingActive) {
-        isScrollingActive = true;
-        if (chamberRef.current) {
-          chamberRef.current.classList.add("is-scrolling");
-        }
-        if (statusTextRef.current) {
-          statusTextRef.current.textContent = "CHROMATIC BLOOM";
-        }
-      }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { rootMargin: "200px" }
+    );
 
-      if (scrollTimeout) clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => {
-        isScrollingActive = false;
-        if (chamberRef.current) {
-          chamberRef.current.classList.remove("is-scrolling");
-        }
-        if (statusTextRef.current) {
-          statusTextRef.current.textContent = "AUTONOMOUS";
-        }
-      }, 450);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      if (scrollTimeout) clearTimeout(scrollTimeout);
-    };
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
+
+  const getMicro = (path: string) => {
+    if (path.includes("/pictures/BlackModels/") && !path.includes("/micro/")) {
+      return path.replace("/pictures/BlackModels/", "/pictures/BlackModels/micro/");
+    }
+    return path;
+  };
 
   // Mathematical Helical Geometry:
   // 16 cards = 2 full 360-deg spiral turns (8 cards per turn, stepAngle = 45deg)
-  // Step Y = 65px -> 8 * 65px = 520px seamless period
   const totalCards = 16;
   const stepAngle = 45;
   const stepY = 65;
-  const radius = 118; // Perfect fit within standard grid card width
+  const radius = 118;
 
   const cards = Array.from({ length: totalCards }, (_, i) => {
-    const imgSrc = streamImages[i % streamImages.length];
+    const rawSrc = streamImages[i % streamImages.length];
+    const imgSrc = getMicro(rawSrc);
     const angle = i * stepAngle;
-    // Center the helix vertically inside the card viewport
     const y = (i - 3) * stepY;
     return { id: i, src: imgSrc, angle, y };
   });
@@ -89,7 +75,10 @@ export default function AutonomousSpiralChamber({
         <div className="spiral-stage">
           <div
             className="spiral-helix-track"
-            style={{ animationDuration: streamSpeed }}
+            style={{
+              animationDuration: streamSpeed,
+              animationPlayState: isVisible ? "running" : "paused",
+            }}
           >
             {cards.map((card) => (
               <div
@@ -99,7 +88,6 @@ export default function AutonomousSpiralChamber({
                   transform: `rotateY(${card.angle}deg) translateZ(${radius}px) translateY(${card.y}px) rotateX(-5deg)`,
                 }}
               >
-                {/* 1. Base Layer: Monochrome 35mm Raw Texture */}
                 <img
                   src={card.src}
                   alt="Archival Spiral Stream"
@@ -107,14 +95,7 @@ export default function AutonomousSpiralChamber({
                   loading="lazy"
                   decoding="async"
                 />
-                {/* 2. Color Layer: Pure GPU Opacity transition */}
-                <img
-                  src={card.src}
-                  alt="Archival Spiral Chromatic"
-                  className="void-thumb-color"
-                  loading="lazy"
-                  decoding="async"
-                />
+                <div className="void-thumb-overlay" />
               </div>
             ))}
           </div>
@@ -142,7 +123,7 @@ export default function AutonomousSpiralChamber({
           <span className="void-id">{meta}</span>
           <span className="void-live-pulse">
             <span>✦</span>
-            <span ref={statusTextRef}>AUTONOMOUS</span>
+            <span>AUTONOMOUS</span>
           </span>
         </div>
         <div className="void-footer">

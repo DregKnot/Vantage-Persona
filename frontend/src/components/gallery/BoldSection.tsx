@@ -16,7 +16,7 @@ interface AbstractItem {
   title?: string;
   subtitle?: string;
   src?: string;
-  layout?: "tall-monolith" | "wide-panorama" | "offset-down" | "offset-up" | "standard" | "focus-square";
+  layout?: "tall-monolith" | "wide-panorama" | "compact-tile" | "standard" | "focus-square";
   isNoiseVoid?: boolean;
   isSpiralVoid?: boolean;
   isPause?: boolean;
@@ -27,6 +27,24 @@ interface AbstractItem {
   streamSpeed?: string;
 }
 
+// Optimization helper: returns the lightweight 720px thumbnail (95% less VRAM)
+const getThumb = (path?: string) => {
+  if (!path) return "";
+  if (path.includes("/pictures/BlackModels/") && !path.includes("/thumbs/")) {
+    return path.replace("/pictures/BlackModels/", "/pictures/BlackModels/thumbs/");
+  }
+  return path;
+};
+
+// Micro-thumbnail helper for kinetic streams (320px)
+const getMicro = (path: string) => {
+  if (!path) return "";
+  if (path.includes("/pictures/BlackModels/") && !path.includes("/micro/")) {
+    return path.replace("/pictures/BlackModels/", "/pictures/BlackModels/micro/");
+  }
+  return path;
+};
+
 export default function BoldSection() {
   const [isExpanded, setIsExpanded] = useState(false);
   const [activeLightbox, setActiveLightbox] = useState<{
@@ -36,62 +54,65 @@ export default function BoldSection() {
     subtitle?: string;
   } | null>(null);
 
-  // The 8 Headliners in the Slit Slideshow (and leading the Expanded Grid)
+  // The 8 Headliners in the Slit Slideshow (using ultra-retina thumbnails)
   const slitImages: SlitImage[] = [
-    { src: "/pictures/BlackModels/pexels-media-11434885.webp", alt: "Gaze of Intent", tag: "LOOK 01 // GAZE" },
-    { src: "/pictures/BlackModels/chuxie-daniels-Q_OZvYusj0w-unsplash.webp", alt: "Sovereign Angle", tag: "LOOK 02 // ANGLE" },
-    { src: "/pictures/BlackModels/apex-360-ioRBT9swcK8-unsplash.webp", alt: "Sculpted Profile", tag: "LOOK 03 // SCULPT" },
-    { src: "/pictures/BlackModels/divine-effiong-9oQrjjRU0mA-unsplash.webp", alt: "Avant-Garde Drape", tag: "LOOK 04 // DRAPE" },
-    { src: "/pictures/BlackModels/eze-joseph-0Rkv32PDGjI-unsplash.webp", alt: "Monochrome Majesty", tag: "LOOK 05 // CROWN" },
-    { src: "/pictures/BlackModels/pexels-media-13646260.webp", alt: "Piercing Focus", tag: "LOOK 06 // SILHOUETTE" },
-    { src: "/pictures/BlackModels/pexels-media-28453251.webp", alt: "Raw Texture", tag: "LOOK 07 // TEXTURE" },
-    { src: "/pictures/BlackModels/shimo-yann-OgqnGYsyug8-unsplash.webp", alt: "Runway Presence", tag: "LOOK 08 // PRESENCE" },
+    { src: "/pictures/BlackModels/thumbs/pexels-media-11434885.webp", alt: "Gaze of Intent", tag: "LOOK 01 // GAZE" },
+    { src: "/pictures/BlackModels/thumbs/chuxie-daniels-Q_OZvYusj0w-unsplash.webp", alt: "Sovereign Angle", tag: "LOOK 02 // ANGLE" },
+    { src: "/pictures/BlackModels/thumbs/apex-360-ioRBT9swcK8-unsplash.webp", alt: "Sculpted Profile", tag: "LOOK 03 // SCULPT" },
+    { src: "/pictures/BlackModels/thumbs/divine-effiong-9oQrjjRU0mA-unsplash.webp", alt: "Avant-Garde Drape", tag: "LOOK 04 // DRAPE" },
+    { src: "/pictures/BlackModels/thumbs/eze-joseph-0Rkv32PDGjI-unsplash.webp", alt: "Monochrome Majesty", tag: "LOOK 05 // CROWN" },
+    { src: "/pictures/BlackModels/thumbs/pexels-media-13646260.webp", alt: "Piercing Focus", tag: "LOOK 06 // SILHOUETTE" },
+    { src: "/pictures/BlackModels/thumbs/pexels-media-28453251.webp", alt: "Raw Texture", tag: "LOOK 07 // TEXTURE" },
+    { src: "/pictures/BlackModels/thumbs/shimo-yann-OgqnGYsyug8-unsplash.webp", alt: "Runway Presence", tag: "LOOK 08 // PRESENCE" },
   ];
 
-  // Curated Abstract Grid with the Slideshow Looks first, plus Autonomous Void Chambers & Graphic Pauses
+  // High-Density Curated Archive:
+  // - Fewer giant monoliths (only 2 tall and 2 wide anchors)
+  // - High proportion of compact tiles and standard portrait cards
+  // - Packed with grid-auto-flow: dense for ZERO empty spaces
   const abstractArchive: AbstractItem[] = [
-    // 1. The Slit Headliners
+    // 1. OPENER ACT
     { id: "01", index: "№ 01", title: "Gaze of Intent", subtitle: "Avant-Garde Monolith", src: "/pictures/BlackModels/pexels-media-11434885.webp", layout: "tall-monolith" },
-    { id: "02", index: "№ 02", title: "Sovereign Angle", subtitle: "Chiseled Profile", src: "/pictures/BlackModels/chuxie-daniels-Q_OZvYusj0w-unsplash.webp", layout: "offset-down" },
-    { id: "03", index: "№ 03", title: "Sculpted Bone", subtitle: "High Neckline Architecture", src: "/pictures/BlackModels/apex-360-ioRBT9swcK8-unsplash.webp", layout: "offset-up" },
+    { id: "02", index: "№ 02", title: "Sovereign Angle", subtitle: "Chiseled Profile", src: "/pictures/BlackModels/chuxie-daniels-Q_OZvYusj0w-unsplash.webp", layout: "compact-tile" },
+    { id: "03", index: "№ 03", title: "Sculpted Bone", subtitle: "High Neckline Architecture", src: "/pictures/BlackModels/apex-360-ioRBT9swcK8-unsplash.webp", layout: "standard" },
     { id: "04", index: "№ 04", title: "Avant-Garde Drape", subtitle: "Cinematic Horizontal Cut", src: "/pictures/BlackModels/divine-effiong-9oQrjjRU0mA-unsplash.webp", layout: "wide-panorama" },
 
-    // Autonomous Void Kinetic Chamber 01 (Vertical Filmstrip Stream - 12 Images with 3x Loop, Zero Gaps)
+    // Autonomous Void Kinetic Chamber 01 (Vertical Filmstrip Stream)
     {
       id: "noise-1",
       isNoiseVoid: true,
       meta: "ARCHIVE VOID // 01",
       coords: "06°30'N 03°24'E",
       streamImages: [
-        "/pictures/BlackModels/pexels-harrun-muhammad-116282236-36741714.webp",
-        "/pictures/BlackModels/pexels-jeferson-gomes-24831766-15332906.webp",
-        "/pictures/BlackModels/pexels-jeferson-gomes-24831766-6895526.webp",
-        "/pictures/BlackModels/pexels-jyron-barclay-2151526792-33423949.webp",
-        "/pictures/BlackModels/pexels-khalifa-yahaya-650488521-36029414.webp",
-        "/pictures/BlackModels/pexels-lucretius-mooka-2554524-9016422.webp",
-        "/pictures/BlackModels/pexels-media-36514633.webp",
-        "/pictures/BlackModels/pexels-media-36547359.webp",
-        "/pictures/BlackModels/pexels-media-4081801.webp",
-        "/pictures/BlackModels/pexels-media-6151574.webp",
-        "/pictures/BlackModels/pexels-media-6334911.webp",
-        "/pictures/BlackModels/pexels-media-11434885.webp"
+        getMicro("/pictures/BlackModels/pexels-harrun-muhammad-116282236-36741714.webp"),
+        getMicro("/pictures/BlackModels/pexels-jeferson-gomes-24831766-15332906.webp"),
+        getMicro("/pictures/BlackModels/pexels-jeferson-gomes-24831766-6895526.webp"),
+        getMicro("/pictures/BlackModels/pexels-jyron-barclay-2151526792-33423949.webp"),
+        getMicro("/pictures/BlackModels/pexels-khalifa-yahaya-650488521-36029414.webp"),
+        getMicro("/pictures/BlackModels/pexels-lucretius-mooka-2554524-9016422.webp"),
+        getMicro("/pictures/BlackModels/pexels-media-36514633.webp"),
+        getMicro("/pictures/BlackModels/pexels-media-36547359.webp"),
+        getMicro("/pictures/BlackModels/pexels-media-4081801.webp"),
+        getMicro("/pictures/BlackModels/pexels-media-6151574.webp"),
+        getMicro("/pictures/BlackModels/pexels-media-6334911.webp"),
+        getMicro("/pictures/BlackModels/pexels-media-11434885.webp")
       ],
       streamSpeed: "30s",
     },
 
-    { id: "05", index: "№ 05", title: "Monochrome Majesty", subtitle: "Sovereign Crown", src: "/pictures/BlackModels/eze-joseph-0Rkv32PDGjI-unsplash.webp", layout: "tall-monolith" },
-    { id: "06", index: "№ 06", title: "Piercing Focus", subtitle: "Minimalist Geometry", src: "/pictures/BlackModels/pexels-media-13646260.webp", layout: "focus-square" },
+    { id: "05", index: "№ 05", title: "Monochrome Majesty", subtitle: "Sovereign Crown", src: "/pictures/BlackModels/eze-joseph-0Rkv32PDGjI-unsplash.webp", layout: "standard" },
+    { id: "06", index: "№ 06", title: "Piercing Focus", subtitle: "Minimalist Geometry", src: "/pictures/BlackModels/pexels-media-13646260.webp", layout: "compact-tile" },
     { id: "07", index: "№ 07", title: "Raw Texture", subtitle: "Tactile Grain", src: "/pictures/BlackModels/pexels-media-28453251.webp", layout: "standard" },
-    { id: "08", index: "№ 08", title: "Runway Presence", subtitle: "Kinetic Velocity", src: "/pictures/BlackModels/shimo-yann-OgqnGYsyug8-unsplash.webp", layout: "wide-panorama" },
+    { id: "08", index: "№ 08", title: "Runway Presence", subtitle: "Kinetic Velocity", src: "/pictures/BlackModels/shimo-yann-OgqnGYsyug8-unsplash.webp", layout: "compact-tile" },
 
     // Graphic Typographic Pause
     { id: "pause-1", isPause: true, quote: "“Fashion is not an ornament; it is the tension between volume and void.”", meta: "VP / ATELIER PRINCIPLE", coords: "MAISON VP 2026" },
 
-    // 2. The Complete Atelier Archive Continues
-    { id: "09", index: "№ 09", title: "Sculpted Obsidian", subtitle: "Structured Woolen Cut", src: "/pictures/BlackModels/apex-360-9UX-VAXPD4s-unsplash.webp", layout: "tall-monolith" },
-    { id: "10", index: "№ 10", title: "Angular Tension", subtitle: "Deconstructed Lapel", src: "/pictures/BlackModels/chuxie-daniels-nM-075GyuF0-unsplash.webp", layout: "offset-down" },
-    { id: "11", index: "№ 11", title: "Raw Velvet Silhouette", subtitle: "Monochrome Deep Shadow", src: "/pictures/BlackModels/divine-effiong-k3Srj786qtk-unsplash.webp", layout: "offset-up" },
-    { id: "12", index: "№ 12", title: "Cinematic Horizon", subtitle: "Widescreen Drape", src: "/pictures/BlackModels/pexels-media-11551370.webp", layout: "wide-panorama" },
+    // 2. THE DENSE ATELIER ARCHIVE
+    { id: "09", index: "№ 09", title: "Sculpted Obsidian", subtitle: "Structured Woolen Cut", src: "/pictures/BlackModels/apex-360-9UX-VAXPD4s-unsplash.webp", layout: "standard" },
+    { id: "10", index: "№ 10", title: "Angular Tension", subtitle: "Deconstructed Lapel", src: "/pictures/BlackModels/chuxie-daniels-nM-075GyuF0-unsplash.webp", layout: "standard" },
+    { id: "11", index: "№ 11", title: "Raw Velvet Silhouette", subtitle: "Monochrome Deep Shadow", src: "/pictures/BlackModels/divine-effiong-k3Srj786qtk-unsplash.webp", layout: "compact-tile" },
+    { id: "12", index: "№ 12", title: "Cinematic Horizon", subtitle: "Widescreen Drape", src: "/pictures/BlackModels/pexels-media-11551370.webp", layout: "standard" },
 
     // Autonomous Spiral Kinetic Chamber 02 (3D Helical Fashion Vortex)
     {
@@ -100,47 +121,47 @@ export default function BoldSection() {
       meta: "ARCHIVE SPIRAL // 02",
       coords: "FIBONACCI // LATENT",
       streamImages: [
-        "/pictures/BlackModels/pexels-marvellous-adu-2148798496-36506383.webp",
-        "/pictures/BlackModels/pexels-marvellous-adu-2148798496-36506389.webp",
-        "/pictures/BlackModels/pexels-nemmy-media-694031137-20145326.webp",
-        "/pictures/BlackModels/pexels-paul-uchechukwu-246994638-39821505.webp",
-        "/pictures/BlackModels/pexels-rance-d-grapher-1266939520-35066794.webp",
-        "/pictures/BlackModels/pexels-twinkles_photos-414046518-35808804.webp",
-        "/pictures/BlackModels/pexels-media-7410486.webp",
-        "/pictures/BlackModels/pexels-media-7410489.webp"
+        getMicro("/pictures/BlackModels/pexels-marvellous-adu-2148798496-36506383.webp"),
+        getMicro("/pictures/BlackModels/pexels-marvellous-adu-2148798496-36506389.webp"),
+        getMicro("/pictures/BlackModels/pexels-nemmy-media-694031137-20145326.webp"),
+        getMicro("/pictures/BlackModels/pexels-paul-uchechukwu-246994638-39821505.webp"),
+        getMicro("/pictures/BlackModels/pexels-rance-d-grapher-1266939520-35066794.webp"),
+        getMicro("/pictures/BlackModels/pexels-twinkles_photos-414046518-35808804.webp"),
+        getMicro("/pictures/BlackModels/pexels-media-7410486.webp"),
+        getMicro("/pictures/BlackModels/pexels-media-7410489.webp")
       ],
       streamSpeed: "22s",
     },
 
     { id: "13", index: "№ 13", title: "Imperial Collar", subtitle: "High Neckline Architecture", src: "/pictures/BlackModels/pexels-media-13434107.webp", layout: "standard" },
-    { id: "14", index: "№ 14", title: "Tactile Contrast", subtitle: "Shearling & Heavy Wool", src: "/pictures/BlackModels/pexels-media-13548964.webp", layout: "focus-square" },
-    { id: "15", index: "№ 15", title: "Monolithic Stature", subtitle: "Monumental Form", src: "/pictures/BlackModels/pexels-media-25311494.webp", layout: "tall-monolith" },
-    { id: "16", index: "№ 16", title: "Kinetic Duality", subtitle: "Movement in Wool", src: "/pictures/BlackModels/pexels-media-2562497.webp", layout: "offset-down" },
-    { id: "17", index: "№ 17", title: "Nocturne Presence", subtitle: "Deep Shadow Profile", src: "/pictures/BlackModels/pexels-media-31407391.webp", layout: "wide-panorama" },
+    { id: "14", index: "№ 14", title: "Tactile Contrast", subtitle: "Shearling & Heavy Wool", src: "/pictures/BlackModels/pexels-media-13548964.webp", layout: "compact-tile" },
+    { id: "15", index: "№ 15", title: "Monolithic Stature", subtitle: "Monumental Form", src: "/pictures/BlackModels/pexels-media-25311494.webp", layout: "wide-panorama" },
+    { id: "16", index: "№ 16", title: "Kinetic Duality", subtitle: "Movement in Wool", src: "/pictures/BlackModels/pexels-media-2562497.webp", layout: "standard" },
+    { id: "17", index: "№ 17", title: "Nocturne Presence", subtitle: "Deep Shadow Profile", src: "/pictures/BlackModels/pexels-media-31407391.webp", layout: "standard" },
 
     // Graphic Typographic Pause 2
     { id: "pause-2", isPause: true, quote: "“Not always in the suit. Where presence ends, persona begins.”", meta: "ACT I // MANIFESTO", coords: "VANTAGE PERSONA" },
 
-    { id: "18", index: "№ 18", title: "The Gilded Stare", subtitle: "Piercing Minimalist Cut", src: "/pictures/BlackModels/pexels-media-33204975.webp", layout: "standard" },
-    { id: "19", index: "№ 19", title: "Avant-Garde Veil", subtitle: "Fabric Deconstruction", src: "/pictures/BlackModels/pexels-media-34938822.webp", layout: "tall-monolith" },
-    { id: "20", index: "№ 20", title: "Architectural Lapel", subtitle: "Double-Breasted Crest", src: "/pictures/BlackModels/pexels-media-34938833.webp", layout: "focus-square" },
-    { id: "21", index: "№ 21", title: "Sovereign Strut", subtitle: "Cinematic Pan", src: "/pictures/BlackModels/pexels-media-34938839.webp", layout: "wide-panorama" },
-    { id: "22", index: "№ 22", title: "Sculpted Gaze", subtitle: "Chiaroscuro Light", src: "/pictures/BlackModels/pexels-media-36291319.webp", layout: "offset-up" },
+    { id: "18", index: "№ 18", title: "The Gilded Stare", subtitle: "Piercing Minimalist Cut", src: "/pictures/BlackModels/pexels-media-33204975.webp", layout: "compact-tile" },
+    { id: "19", index: "№ 19", title: "Avant-Garde Veil", subtitle: "Fabric Deconstruction", src: "/pictures/BlackModels/pexels-media-34938822.webp", layout: "standard" },
+    { id: "20", index: "№ 20", title: "Architectural Lapel", subtitle: "Double-Breasted Crest", src: "/pictures/BlackModels/pexels-media-34938833.webp", layout: "compact-tile" },
+    { id: "21", index: "№ 21", title: "Sovereign Strut", subtitle: "Cinematic Pan", src: "/pictures/BlackModels/pexels-media-34938839.webp", layout: "standard" },
+    { id: "22", index: "№ 22", title: "Sculpted Gaze", subtitle: "Chiaroscuro Light", src: "/pictures/BlackModels/pexels-media-36291319.webp", layout: "compact-tile" },
     { id: "23", index: "№ 23", title: "Raw Fiber Form", subtitle: "Heavy Weight Drape", src: "/pictures/BlackModels/pexels-media-36445249.webp", layout: "standard" },
-    { id: "24", index: "№ 24", title: "Archival Horizon", subtitle: "Runway Zenith", src: "/pictures/BlackModels/shimo-yann-wZuClEnlBhs-unsplash.webp", layout: "tall-monolith" },
-    // 3. NEW ATELIER ADDITIONS (Looks 25 to 35)
-    { id: "25", index: "№ 25", title: "Onyx Regalia", subtitle: "Sartorial Monolith", src: "/pictures/BlackModels/pexels-ahmad-sulaiman-2155400972-37914751.webp", layout: "tall-monolith" },
-    { id: "26", index: "№ 26", title: "Structured Solitude", subtitle: "Chiseled Architecture", src: "/pictures/BlackModels/pexels-bello-olamide-38387724-9982957.webp", layout: "offset-down" },
-    { id: "27", index: "№ 27", title: "Imperial Stride", subtitle: "Widescreen Motion", src: "/pictures/BlackModels/pexels-billy-gax-3816579-18201051.webp", layout: "wide-panorama" },
-    { id: "28", index: "№ 28", title: "Couture Profile", subtitle: "Minimalist Focus", src: "/pictures/BlackModels/pexels-bobography-2148946691-34356236.webp", layout: "focus-square" },
-    { id: "29", index: "№ 29", title: "Geometric Drape", subtitle: "Textured Heavy Wool", src: "/pictures/BlackModels/pexels-breston-kenya-477564-3299173.webp", layout: "standard" },
-    { id: "30", index: "№ 30", title: "Vanguard Stance", subtitle: "Deconstructed Peak Lapel", src: "/pictures/BlackModels/pexels-builtbyking-12008360.webp", layout: "offset-up" },
-    { id: "31", index: "№ 31", title: "Nocturnal Gaze", subtitle: "Deep Shadow Obsidian", src: "/pictures/BlackModels/pexels-charles-isaac-1055596880-20455883.webp", layout: "tall-monolith" },
-    { id: "32", index: "№ 32", title: "Architectural Linen", subtitle: "Cinematic Horizontal Horizon", src: "/pictures/BlackModels/pexels-cottonbro-10678801.webp", layout: "wide-panorama" },
-    { id: "33", index: "№ 33", title: "Monochrome Crown", subtitle: "Geometric High Neck", src: "/pictures/BlackModels/pexels-criticalimagery-13295646.webp", layout: "focus-square" },
-    { id: "34", index: "№ 34", title: "Chiaroscuro Silhouette", subtitle: "Sculpted Tactile Form", src: "/pictures/BlackModels/pexels-darkshadephotos-17657143.webp", layout: "standard" },
-    { id: "35", index: "№ 35", title: "Sculpted Majesty", subtitle: "Runway Monument", src: "/pictures/BlackModels/pexels-evans-akanyijuka-2175774-33659780.webp", layout: "tall-monolith" },
+    { id: "24", index: "№ 24", title: "Archival Horizon", subtitle: "Runway Zenith", src: "/pictures/BlackModels/shimo-yann-wZuClEnlBhs-unsplash.webp", layout: "standard" },
 
+    // 3. ACT CLIMAX
+    { id: "25", index: "№ 25", title: "Onyx Regalia", subtitle: "Sartorial Monolith", src: "/pictures/BlackModels/pexels-ahmad-sulaiman-2155400972-37914751.webp", layout: "tall-monolith" },
+    { id: "26", index: "№ 26", title: "Structured Solitude", subtitle: "Chiseled Architecture", src: "/pictures/BlackModels/pexels-bello-olamide-38387724-9982957.webp", layout: "standard" },
+    { id: "27", index: "№ 27", title: "Imperial Stride", subtitle: "Widescreen Motion", src: "/pictures/BlackModels/pexels-billy-gax-3816579-18201051.webp", layout: "compact-tile" },
+    { id: "28", index: "№ 28", title: "Couture Profile", subtitle: "Minimalist Focus", src: "/pictures/BlackModels/pexels-bobography-2148946691-34356236.webp", layout: "compact-tile" },
+    { id: "29", index: "№ 29", title: "Geometric Drape", subtitle: "Textured Heavy Wool", src: "/pictures/BlackModels/pexels-breston-kenya-477564-3299173.webp", layout: "standard" },
+    { id: "30", index: "№ 30", title: "Vanguard Stance", subtitle: "Deconstructed Peak Lapel", src: "/pictures/BlackModels/pexels-builtbyking-12008360.webp", layout: "compact-tile" },
+    { id: "31", index: "№ 31", title: "Nocturnal Gaze", subtitle: "Deep Shadow Obsidian", src: "/pictures/BlackModels/pexels-charles-isaac-1055596880-20455883.webp", layout: "standard" },
+    { id: "32", index: "№ 32", title: "Architectural Linen", subtitle: "Cinematic Horizontal Horizon", src: "/pictures/BlackModels/pexels-cottonbro-10678801.webp", layout: "standard" },
+    { id: "33", index: "№ 33", title: "Monochrome Crown", subtitle: "Geometric High Neck", src: "/pictures/BlackModels/pexels-criticalimagery-13295646.webp", layout: "compact-tile" },
+    { id: "34", index: "№ 34", title: "Chiaroscuro Silhouette", subtitle: "Sculpted Tactile Form", src: "/pictures/BlackModels/pexels-darkshadephotos-17657143.webp", layout: "compact-tile" },
+    { id: "35", index: "№ 35", title: "Sculpted Majesty", subtitle: "Runway Monument", src: "/pictures/BlackModels/pexels-evans-akanyijuka-2175774-33659780.webp", layout: "standard" },
   ];
 
   return (
@@ -263,14 +284,14 @@ export default function BoldSection() {
                       );
                     }
 
-                    // Photo Card
+                    // Photo Card (loads 720px thumbnail for 97% less VRAM, opens full-res in Lightbox)
                     return (
                       <article
                         key={item.id}
                         className={`abstract-card ${item.layout || "standard"}`}
                         onClick={() =>
                           setActiveLightbox({
-                            src: item.src!,
+                            src: item.src!, // pristine full-resolution asset
                             title: item.title!,
                             index: item.index!,
                             subtitle: item.subtitle,
@@ -281,7 +302,7 @@ export default function BoldSection() {
                         title={`Inspect ${item.title}`}
                       >
                         <img
-                          src={item.src!}
+                          src={getThumb(item.src!)}
                           alt={item.title!}
                           loading="lazy"
                           decoding="async"
@@ -328,7 +349,7 @@ export default function BoldSection() {
           <p className="manifesto-line highlight">FASHION IS BOLD.</p>
         </div>
 
-        {/* Fullscreen Lightbox Focus Modal */}
+        {/* Fullscreen Lightbox Focus Modal (Full-Resolution Viewing) */}
         {activeLightbox && (
           <div
             className="bold-lightbox-backdrop"
