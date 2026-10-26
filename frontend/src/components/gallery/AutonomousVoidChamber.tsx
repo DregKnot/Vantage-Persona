@@ -2,26 +2,44 @@
 
 import React, { useEffect, useRef, useState } from "react";
 
+// Directly self-contained micro-thumbnail stream (zero runtime string replacement, zero prop drilling)
+const DEFAULT_VOID_IMAGES = [
+  "/pictures/BlackModels/micro/pexels-harrun-muhammad-116282236-36741714.webp",
+  "/pictures/BlackModels/micro/pexels-jeferson-gomes-24831766-15332906.webp",
+  "/pictures/BlackModels/micro/pexels-jeferson-gomes-24831766-6895526.webp",
+  "/pictures/BlackModels/micro/pexels-jyron-barclay-2151526792-33423949.webp",
+  "/pictures/BlackModels/micro/pexels-khalifa-yahaya-650488521-36029414.webp",
+  "/pictures/BlackModels/micro/pexels-lucretius-mooka-2554524-9016422.webp",
+  "/pictures/BlackModels/micro/pexels-media-36514633.webp",
+  "/pictures/BlackModels/micro/pexels-media-36547359.webp",
+  "/pictures/BlackModels/micro/pexels-media-4081801.webp",
+  "/pictures/BlackModels/micro/pexels-media-6151574.webp",
+  "/pictures/BlackModels/micro/pexels-media-6334911.webp",
+  "/pictures/BlackModels/micro/pexels-media-11434885.webp",
+];
+
+// Pre-doubled static loop: evaluated once at module load, zero runtime allocation
+const STATIC_VOID_LOOP = [...DEFAULT_VOID_IMAGES, ...DEFAULT_VOID_IMAGES];
+
 interface AutonomousVoidChamberProps {
   id: string;
   meta?: string;
   coords?: string;
-  streamImages: string[];
+  streamImages?: string[];
   streamSpeed?: string;
 }
 
 /**
- * Autonomous Void Kinetic Chamber (Optimized High-Performance Marquee)
- * - Uses micro-thumbnails (/pictures/BlackModels/micro/) for 97% less VRAM consumption
- * - Single GPU-accelerated layer per card (no heavy mix-blend reflows)
+ * Autonomous Void Kinetic Chamber (Self-Contained High-Performance Stream)
+ * - Self-contained micro-thumbnails: zero runtime regex or string replaces
+ * - Single GPU-accelerated layer per card
  * - IntersectionObserver pauses stream when off-screen to preserve 60-120 FPS
- * - Zero scroll listener layout thrashing
  */
 export default function AutonomousVoidChamber({
   id,
   meta = "ARCHIVE VOID",
   coords = "LATENT NOISE",
-  streamImages = [],
+  streamImages,
   streamSpeed = "24s",
 }: AutonomousVoidChamberProps) {
   const chamberRef = useRef<HTMLDivElement>(null);
@@ -43,16 +61,9 @@ export default function AutonomousVoidChamber({
     return () => observer.disconnect();
   }, []);
 
-  // Convert image paths to micro-thumbnails
-  const getMicro = (path: string) => {
-    if (path.includes("/pictures/BlackModels/") && !path.includes("/micro/")) {
-      return path.replace("/pictures/BlackModels/", "/pictures/BlackModels/micro/");
-    }
-    return path;
-  };
-
-  // Seamless 3x loop array ensures there is NEVER an empty gap at any point in the cycle
-  const loopImages = [...streamImages, ...streamImages, ...streamImages];
+  const loopImages = streamImages && streamImages.length > 0
+    ? [...streamImages, ...streamImages]
+    : STATIC_VOID_LOOP;
 
   return (
     <article key={id} className="abstract-card noise-void" aria-hidden="true">
@@ -69,7 +80,7 @@ export default function AutonomousVoidChamber({
             {loopImages.map((imgSrc, imgIdx) => (
               <div key={imgIdx} className="void-stream-thumb">
                 <img
-                  src={getMicro(imgSrc)}
+                  src={imgSrc}
                   alt="Archival Stream"
                   className="void-thumb-base"
                   loading="lazy"

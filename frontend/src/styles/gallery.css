@@ -717,7 +717,7 @@ body {
 
 @keyframes voidStreamScroll {
     0% { transform: translateY(0); }
-    100% { transform: translateY(-33.333333%); }
+    100% { transform: translateY(-50%); }
 }
 
 @keyframes voidStreamScrollHorizontal {
@@ -767,7 +767,7 @@ body {
     object-fit: cover;
     object-position: center 30%;
     display: block;
-    filter: grayscale(100%) contrast(1.32) brightness(0.75);
+    filter: grayscale(100%);
     transform: translateZ(0);
 }
 
@@ -800,9 +800,8 @@ body {
     inset: 0;
     z-index: 3;
     background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXVtbW1mz1R3d3dtbW13d3dtbW13d3dtbW13d3dtbW13d3dtbW13d3dtbW13d3dtbW13d3dbtZ3LAAAABnRSTlMAESIzRFVmd4iZq7u8xwAAAFpJREFUeNpjYGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGS0ADSAZGRkZGRkZGRkZGRkZGRkZGRkdAA0gGRkZGRkZGRkZGRkZGRkZGR0ADSAZGRkZGSkAADI6ADSAZGRkZE=');
-    opacity: 0.16;
+    opacity: 0.07;
     pointer-events: none;
-    mix-blend-mode: overlay;
 }
 
 /* Ambient Chromatic Aura on Scroll */
@@ -928,11 +927,10 @@ body {
     border-radius: 6px;
     overflow: hidden;
     background: #0d0a08;
-    border: 1px solid rgba(214, 180, 120, 0.3);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.85);
-    contain: strict;
+    border: 1px solid rgba(214, 180, 120, 0.35);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.9);
     transform-style: preserve-3d;
-    backface-visibility: visible;
+    backface-visibility: hidden;
 }
 
 .spiral-thumb-card::after {
@@ -940,11 +938,8 @@ body {
     position: absolute;
     inset: 0;
     z-index: 2;
-    background: linear-gradient(145deg, rgba(214, 180, 120, 0.42) 0%, rgba(225, 110, 45, 0.28) 60%, rgba(212, 175, 55, 0.35) 100%);
-    mix-blend-mode: color;
-    opacity: 0;
-    will-change: opacity;
-    transition: opacity 2.0s cubic-bezier(0.16, 1, 0.3, 1);
+    background: linear-gradient(145deg, rgba(214, 180, 120, 0.22) 0%, rgba(225, 110, 45, 0.12) 60%, rgba(212, 175, 55, 0.18) 100%);
+    opacity: 0.4;
     pointer-events: none;
 }
 
@@ -959,7 +954,7 @@ body {
     object-fit: cover;
     object-position: center 30%;
     display: block;
-    filter: grayscale(100%) contrast(1.32) brightness(0.75);
+    filter: grayscale(100%);
     transform: translateZ(0);
 }
 
@@ -973,16 +968,14 @@ body {
     object-position: center 30%;
     display: block;
     opacity: 0;
-    filter: saturate(1.85) contrast(1.12);
-    will-change: opacity, transform;
+    will-change: opacity;
     transform: translateZ(0);
-    transition: opacity 2.0s cubic-bezier(0.16, 1, 0.3, 1), transform 2.0s ease;
+    transition: opacity 1.2s ease;
 }
 
 .void-kinetic-chamber.is-scrolling .spiral-thumb-card .void-thumb-color {
     opacity: 1;
-    transform: scale(1.04) translateZ(0);
-    transition: opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1), transform 1.4s ease;
+    transition: opacity 0.8s ease;
 }
 
 /* Decorative Golden Fibonacci Spiral Watermark */

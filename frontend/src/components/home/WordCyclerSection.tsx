@@ -140,21 +140,46 @@ export default function WordCyclerSection() {
           <article className={`word-container${currentIdx === 0 ? " active" : ""}`}>
             <div className="left-images">
               <div className="left-img-wrapper stagger-img stagger-1">
-                <img src="/pictures/Casual/gus-tu-njana-O5IvDLsZAcE-unsplash.webp" alt="Clothes Top" />
+                <img
+                  src="/pictures/Casual/gus-tu-njana-O5IvDLsZAcE-unsplash.webp"
+                  alt="Clothes Top"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
               <div className="left-img-wrapper stagger-img stagger-4">
-                <img src="/pictures/Casual/shalom-ejiofor-t_prchAm4ag-unsplash.webp" alt="Clothes Bottom" />
+                <img
+                  src="/pictures/Casual/shalom-ejiofor-t_prchAm4ag-unsplash.webp"
+                  alt="Clothes Bottom"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
             </div>
             <div className="word-masonry">
               <div className="word-img large stagger-img stagger-2">
-                <img src="/pictures/Casual/black-scorpion-music-TSaDoFDc8JE-unsplash.webp" alt="Clothes Feature" />
+                <img
+                  src="/pictures/Casual/black-scorpion-music-TSaDoFDc8JE-unsplash.webp"
+                  alt="Clothes Feature"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
               <div className="word-img medium stagger-img stagger-3">
-                <img src="/pictures/Casual/pexels-kristina-kozlova-110223342-14495271.webp" alt="Clothes Cut" />
+                <img
+                  src="/pictures/Casual/pexels-kristina-kozlova-110223342-14495271.webp"
+                  alt="Clothes Cut"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
               <div className="word-img small stagger-img stagger-5">
-                <img src="/pictures/Cooperate/clay-banks-_3Sud4WPPYE-unsplash.webp" alt="Clothes Accent" />
+                <img
+                  src="/pictures/Cooperate/clay-banks-_3Sud4WPPYE-unsplash.webp"
+                  alt="Clothes Accent"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
             </div>
           </article>
@@ -163,21 +188,46 @@ export default function WordCyclerSection() {
           <article className={`word-container${currentIdx === 1 ? " active" : ""}`}>
             <div className="left-images">
               <div className="left-img-wrapper stagger-img stagger-1">
-                <img src="/pictures/Moments/drew-dizzy-graham-PVyhz0wmHdo-unsplash.webp" alt="Moments Top" />
+                <img
+                  src="/pictures/Moments/drew-dizzy-graham-PVyhz0wmHdo-unsplash.webp"
+                  alt="Moments Top"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
               <div className="left-img-wrapper stagger-img stagger-4">
-                <img src="/pictures/Moments/hassan-kibwana-9FtRopVGmWQ-unsplash.webp" alt="Moments Bottom" />
+                <img
+                  src="/pictures/Moments/hassan-kibwana-9FtRopVGmWQ-unsplash.webp"
+                  alt="Moments Bottom"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
             </div>
             <div className="word-masonry">
               <div className="word-img large stagger-img stagger-2">
-                <img src="/pictures/Moments/jayson-hinrichsen-h4w53bI7pI8-unsplash.webp" alt="Moments Feature" />
+                <img
+                  src="/pictures/Moments/jayson-hinrichsen-h4w53bI7pI8-unsplash.webp"
+                  alt="Moments Feature"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
               <div className="word-img medium stagger-img stagger-3">
-                <img src="/pictures/Moments/houcine-ncib-U8M8MX2x7Ug-unsplash.webp" alt="Moments Cut" />
+                <img
+                  src="/pictures/Moments/houcine-ncib-U8M8MX2x7Ug-unsplash.webp"
+                  alt="Moments Cut"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
               <div className="word-img small stagger-img stagger-5">
-                <img src="/pictures/Party/karsten-winegeart-UicC_FIozPc-unsplash.webp" alt="Moments Accent" />
+                <img
+                  src="/pictures/Party/karsten-winegeart-UicC_FIozPc-unsplash.webp"
+                  alt="Moments Accent"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
             </div>
           </article>
@@ -186,21 +236,46 @@ export default function WordCyclerSection() {
           <article className={`word-container${currentIdx === 2 ? " active" : ""}`}>
             <div className="left-images">
               <div className="left-img-wrapper stagger-img stagger-1">
-                <img src="/pictures/Rides/victor-furtuna-0mchrVHAYzg-unsplash.webp" alt="Rides Top" />
+                <img
+                  src="/pictures/Rides/victor-furtuna-0mchrVHAYzg-unsplash.webp"
+                  alt="Rides Top"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
               <div className="left-img-wrapper stagger-img stagger-4">
-                <img src="/pictures/Rides/adrian-newell-jWM41o-TMAw-unsplash.webp" alt="Rides Bottom" />
+                <img
+                  src="/pictures/Rides/adrian-newell-jWM41o-TMAw-unsplash.webp"
+                  alt="Rides Bottom"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
             </div>
             <div className="word-masonry">
               <div className="word-img large stagger-img stagger-2">
-                <img src="/pictures/Rides/elianna-gill-8bAPKqt6C7A-unsplash.webp" alt="Rides Feature" />
+                <img
+                  src="/pictures/Rides/elianna-gill-8bAPKqt6C7A-unsplash.webp"
+                  alt="Rides Feature"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
               <div className="word-img medium stagger-img stagger-3">
-                <img src="/pictures/Rides/talia-zsJZhl-dZMU-unsplash.webp" alt="Rides Cut" />
+                <img
+                  src="/pictures/Rides/talia-zsJZhl-dZMU-unsplash.webp"
+                  alt="Rides Cut"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
               <div className="word-img small stagger-img stagger-5">
-                <img src="/pictures/Rides/stefano-tanasi-FNlF0676UMU-unsplash.webp" alt="Rides Accent" />
+                <img
+                  src="/pictures/Rides/stefano-tanasi-FNlF0676UMU-unsplash.webp"
+                  alt="Rides Accent"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
             </div>
           </article>
@@ -209,21 +284,46 @@ export default function WordCyclerSection() {
           <article className={`word-container${currentIdx === 3 ? " active" : ""}`}>
             <div className="left-images">
               <div className="left-img-wrapper stagger-img stagger-1">
-                <img src="/pictures/Architecture/luke-van-zyl-koH7IVuwRLw-unsplash.webp" alt="Architecture Top" />
+                <img
+                  src="/pictures/Architecture/luke-van-zyl-koH7IVuwRLw-unsplash.webp"
+                  alt="Architecture Top"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
               <div className="left-img-wrapper stagger-img stagger-4">
-                <img src="/pictures/Architecture/ricardo-gomez-angel-opFPVxMRpP8-unsplash.webp" alt="Architecture Bottom" />
+                <img
+                  src="/pictures/Architecture/ricardo-gomez-angel-opFPVxMRpP8-unsplash.webp"
+                  alt="Architecture Bottom"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
             </div>
             <div className="word-masonry">
               <div className="word-img large stagger-img stagger-2">
-                <img src="/pictures/Architecture/rashed-moslem-cexfB8toXfc-unsplash.webp" alt="Architecture Feature" />
+                <img
+                  src="/pictures/Architecture/rashed-moslem-cexfB8toXfc-unsplash.webp"
+                  alt="Architecture Feature"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
               <div className="word-img medium stagger-img stagger-3">
-                <img src="/pictures/Architecture/sam-hFrRNecJWjY-unsplash.webp" alt="Architecture Cut" />
+                <img
+                  src="/pictures/Architecture/sam-hFrRNecJWjY-unsplash.webp"
+                  alt="Architecture Cut"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
               <div className="word-img small stagger-img stagger-5">
-                <img src="/pictures/Architecture/tofan-teodor-6_PsZvYqfdQ-unsplash.webp" alt="Architecture Accent" />
+                <img
+                  src="/pictures/Architecture/tofan-teodor-6_PsZvYqfdQ-unsplash.webp"
+                  alt="Architecture Accent"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
             </div>
           </article>
@@ -232,21 +332,46 @@ export default function WordCyclerSection() {
           <article className={`word-container${currentIdx === 4 ? " active" : ""}`}>
             <div className="left-images">
               <div className="left-img-wrapper stagger-img stagger-1">
-                <img src="/pictures/Future/shubham-dhage-O1rxducLjN0-unsplash.webp" alt="Future Top" />
+                <img
+                  src="/pictures/Future/shubham-dhage-O1rxducLjN0-unsplash.webp"
+                  alt="Future Top"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
               <div className="left-img-wrapper stagger-img stagger-4">
-                <img src="/pictures/Future/steve-johnson-wj_LPlw2Rns-unsplash.webp" alt="Future Bottom" />
+                <img
+                  src="/pictures/Future/steve-johnson-wj_LPlw2Rns-unsplash.webp"
+                  alt="Future Bottom"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
             </div>
             <div className="word-masonry">
               <div className="word-img large stagger-img stagger-2">
-                <img src="/pictures/Future/xu-haiwei-_3KdlCgHAn0-unsplash.webp" alt="Future Feature" />
+                <img
+                  src="/pictures/Future/xu-haiwei-_3KdlCgHAn0-unsplash.webp"
+                  alt="Future Feature"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
               <div className="word-img medium stagger-img stagger-3">
-                <img src="/pictures/Future/daniel-lincoln-kbBcocXzFD8-unsplash.webp" alt="Future Cut" />
+                <img
+                  src="/pictures/Future/daniel-lincoln-kbBcocXzFD8-unsplash.webp"
+                  alt="Future Cut"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
               <div className="word-img small stagger-img stagger-5">
-                <img src="/pictures/Future/shubham-dhage-TeAev-gzja0-unsplash.webp" alt="Future Accent" />
+                <img
+                  src="/pictures/Future/shubham-dhage-TeAev-gzja0-unsplash.webp"
+                  alt="Future Accent"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
             </div>
             <div className="future-closing-row">

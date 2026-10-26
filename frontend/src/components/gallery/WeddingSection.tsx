@@ -256,29 +256,39 @@ export default function WeddingSection() {
       "#dfa013",
     ];
 
+    let cachedW = 1200;
+    let cachedH = 800;
+    let cordPositions = [cachedW * 0.22, cachedW * 0.50, cachedW * 0.78];
+    let cordHeight = cachedH * 0.38;
+    let cardWidth = 280;
+    let cardBottomY = cachedH * 0.72;
+
     const resizeCanvas = () => {
       const container = containerRef.current;
       if (!container || !canvas) return;
       const rect = container.getBoundingClientRect();
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      canvas.width = rect.width * dpr;
-      canvas.height = rect.height * dpr;
-      canvas.style.width = `${rect.width}px`;
-      canvas.style.height = `${rect.height}px`;
+      cachedW = rect.width;
+      cachedH = rect.height;
+      cordPositions = [cachedW * 0.22, cachedW * 0.50, cachedW * 0.78];
+      cordHeight = cachedH * 0.38;
+      cardWidth = Math.min(320, cachedW * 0.28);
+      cardBottomY = cachedH * 0.72;
+      canvas.width = cachedW * dpr;
+      canvas.height = cachedH * dpr;
+      canvas.style.width = `${cachedW}px`;
+      canvas.style.height = `${cachedH}px`;
       ctx.scale(dpr, dpr);
     };
 
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
 
-    // Helper: spawn glitter along a vertical cord
-    const spawnCordSparkle = (cordEl: HTMLElement | null, w: number, h: number) => {
-      if (!cordEl || !containerRef.current) return;
-      const cRect = containerRef.current.getBoundingClientRect();
-      const elRect = cordEl.getBoundingClientRect();
-
-      const x = elRect.left - cRect.left + elRect.width / 2 + (Math.random() - 0.5) * 6;
-      const y = elRect.top - cRect.top + Math.random() * elRect.height;
+    // Fast coordinate-based sparkle spawn (Zero getBoundingClientRect in hot loop)
+    const spawnCordSparkle = (cordIdx: number, w: number, h: number) => {
+      const baseX = cordPositions[cordIdx] || w * 0.5;
+      const x = baseX + (Math.random() - 0.5) * 8;
+      const y = Math.random() * cordHeight;
 
       particles.push({
         x,
@@ -298,15 +308,11 @@ export default function WeddingSection() {
       });
     };
 
-    // Helper: spawn dripping gold dust from card bottom
-    const spawnCardDrip = (cardEl: HTMLElement | null, w: number, h: number) => {
-      if (!cardEl || !containerRef.current) return;
-      const cRect = containerRef.current.getBoundingClientRect();
-      const elRect = cardEl.getBoundingClientRect();
-
-      // Spawn across the bottom width of the card
-      const x = elRect.left - cRect.left + Math.random() * elRect.width;
-      const y = elRect.bottom - cRect.top + (Math.random() - 0.5) * 4;
+    // Fast coordinate-based drip spawn (Zero getBoundingClientRect in hot loop)
+    const spawnCardDrip = (cardIdx: number, w: number, h: number) => {
+      const baseX = cordPositions[cardIdx] || w * 0.5;
+      const x = baseX - cardWidth / 2 + Math.random() * cardWidth;
+      const y = cardBottomY + (Math.random() - 0.5) * 4;
 
       particles.push({
         x,
@@ -317,7 +323,7 @@ export default function WeddingSection() {
         alpha: 0.1,
         maxAlpha: 0.85 + Math.random() * 0.15,
         life: 0,
-        maxLife: 280, // survives to reach the river
+        maxLife: 280,
         type: "drip",
         color: goldPalette[Math.floor(Math.random() * goldPalette.length)],
         twinklePhase: Math.random() * Math.PI * 2,
@@ -335,7 +341,7 @@ export default function WeddingSection() {
       particles.push({
         x,
         y: riverY,
-        vx: 1.2 + Math.random() * 1.8, // steady rightward flow
+        vx: 1.2 + Math.random() * 1.8,
         vy: (Math.random() - 0.5) * 0.15,
         size: 1.0 + Math.random() * 2.6,
         alpha: 0.2,
@@ -351,23 +357,18 @@ export default function WeddingSection() {
     };
 
     // Pre-populate river with particles so the river is active immediately
-    const container = containerRef.current;
-    if (container) {
-      const cRect = container.getBoundingClientRect();
-      for (let i = 0; i < 90; i++) {
-        spawnRiverParticle(cRect.width, cRect.height, Math.random() * cRect.width);
-      }
+    for (let i = 0; i < 90; i++) {
+      spawnRiverParticle(cachedW, cachedH, Math.random() * cachedW);
     }
 
     let frameCount = 0;
+    let isSectionVisible = false;
 
     const render = () => {
+      if (!isSectionVisible) return;
       frameCount++;
-      const container = containerRef.current;
-      if (!container) return;
-      const rect = container.getBoundingClientRect();
-      const w = rect.width;
-      const h = rect.height;
+      const w = cachedW;
+      const h = cachedH;
       const riverThreshold = h - Math.max(95, h * 0.15);
 
       ctx.clearRect(0, 0, w, h);
@@ -385,16 +386,16 @@ export default function WeddingSection() {
       if (particles.length < maxParticles) {
         // Emit sparkling glitter from strings
         if (frameCount % 2 === 0) {
-          spawnCordSparkle(leftCordRef.current, w, h);
-          spawnCordSparkle(centerCordRef.current, w, h);
-          spawnCordSparkle(rightCordRef.current, w, h);
+          spawnCordSparkle(0, w, h);
+          spawnCordSparkle(1, w, h);
+          spawnCordSparkle(2, w, h);
         }
 
         // Emit dripping gold dust from bottom of cards
         if (frameCount % 3 === 0) {
-          spawnCardDrip(leftCardRef.current, w, h);
-          spawnCardDrip(centerCardRef.current, w, h);
-          spawnCardDrip(rightCardRef.current, w, h);
+          spawnCardDrip(0, w, h);
+          spawnCardDrip(1, w, h);
+          spawnCardDrip(2, w, h);
         }
 
         // Emit continuous river particles entering from the left or rising in the river bed
@@ -417,61 +418,49 @@ export default function WeddingSection() {
         p.alpha = Math.min(p.maxAlpha, p.maxAlpha * pulse);
 
         if (p.type === "sparkle") {
-          // Strings: gentle fluttering drift downwards
           p.x += p.vx + Math.sin(p.life * 0.05 + p.waveOffset) * 0.3;
           p.y += p.vy;
-          p.vy += 0.015; // slow gravity
+          p.vy += 0.015;
 
-          // If sparkle reaches the river, transition it into the flowing river
           if (p.y >= riverThreshold) {
             p.type = "river";
             p.vy *= 0.5;
             p.vx = 1.4 + Math.random() * 1.5;
           }
         } else if (p.type === "drip") {
-          // Card Drip: falls downward with realistic gravity acceleration
-          p.vy += 0.055; // gravity
-          p.vx += (Math.random() - 0.5) * 0.08; // air jitter
+          p.vy += 0.055;
+          p.vx += (Math.random() - 0.5) * 0.08;
           p.x += p.vx;
           p.y += p.vy;
 
-          // When dripping gold dust reaches the bottom river threshold:
-          // Smoothly convert vertical downward motion into horizontal rightward river velocity!
           if (p.y >= riverThreshold) {
             p.type = "river";
             p.y = riverThreshold + Math.random() * (h - riverThreshold);
-            p.vy = 0; // stop falling
-            p.vx = 1.6 + Math.random() * 1.8; // catch the current flowing right
-            p.maxLife = p.life + 350; // allow it to travel all the way right
+            p.vy = 0;
+            p.vx = 1.6 + Math.random() * 1.8;
+            p.maxLife = p.life + 350;
           }
         } else if (p.type === "river") {
-          // River: flows smoothly to the right, sipping out of screen on the right edge
           p.x += p.vx;
-          p.y += Math.sin(p.x * 0.02 + p.life * 0.04 + p.waveOffset) * 0.4; // undulating liquid surface wave
-
-          // Slowly accelerate rightward near bottom
+          p.y += Math.sin(p.x * 0.02 + p.life * 0.04 + p.waveOffset) * 0.4;
           p.vx = Math.min(p.vx + 0.005, 3.2);
 
-          // Subtle natural fade as it approaches far right
           if (p.x > w - 100) {
             p.alpha *= 0.98;
           }
         }
 
-        // Dead particle removal
         if (p.life > p.maxLife || p.x > w + 60 || p.y > h + 20) {
           particles.splice(i, 1);
           continue;
         }
 
-        // Render glowing particle
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fillStyle = p.color;
         ctx.globalAlpha = p.alpha;
         ctx.fill();
 
-        // Extra specular glint for larger particles
         if (p.size > 2.0 && pulse > 0.75) {
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.size * 2.2, 0, Math.PI * 2);
@@ -484,10 +473,28 @@ export default function WeddingSection() {
       animId = requestAnimationFrame(render);
     };
 
-    animId = requestAnimationFrame(render);
+    // Pause 100% of particle loop when off-screen to preserve 60-120 FPS on rest of page
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const isNowVisible = entry.isIntersecting;
+        if (isNowVisible && !isSectionVisible) {
+          isSectionVisible = true;
+          animId = requestAnimationFrame(render);
+        } else if (!isNowVisible && isSectionVisible) {
+          isSectionVisible = false;
+          cancelAnimationFrame(animId);
+        }
+      },
+      { rootMargin: "150px" }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
 
     return () => {
       cancelAnimationFrame(animId);
+      observer.disconnect();
       window.removeEventListener("resize", resizeCanvas);
     };
   }, []);

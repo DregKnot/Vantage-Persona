@@ -111,27 +111,34 @@ export default function HeroSection() {
         </div>
 
         {/* ----------------- TOP BAR OF CARD ----------------- */}
+        {/* ----------------- TOP BAR OF CARD ----------------- */}
         <div className="card-top-row">
-          {/* Left: Introductions & Heritage */}
+          {/* Left: Brand Identity, Main Headline, Supporting Head, Description & CTAs */}
           <div className="card-header-left">
-            <span className="card-eyebrow-mini">VANTAGE PERSONA • WINTER ATELIER</span>
-            <h1 className="card-introducing-title">INTRODUCING</h1>
-            <div className="card-meta-row">
-              <span className="meta-month">DECEMBER</span>
-              <span className="meta-year">2026</span>
-              <span className="meta-founded">YEAR <em>Founded</em></span>
-            </div>
-            <div className="card-discoverability-badge">
-              <span className="badge-tag">DISCOVERABILITY</span>
-              <span className="badge-sub">IMPORTANT CONTENT IS EASY TO FIND</span>
+            <span className="card-eyebrow-mini">VANTAGE PERSONA • THE ART OF PERSONAL STYLE</span>
+            <h1 className="hero-main-headline">BEYOND THE OUTFIT.</h1>
+            <h2 className="hero-supporting-heading">Style is personal. So are we.</h2>
+            <p className="hero-description-text">
+              We discover who you are, understand how you want to be seen, and curate a look that speaks for you. From everyday elegance to unforgettable occasions, every detail is considered.
+            </p>
+
+            {/* Action CTA Group */}
+            <div className="hero-cta-group">
+              <Link href="/appointment" className="hero-primary-btn">
+                <span>Discover Your Persona</span>
+                <span className="btn-arrow" aria-hidden="true">→</span>
+              </Link>
+              <Link href="/gallery" className="hero-secondary-btn">
+                <span>Explore Our Work</span>
+              </Link>
             </div>
           </div>
 
-          {/* Right: Modern UX / UI & Staggered Look Cards */}
+          {/* Right: Right-Side Editorial Text & Staggered Look Cards */}
           <div className="card-header-right">
-            <div className="card-right-label">
-              <span>Vantage</span>
-              <strong>FASHION</strong>
+            <div className="card-right-editorial">
+              <span className="right-editorial-lead">Your presence, reimagined.</span>
+              <span className="right-editorial-disciplines">Everyday · Professional · Occasion · Bespoke</span>
             </div>
 
             {/* Staggered Floating Look Previews */}
@@ -213,7 +220,7 @@ export default function HeroSection() {
                 />
                 <text className="seal-text">
                   <textPath href="#sealTextPath" startOffset="0%">
-                    ★ VANTAGE PERSONA ★ BESPOKE LUXURY ★ ATELIER SARTORIAL ★ 2026 ★
+                    ★ VANTAGE PERSONA ★ BESPOKE LUXURY ★ ATELIER SARTORIAL ★ EST. 2024 ★
                   </textPath>
                 </text>
               </svg>
@@ -225,12 +232,10 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* Bottom Right: Editorial Sartorial Terminology */}
-          <div className="card-editorial-terms">
-            <span className="term-item">Kurti</span>
-            <span className="term-item">Selwar</span>
-            <span className="term-item">T-Shirt</span>
-            <span className="term-highlight">Jacket wear</span>
+          {/* Bottom Right: Bottom Microcopy */}
+          <div className="card-bottom-right-micro">
+            <span className="bottom-microcopy-tag">CURATED FOR THE INDIVIDUAL</span>
+            <span className="bottom-microcopy-sub">✦ BESPOKE SARTORIAL ATELIER • EST. 2024</span>
           </div>
         </div>
       </div>

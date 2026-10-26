@@ -282,6 +282,19 @@ class MorphEngine {
 
     this.loadTextures();
 
+    this.isVisible = true;
+    this.intersectionObserver = new IntersectionObserver(([entry]) => {
+      const nowVisible = entry.isIntersecting;
+      if (nowVisible && !this.isVisible) {
+        this.isVisible = true;
+        this.raf = requestAnimationFrame(this.boundLoop);
+      } else if (!nowVisible && this.isVisible) {
+        this.isVisible = false;
+        cancelAnimationFrame(this.raf);
+      }
+    }, { rootMargin: '100px' });
+    this.intersectionObserver.observe(container);
+
     this.boundLoop = this.loop.bind(this);
     this.raf = requestAnimationFrame(this.boundLoop);
   }
@@ -333,6 +346,7 @@ class MorphEngine {
   }
 
   loop(t) {
+    if (!this.isVisible) return;
     this.program.uniforms.uTime.value = t * 0.001;
     if (!this.dragging && !this.animating) this.syncOptions();
     this.renderer.render({ scene: this.mesh });
@@ -499,6 +513,7 @@ class MorphEngine {
 
   destroy() {
     cancelAnimationFrame(this.raf);
+    if (this.intersectionObserver) this.intersectionObserver.disconnect();
     if (this.tween) this.tween.kill();
     this.resizeObserver.disconnect();
     this.canvas.removeEventListener('webglcontextlost', this.boundContextLost);

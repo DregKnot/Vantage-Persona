@@ -38,6 +38,8 @@ function AccessCard({ className, eyebrow, title, sub, images }: AccessCardProps)
             key={src}
             src={src}
             alt={`${title} - Look ${idx + 1}`}
+            loading="lazy"
+            decoding="async"
             style={{
               opacity: idx === currentIdx ? 1 : 0,
               zIndex: idx === currentIdx ? 2 : 1,

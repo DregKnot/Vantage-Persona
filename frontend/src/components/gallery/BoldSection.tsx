@@ -83,20 +83,6 @@ export default function BoldSection() {
       isNoiseVoid: true,
       meta: "ARCHIVE VOID // 01",
       coords: "06°30'N 03°24'E",
-      streamImages: [
-        getMicro("/pictures/BlackModels/pexels-harrun-muhammad-116282236-36741714.webp"),
-        getMicro("/pictures/BlackModels/pexels-jeferson-gomes-24831766-15332906.webp"),
-        getMicro("/pictures/BlackModels/pexels-jeferson-gomes-24831766-6895526.webp"),
-        getMicro("/pictures/BlackModels/pexels-jyron-barclay-2151526792-33423949.webp"),
-        getMicro("/pictures/BlackModels/pexels-khalifa-yahaya-650488521-36029414.webp"),
-        getMicro("/pictures/BlackModels/pexels-lucretius-mooka-2554524-9016422.webp"),
-        getMicro("/pictures/BlackModels/pexels-media-36514633.webp"),
-        getMicro("/pictures/BlackModels/pexels-media-36547359.webp"),
-        getMicro("/pictures/BlackModels/pexels-media-4081801.webp"),
-        getMicro("/pictures/BlackModels/pexels-media-6151574.webp"),
-        getMicro("/pictures/BlackModels/pexels-media-6334911.webp"),
-        getMicro("/pictures/BlackModels/pexels-media-11434885.webp")
-      ],
       streamSpeed: "30s",
     },
 
@@ -120,16 +106,6 @@ export default function BoldSection() {
       isSpiralVoid: true,
       meta: "ARCHIVE SPIRAL // 02",
       coords: "FIBONACCI // LATENT",
-      streamImages: [
-        getMicro("/pictures/BlackModels/pexels-marvellous-adu-2148798496-36506383.webp"),
-        getMicro("/pictures/BlackModels/pexels-marvellous-adu-2148798496-36506389.webp"),
-        getMicro("/pictures/BlackModels/pexels-nemmy-media-694031137-20145326.webp"),
-        getMicro("/pictures/BlackModels/pexels-paul-uchechukwu-246994638-39821505.webp"),
-        getMicro("/pictures/BlackModels/pexels-rance-d-grapher-1266939520-35066794.webp"),
-        getMicro("/pictures/BlackModels/pexels-twinkles_photos-414046518-35808804.webp"),
-        getMicro("/pictures/BlackModels/pexels-media-7410486.webp"),
-        getMicro("/pictures/BlackModels/pexels-media-7410489.webp")
-      ],
       streamSpeed: "22s",
     },
 
@@ -250,7 +226,6 @@ export default function BoldSection() {
                           id={item.id}
                           meta={item.meta}
                           coords={item.coords}
-                          streamImages={item.streamImages || []}
                           streamSpeed={item.streamSpeed}
                         />
                       );
@@ -264,7 +239,6 @@ export default function BoldSection() {
                           id={item.id}
                           meta={item.meta}
                           coords={item.coords}
-                          streamImages={item.streamImages || []}
                           streamSpeed={item.streamSpeed}
                         />
                       );

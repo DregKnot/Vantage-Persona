@@ -2,26 +2,51 @@
 
 import React, { useEffect, useRef, useState } from "react";
 
+// Directly self-contained micro-thumbnail stream for the 3D vortex
+const DEFAULT_SPIRAL_IMAGES = [
+  "/pictures/BlackModels/micro/pexels-marvellous-adu-2148798496-36506383.webp",
+  "/pictures/BlackModels/micro/pexels-marvellous-adu-2148798496-36506389.webp",
+  "/pictures/BlackModels/micro/pexels-nemmy-media-694031137-20145326.webp",
+  "/pictures/BlackModels/micro/pexels-paul-uchechukwu-246994638-39821505.webp",
+  "/pictures/BlackModels/micro/pexels-rance-d-grapher-1266939520-35066794.webp",
+  "/pictures/BlackModels/micro/pexels-twinkles_photos-414046518-35808804.webp",
+  "/pictures/BlackModels/micro/pexels-media-7410486.webp",
+  "/pictures/BlackModels/micro/pexels-media-7410489.webp",
+];
+
+// Precomputed mathematical helical coordinates (Computed once at module load, zero runtime allocation)
+const TOTAL_SPIRAL_CARDS = 16;
+const STEP_ANGLE = 45;
+const STEP_Y = 65;
+const SPIRAL_RADIUS = 118;
+
+const STATIC_SPIRAL_CARDS = Array.from({ length: TOTAL_SPIRAL_CARDS }, (_, i) => {
+  const src = DEFAULT_SPIRAL_IMAGES[i % DEFAULT_SPIRAL_IMAGES.length];
+  const angle = i * STEP_ANGLE;
+  const y = (i - 3) * STEP_Y;
+  return { id: i, src, angle, y };
+});
+
 interface AutonomousSpiralChamberProps {
   id?: string;
   meta?: string;
   coords?: string;
-  streamImages: string[];
+  streamImages?: string[];
   streamSpeed?: string;
 }
 
 /**
- * Autonomous Spiral Kinetic Chamber (3D Helical Fashion Vortex)
- * - Optimized with micro-thumbnails (/pictures/BlackModels/micro/)
+ * Autonomous Spiral Kinetic Chamber (Self-Contained 3D Helical Vortex)
+ * - Self-contained precomputed 3D coordinates: zero per-render trigonometric math
+ * - Direct micro-thumbnails (/pictures/BlackModels/micro/): zero runtime string replacement
  * - Single image layer per card, smooth GPU compositing
  * - Pauses 3D animation when scrolled off-screen
- * - Zero scroll listener layout thrashing
  */
 export default function AutonomousSpiralChamber({
   id = "spiral-void",
   meta = "ARCHIVE SPIRAL // 02",
   coords = "FIBONACCI // LATENT",
-  streamImages = [],
+  streamImages,
   streamSpeed = "22s",
 }: AutonomousSpiralChamberProps) {
   const chamberRef = useRef<HTMLDivElement>(null);
@@ -42,27 +67,14 @@ export default function AutonomousSpiralChamber({
     return () => observer.disconnect();
   }, []);
 
-  const getMicro = (path: string) => {
-    if (path.includes("/pictures/BlackModels/") && !path.includes("/micro/")) {
-      return path.replace("/pictures/BlackModels/", "/pictures/BlackModels/micro/");
-    }
-    return path;
-  };
-
-  // Mathematical Helical Geometry:
-  // 16 cards = 2 full 360-deg spiral turns (8 cards per turn, stepAngle = 45deg)
-  const totalCards = 16;
-  const stepAngle = 45;
-  const stepY = 65;
-  const radius = 118;
-
-  const cards = Array.from({ length: totalCards }, (_, i) => {
-    const rawSrc = streamImages[i % streamImages.length];
-    const imgSrc = getMicro(rawSrc);
-    const angle = i * stepAngle;
-    const y = (i - 3) * stepY;
-    return { id: i, src: imgSrc, angle, y };
-  });
+  const cards = streamImages && streamImages.length > 0
+    ? Array.from({ length: TOTAL_SPIRAL_CARDS }, (_, i) => {
+        const src = streamImages[i % streamImages.length];
+        const angle = i * STEP_ANGLE;
+        const y = (i - 3) * STEP_Y;
+        return { id: i, src, angle, y };
+      })
+    : STATIC_SPIRAL_CARDS;
 
   return (
     <article key={id} className="abstract-card noise-void spiral-chamber-card" aria-hidden="true">
@@ -85,7 +97,7 @@ export default function AutonomousSpiralChamber({
                 key={card.id}
                 className="spiral-thumb-card"
                 style={{
-                  transform: `rotateY(${card.angle}deg) translateZ(${radius}px) translateY(${card.y}px) rotateX(-5deg)`,
+                  transform: `rotateY(${card.angle}deg) translateZ(${SPIRAL_RADIUS}px) translateY(${card.y}px) rotateX(-5deg)`,
                 }}
               >
                 <img
