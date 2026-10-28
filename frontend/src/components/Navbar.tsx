@@ -64,8 +64,16 @@ export default function Navbar() {
       <header className="vantage-nav-container">
         <nav className="vantage-nav">
           <div className="nav-logo">
-            <Link href="/">
-              <img src="/pictures/Vantage personsa logo.svg" alt="Vantage Persona" />
+            <Link
+              href="/"
+              aria-label="Vantage Persona Home"
+              suppressHydrationWarning
+            >
+              <img
+                src="/Vantage-Persona-Brand-Kit/Vantage-Persona-Stacked-No-Tagline-Transparent.svg"
+                alt="Vantage Persona"
+                suppressHydrationWarning
+              />
             </Link>
           </div>
 

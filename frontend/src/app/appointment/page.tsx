@@ -245,7 +245,7 @@ export default function AppointmentPage() {
             </div>
             <div className="card-bottom-content">
               <div className="card-brand-icon">
-                <img src="/pictures/Vantage personsa logo.svg" alt="Vantage Icon" />
+                <img src="/Vantage-Persona-Brand-Kit/Vantage-Persona-Stacked-No-Tagline-Transparent.svg" alt="Vantage Persona" />
               </div>
               <div className="overlay-pills">
                 <span className="overlay-pill">Identity</span>

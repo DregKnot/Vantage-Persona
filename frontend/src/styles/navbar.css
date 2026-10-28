@@ -37,12 +37,16 @@
 }
 
 .nav-logo img {
-    height: 110px; /* Grand scale logo */
+    height: 58px;
     width: auto;
-    filter: invert(1);
-    /* Allow it to overflow the 85px container */
-    margin-top: 5px; 
+    object-fit: contain;
+    display: block;
     z-index: 10;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-logo a:hover img {
+    transform: scale(1.05);
 }
 
 /* Nav Pills Section (Centered) */
@@ -249,7 +253,7 @@
     }
 
     .nav-logo img {
-        height: 85px;
+        height: 48px;
     }
 }
 

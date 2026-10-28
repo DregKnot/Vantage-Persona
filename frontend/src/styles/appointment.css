@@ -662,12 +662,13 @@
 }
 
 .card-brand-icon {
-    opacity: 0.08; 
+    opacity: 0.9; 
 }
 
 .card-brand-icon img {
-    height: 60px;
+    height: 52px;
     width: auto;
+    object-fit: contain;
 }
 
 .solutions-card-split .overlay-pill {

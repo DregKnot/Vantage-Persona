@@ -3,9 +3,53 @@
 import React, { useState, useRef } from "react";
 import Link from "next/link";
 
+interface PresentationLook {
+  id: string;
+  step: string;
+  label: string;
+  subtitle: string;
+  image: string;
+  alt: string;
+}
+
+const PRESENTATIONS: PresentationLook[] = [
+  {
+    id: "everyday",
+    step: "01",
+    label: "Everyday",
+    subtitle: "Effortless Silhouette",
+    image: "/pictures/Casual/chris-mac-t3R6M_9GVRY-unsplash.webp",
+    alt: "Everyday elevated casual luxury tailoring with red beanie and textured dark overcoat",
+  },
+  {
+    id: "professional",
+    step: "02",
+    label: "Professional",
+    subtitle: "Executive Poise",
+    image: "/pictures/Casual/helga-pettersen-Z0EtZNXY_eE-unsplash.webp",
+    alt: "Professional tailored wool check coat with cream knit sleeve and leather shoulder bag",
+  },
+  {
+    id: "occasion",
+    step: "03",
+    label: "Occasion",
+    subtitle: "Ceremonial Gala",
+    image: "/pictures/Party/eyitayo-adekoya-oJmQ4oFtvbM-unsplash.webp",
+    alt: "Occasion evening haute couture and celebration ensemble",
+  },
+  {
+    id: "bespoke",
+    step: "04",
+    label: "Bespoke",
+    subtitle: "Atelier Signature",
+    image: "/pictures/Cooperate/ben-iwara-jHzZp4wYRbk-unsplash.webp",
+    alt: "Bespoke emerald textured atelier vest with tie and sunglasses",
+  },
+];
+
 export default function HeroSection() {
   const [modelTagOpen, setModelTagOpen] = useState(false);
-  const [activeCategory, setActiveCategory] = useState<string | null>("Model");
+  const [activePresentation, setActivePresentation] = useState<string>("everyday");
   const heroRef = useRef<HTMLElement>(null);
   const [mouseOffset, setMouseOffset] = useState({ x: 0, y: 0 });
 
@@ -134,59 +178,81 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* Right: Right-Side Editorial Text & Staggered Look Cards */}
+          {/* Right: Right-Side Editorial Text & 4 Curated Presentation Cards */}
           <div className="card-header-right">
             <div className="card-right-editorial">
               <span className="right-editorial-lead">Your presence, reimagined.</span>
-              <span className="right-editorial-disciplines">Everyday · Professional · Occasion · Bespoke</span>
+              <div
+                className="right-editorial-disciplines"
+                role="tablist"
+                aria-label="Style Presentations"
+              >
+                {PRESENTATIONS.map((item, index) => {
+                  const isActive = activePresentation === item.id;
+                  return (
+                    <React.Fragment key={item.id}>
+                      {index > 0 && <span className="discipline-dot" aria-hidden="true">·</span>}
+                      <button
+                        type="button"
+                        role="tab"
+                        aria-selected={isActive}
+                        className={`discipline-tab-btn ${isActive ? "active" : ""}`}
+                        onClick={() => setActivePresentation(item.id)}
+                      >
+                        {item.label.toUpperCase()}
+                      </button>
+                    </React.Fragment>
+                  );
+                })}
+              </div>
             </div>
 
-            {/* Staggered Floating Look Previews */}
-            <div className="staggered-look-stack">
-              {/* Look 1: Man */}
-              <div
-                className={`staggered-card card-man ${activeCategory === "Man" ? "active" : ""}`}
-                onClick={() => setActiveCategory(activeCategory === "Man" ? null : "Man")}
-                title="Explore Men's Tailoring"
-              >
-                <img
-                  src="/pictures/Casual/chris-mac-t3R6M_9GVRY-unsplash.webp"
-                  alt="Men's Collection Preview"
-                />
-                <button type="button" className="pill-tag-btn">
-                  <span className="tag-plus">+</span> Man
-                </button>
-              </div>
-
-              {/* Look 2: Woman */}
-              <div
-                className={`staggered-card card-woman ${activeCategory === "Woman" ? "active" : ""}`}
-                onClick={() => setActiveCategory(activeCategory === "Woman" ? null : "Woman")}
-                title="Explore Women's Couture"
-              >
-                <img
-                  src="/pictures/Casual/helga-pettersen-Z0EtZNXY_eE-unsplash.webp"
-                  alt="Women's Collection Preview"
-                />
-                <button type="button" className="pill-tag-btn">
-                  <span className="tag-plus">+</span> Women
-                </button>
-              </div>
-
-              {/* Look 3: Bespoke */}
-              <div
-                className={`staggered-card card-kids ${activeCategory === "Bespoke" ? "active" : ""}`}
-                onClick={() => setActiveCategory(activeCategory === "Bespoke" ? null : "Bespoke")}
-                title="Explore Bespoke Tailoring"
-              >
-                <img
-                  src="/pictures/Cooperate/ben-iwara-jHzZp4wYRbk-unsplash.webp"
-                  alt="Bespoke Collection Preview"
-                />
-                <button type="button" className="pill-tag-btn">
-                  <span className="tag-plus">+</span> Bespoke
-                </button>
-              </div>
+            {/* 4 Presentation Look Cards - Vertical Staircase Layout */}
+            <div
+              className="staircase-presentation-stack"
+              role="region"
+              aria-label="Curated Style Presentations Staircase"
+            >
+              {PRESENTATIONS.map((item, index) => {
+                const isActive = activePresentation === item.id;
+                return (
+                  <div
+                    key={item.id}
+                    className={`staircase-card step-${index + 1} ${isActive ? "active" : ""}`}
+                    onClick={() => setActivePresentation(item.id)}
+                    title={`Explore ${item.label} (${item.subtitle})`}
+                    role="button"
+                    tabIndex={0}
+                    style={{
+                      "--step-index": index,
+                    } as React.CSSProperties}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        setActivePresentation(item.id);
+                      }
+                    }}
+                  >
+                    <span className="staircase-step-num">{item.step}</span>
+                    <img
+                      src={item.image}
+                      alt={item.alt}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <button
+                      type="button"
+                      className="pill-tag-btn"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setActivePresentation(item.id);
+                      }}
+                    >
+                      <span className="tag-plus">+</span> {item.label}
+                    </button>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -195,18 +261,55 @@ export default function HeroSection() {
         <div className="card-bottom-row">
           {/* Bottom Left Group: Polaroid & Luxury Rotating Atelier Seal */}
           <div className="card-bottom-left-group">
-            <div className="floating-polaroid-card">
-              <div className="polaroid-image-box">
+            {/* The 4 Pillars of Presence: Atelier Philosophy Capsule */}
+            <div
+              className="floating-philosophy-card"
+              role="region"
+              aria-label="The 4 Pillars of Presence"
+              suppressHydrationWarning
+            >
+              <div className="philosophy-image-box">
                 <img
                   src="/pictures/Casual/albert-dera-ILip77SbmOE-unsplash.webp"
-                  alt="Burgundy Wool Knit Overcoat"
+                  alt="Vantage Persona Atelier Curation"
+                  loading="lazy"
+                  decoding="async"
+                  suppressHydrationWarning
                 />
+                <span className="philosophy-image-tag">ATELIER CODEX</span>
               </div>
-              <div className="polaroid-info">
-                <div className="polaroid-title">Burgundy Cotton Knit &amp; Overcoat</div>
-                <div className="polaroid-price">
-                  <strong>$756</strong> <small>+ VAT</small>
+
+              <div className="philosophy-content">
+                <span className="philosophy-eyebrow">THE FULL PERSONA SYSTEM</span>
+                <h3 className="philosophy-title">The 4 Pillars of Presence</h3>
+
+                <div className="philosophy-pillars-list">
+                  <div className="philosophy-pillar-item">
+                    <span className="pillar-num">01</span>
+                    <span className="pillar-name">Creative Direction</span>
+                    <span className="pillar-desc">Identity</span>
+                  </div>
+                  <div className="philosophy-pillar-item">
+                    <span className="pillar-num">02</span>
+                    <span className="pillar-name">Atelier Styling</span>
+                    <span className="pillar-desc">Silhouette</span>
+                  </div>
+                  <div className="philosophy-pillar-item">
+                    <span className="pillar-num">03</span>
+                    <span className="pillar-name">Lens &amp; Cinema</span>
+                    <span className="pillar-desc">Archive</span>
+                  </div>
+                  <div className="philosophy-pillar-item">
+                    <span className="pillar-num">04</span>
+                    <span className="pillar-name">Haute Beauté</span>
+                    <span className="pillar-desc">Grooming</span>
+                  </div>
                 </div>
+
+                <a href="#board-section" className="philosophy-trustees-link">
+                  <span>13 Artisans • The Board</span>
+                  <span className="link-arrow" aria-hidden="true">↘</span>
+                </a>
               </div>
             </div>
 
