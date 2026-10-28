@@ -505,15 +505,14 @@ export default function ServicesIntroSection() {
                 {isMounted && shouldRenderDome ? (
                   <DomeGallery
                     images={CHILDREN_IMAGES}
-                    overlayBlurColor="#D6C097"
+                    overlayBlurColor="#000000"
                     grayscale={false}
-                    fit={0.62}
-                    segments={17}
-                    minRadius={800}
-                    maxRadius={1300}
-                    zoomDistance={300}
-                    openedImageWidth="440px"
-                    openedImageHeight="560px"
+                    fit={0.96}
+                    segments={26}
+                    minRadius={850}
+                    maxRadius={1350}
+                    zoomDistance={330}
+                    imageBorderRadius="30px"
                   />
                 ) : (
                   <div className="dome-gallery-placeholder" />
