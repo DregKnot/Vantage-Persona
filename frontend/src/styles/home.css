@@ -941,31 +941,55 @@
     }
     .right-editorial-disciplines {
         justify-content: center;
+        flex-wrap: wrap;
+        row-gap: 4px;
     }
     .staircase-presentation-stack {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
         width: 100%;
-        max-width: 310px;
-        margin: 10px auto 0;
-        align-items: center;
+        max-width: 380px;
+        margin: 12px auto 0;
+        align-items: stretch;
+        justify-content: center;
     }
     .staircase-card {
-        width: 84px;
-        height: 104px;
-        margin-left: calc(var(--step-index) * 36px);
-        margin-top: -10px;
-        border-radius: 14px;
+        position: relative;
+        width: 100%;
+        max-width: none;
+        height: 96px;
+        margin-left: 0 !important;
+        margin-top: 0 !important;
+        border-radius: 12px;
         border-width: 2px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.16);
+    }
+    .staircase-card:hover,
+    .staircase-card.active {
+        transform: translateY(-3px) scale(1.03);
+        box-shadow: 0 10px 22px rgba(0, 0, 0, 0.22), 0 0 0 1.5px rgba(212, 175, 55, 0.85);
     }
     .staircase-step-num {
-        font-size: 0.54rem;
+        font-size: 0.52rem;
         padding: 1px 4px;
         top: 4px;
         left: 4px;
+        border-radius: 4px;
     }
     .pill-tag-btn {
-        font-size: 0.58rem;
-        padding: 2px 7px;
+        font-size: 0.52rem;
+        font-weight: 700;
+        padding: 2px 5px;
         bottom: 5px;
+        gap: 2px;
+        max-width: 90%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .pill-tag-btn .tag-plus {
+        font-size: 0.62rem;
     }
     .model-hero-img {
         height: clamp(380px, 60vh, 520px);
@@ -996,6 +1020,31 @@
     .model-interactive-pill {
         right: 10px;
         top: 48%;
+    }
+}
+
+@media (max-width: 420px) {
+    .staircase-presentation-stack {
+        gap: 6px;
+    }
+    .staircase-card {
+        height: 88px;
+        border-radius: 10px;
+        border-width: 1.5px;
+    }
+    .staircase-step-num {
+        font-size: 0.48rem;
+        padding: 1px 3px;
+        top: 3px;
+        left: 3px;
+    }
+    .pill-tag-btn {
+        font-size: 0.46rem;
+        padding: 1px 4px;
+        bottom: 4px;
+    }
+    .pill-tag-btn .tag-plus {
+        font-size: 0.54rem;
     }
 }
 
@@ -1518,8 +1567,11 @@
         0 36px 90px -18px rgba(0, 0, 0, 0.85);
     position: relative;
     overflow: hidden;
-    padding: 0 !important;
-    display: block;
+    padding: clamp(24px, 2.8vw, 36px) !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 18px;
     box-sizing: border-box;
 }
 
@@ -1528,7 +1580,29 @@
     display: none !important;
 }
 
-/* The 3D Dome Gallery spans the ENTIRE card canvas */
+/* Top Writeup Header & Controls: Cleanly structured above the dome */
+.children-card-top-writeup {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* Dedicated 3D Dome Stage: Free from any overlapping text */
+.children-card-dome-stage {
+    position: relative;
+    width: 100%;
+    flex: 1 1 auto;
+    min-height: clamp(480px, 54vh, 660px);
+    border-radius: 24px;
+    overflow: hidden;
+    z-index: 2;
+    background: #000000;
+}
+
+/* The 3D Dome Gallery canvas */
 .children-dome-full-canvas {
     position: absolute;
     inset: 0;
@@ -1545,24 +1619,9 @@
     height: 100%;
     z-index: 2;
     background: #000000;
-    padding: clamp(170px, 22vh, 210px) clamp(24px, 3.2vw, 40px) clamp(140px, 18vh, 170px);
+    padding: 20px;
     box-sizing: border-box;
     overflow-y: auto;
-}
-
-/* Glass Editorial Overlays positioned directly "in the dome" */
-.children-dome-editorial-overlay {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 5;
-    pointer-events: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: clamp(24px, 3.2vw, 38px);
-    box-sizing: border-box;
 }
 
 /* Top Glass Header */
@@ -2080,17 +2139,31 @@
         height: 160px;
     }
 
-    /* Card 3 Mobile: Stacked vertical order */
+    /* Card 3 Mobile: Stacked vertical order with writeup outside dome */
     .scroll-stack-card.vp-children-card,
     .vp-children-card {
         min-height: auto;
-        padding: 0 !important;
+        padding: 20px 14px !important;
+        gap: 16px;
     }
 
-    .children-dome-editorial-overlay {
-        position: relative;
-        padding: 22px 16px;
-        gap: 18px;
+    .children-card-top-writeup {
+        width: 100%;
+        gap: 12px;
+    }
+
+    .children-card-dome-stage {
+        width: 100%;
+        height: clamp(380px, 52vh, 460px);
+        min-height: 380px;
+        border-radius: 18px;
+    }
+
+    .children-dome-full-canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
     }
 
     .children-floating-header {
@@ -2098,20 +2171,6 @@
         align-items: flex-start;
         gap: 14px;
         padding: 18px 16px;
-    }
-
-    .children-floating-title-block,
-    .children-floating-para-block {
-        flex: 1 1 100%;
-        max-width: 100%;
-        padding-top: 0;
-    }
-
-    .children-dome-full-canvas {
-        position: relative;
-        height: 420px;
-        border-radius: 18px;
-        overflow: hidden;
     }
 
     .children-floating-footer {
@@ -2224,6 +2283,8 @@
     background: radial-gradient(circle at 15% 35%, rgba(38, 30, 24, 0.45) 0%, rgba(25, 24, 24, 1) 70%);
     position: relative;
     overflow: hidden;
+    content-visibility: auto;
+    contain-intrinsic-size: 850px;
 }
 
 .clothing-section-2::before {
@@ -2246,6 +2307,37 @@
     margin: 0 auto;
     position: relative;
     transition: min-height 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Modern Accordion Gallery Layout for Section 3 */
+.clothing-collection-2.cycler-accordion-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 92%;
+    max-width: 1480px;
+    margin: 0 auto;
+    position: relative;
+    grid-template-columns: none;
+    grid-template-rows: none;
+}
+
+.cycler-accordion-header {
+    width: 100%;
+    max-width: 860px;
+    grid-column: auto;
+    grid-row: auto;
+    align-self: flex-start;
+    padding: 0;
+}
+
+.cycler-accordion-stage {
+    position: relative;
+    width: 100%;
+    border-radius: 24px;
+    overflow: hidden;
+    background: rgba(13, 10, 8, 0.4);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
 }
 
 .clothing-collection-2.has-closing-quote {
@@ -2317,13 +2409,79 @@
 .elegance-heading {
     display: block;
     margin-bottom: 16px;
-    font-family: "Jura", "Cinzel", sans-serif;
-    font-size: 27px;
-    line-height: 1.45;
+    font-family: "Playfair Display", "Cinzel", "Jura", serif;
+    font-size: clamp(1.8rem, 2.3vw, 2.4rem);
+    line-height: 1.3;
     max-width: 720px;
-    font-weight: 300;
+    font-weight: 400;
     color: #f0ebe4;
-    letter-spacing: 0.015em;
+    letter-spacing: -0.01em;
+}
+
+.cycler-intro-lead {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: clamp(0.95rem, 1.05vw, 1.05rem);
+    line-height: 1.74;
+    color: #cfbda8;
+    margin: 0 0 24px 0;
+    max-width: 640px;
+    font-weight: 400;
+}
+
+/* Selectable Category Words (UNDERSTATED · EXPRESSIVE · ROOTED · REIMAGINED) */
+.cycler-category-selector {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 22px;
+    font-family: "Jura", "Plus Jakarta Sans", sans-serif;
+    font-size: 0.95rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+.cat-word-btn {
+    background: none;
+    border: none;
+    padding: 4px 0;
+    font-family: inherit;
+    font-size: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.45);
+    cursor: pointer;
+    transition: color 0.25s ease, transform 0.25s ease;
+    position: relative;
+}
+
+.cat-word-btn:hover {
+    color: #f8e3b4;
+    transform: translateY(-1px);
+}
+
+.cat-word-btn.active {
+    color: #d4af37;
+    font-weight: 700;
+}
+
+.cat-word-btn.active::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #d4af37;
+    border-radius: 1px;
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
+}
+
+.cat-separator {
+    color: rgba(214, 180, 120, 0.4);
+    font-weight: 300;
+    user-select: none;
 }
 
 .manifesto-zenith {
@@ -2941,6 +3099,8 @@
     padding: 100px 0 130px;
     position: relative;
     overflow: hidden;
+    content-visibility: auto;
+    contain-intrinsic-size: 850px;
 }
 
 .section-3::before {
@@ -3480,6 +3640,8 @@
     color: #14110f;
     border-top: 1px solid rgba(166, 138, 100, 0.25);
     border-bottom: 1px solid rgba(166, 138, 100, 0.25);
+    content-visibility: auto;
+    contain-intrinsic-size: 900px;
 }
 
 .section-4-bg-text {
@@ -4161,6 +4323,8 @@
     overflow: hidden;
     color: #fff;
     border-top: 1px solid rgba(214, 180, 120, 0.18);
+    content-visibility: auto;
+    contain-intrinsic-size: 750px;
 }
 
 .board-header {

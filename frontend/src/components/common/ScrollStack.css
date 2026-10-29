@@ -28,6 +28,9 @@
   color: #FBF4E6;
   transform-origin: 50% 0;
   will-change: transform;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .scroll-stack-card__shade {

@@ -178,6 +178,7 @@ export default function ServicesIntroSection() {
   const [isGridMode, setIsGridMode] = useState(false);
   const [selectedGridImg, setSelectedGridImg] = useState<string | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
+  const domeTriggerRef = useRef<HTMLDivElement>(null);
   const [isMounted, setIsMounted] = useState(false);
   const [shouldRenderDome, setShouldRenderDome] = useState(false);
 
@@ -190,7 +191,7 @@ export default function ServicesIntroSection() {
 
   useEffect(() => {
     if (shouldRenderDome) return;
-    const el = sectionRef.current;
+    const el = domeTriggerRef.current || sectionRef.current;
     if (!el) return;
 
     if (!("IntersectionObserver" in window)) {
@@ -205,7 +206,7 @@ export default function ServicesIntroSection() {
           observer.disconnect();
         }
       },
-      { rootMargin: "500px 0px" } // Preload 500px before scrolling into view for seamless appearance
+      { rootMargin: "450px 0px" } // Preload 450px before Card 3 reaches view
     );
 
     observer.observe(el);
@@ -490,63 +491,12 @@ export default function ServicesIntroSection() {
           {/* =====================================================================
              CARD 3: CHILDREN'S STYLING & PHOTOGRAPHY
              - Full-card panoramic 3D Dome Gallery
-             - Children writeup integrated directly in the dome as floating glass panels
-             - Champagne Sand #D6C097 Atmosphere
-             - Close, vibrant, upright images in gentle panoramic arc
+             - Writeup placed outside/above the dome canvas for perfect mobile responsiveness
+             - Obsidian Black #000000 Atmosphere matching the 3D dome geometry
              ===================================================================== */}
           <ScrollStackItem itemClassName="vp-service-card vp-children-card">
-            {/* The 3D Dome Gallery spans the ENTIRE card canvas */}
-            {!isGridMode ? (
-              <div
-                className="children-dome-full-canvas"
-                aria-hidden={isGridMode}
-                suppressHydrationWarning
-              >
-                {isMounted && shouldRenderDome ? (
-                  <DomeGallery
-                    images={CHILDREN_IMAGES}
-                    overlayBlurColor="#000000"
-                    grayscale={false}
-                    fit={0.96}
-                    segments={26}
-                    minRadius={850}
-                    maxRadius={1350}
-                    zoomDistance={330}
-                    imageBorderRadius="30px"
-                  />
-                ) : (
-                  <div className="dome-gallery-placeholder" />
-                )}
-              </div>
-            ) : (
-              /* Grid Fallback Mode */
-              <div className="children-grid-full-canvas">
-                <div className="children-grid-view">
-                  {CHILDREN_IMAGES.map((img, idx) => (
-                    <div
-                      key={idx}
-                      className="children-grid-card"
-                      role="button"
-                      tabIndex={0}
-                      onClick={() => setSelectedGridImg(img.fullSrc || img.src)}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter" || e.key === " ") {
-                          setSelectedGridImg(img.fullSrc || img.src);
-                        }
-                      }}
-                      aria-label={`View ${img.title || "children photograph"}`}
-                    >
-                      <img src={img.src} alt={img.alt} loading="lazy" decoding="async" />
-                      <span className="children-grid-title">{img.title}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Editorial writeup integrated directly in the dome */}
-            <div className="children-dome-editorial-overlay">
-              {/* Top Glass Header */}
+            {/* Top Writeup Header & Controls: Placed outside the dome canvas */}
+            <div className="children-card-top-writeup">
               <div className="children-floating-header">
                 <div className="children-floating-title-block">
                   <div className="children-label-wrap">
@@ -629,65 +579,116 @@ export default function ServicesIntroSection() {
                   <span>{isGridMode ? "View in 3D dome" : "View as grid"}</span>
                 </button>
               </div>
+            </div>
 
-              {/* Bottom Glass Footer with Supporting Copy & Both Actions */}
-              <div className="children-floating-footer">
-                <div className="children-support-col">
-                  <p className="children-support-text">
-                    Just want beautiful photographs of your child? You’re welcome
-                    here, too. Book a photoshoot on its own, choose styling for an
-                    occasion, or bring both together. Come just for them, or make
-                    it a family moment.
-                  </p>
+            {/* Dedicated 3D Dome Stage: Completely unobstructed by text */}
+            <div ref={domeTriggerRef} className="children-card-dome-stage">
+              {!isGridMode ? (
+                <div
+                  className="children-dome-full-canvas"
+                  aria-hidden={isGridMode}
+                  suppressHydrationWarning
+                >
+                  {isMounted && shouldRenderDome ? (
+                    <DomeGallery
+                      images={CHILDREN_IMAGES}
+                      overlayBlurColor="#000000"
+                      grayscale={false}
+                      fit={0.96}
+                      segments={26}
+                      minRadius={850}
+                      maxRadius={1350}
+                      zoomDistance={330}
+                      imageBorderRadius="30px"
+                    />
+                  ) : (
+                    <div className="dome-gallery-placeholder" />
+                  )}
                 </div>
-
-                <div className="children-actions-col">
-                  <Link
-                    href="/appointment?service=children-photoshoot"
-                    className="children-action-btn primary-children-btn"
-                    aria-label="Book a Children's Photoshoot"
-                  >
-                    <span className="btn-text">Book a Children’s Photoshoot</span>
-                    <span className="btn-icon" aria-hidden="true">
-                      <svg
-                        width="18"
-                        height="18"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.75"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
+              ) : (
+                /* Grid Fallback Mode */
+                <div className="children-grid-full-canvas">
+                  <div className="children-grid-view">
+                    {CHILDREN_IMAGES.map((img, idx) => (
+                      <div
+                        key={idx}
+                        className="children-grid-card"
+                        role="button"
+                        tabIndex={0}
+                        onClick={() => setSelectedGridImg(img.fullSrc || img.src)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter" || e.key === " ") {
+                            setSelectedGridImg(img.fullSrc || img.src);
+                          }
+                        }}
+                        aria-label={`View ${img.title || "children photograph"}`}
                       >
-                        <path d="M5 12h14" />
-                        <path d="m12 5 7 7-7 7" />
-                      </svg>
-                    </span>
-                  </Link>
-
-                  <Link
-                    href="/appointment?service=children-styling"
-                    className="children-action-btn secondary-children-btn"
-                    aria-label="Explore Children's Styling"
-                  >
-                    <span className="btn-text">Explore Children’s Styling</span>
-                    <span className="btn-icon" aria-hidden="true">
-                      <svg
-                        width="18"
-                        height="18"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.75"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M5 12h14" />
-                        <path d="m12 5 7 7-7 7" />
-                      </svg>
-                    </span>
-                  </Link>
+                        <img src={img.src} alt={img.alt} loading="lazy" decoding="async" />
+                        <span className="children-grid-title">{img.title}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
+              )}
+            </div>
+
+            {/* Bottom Glass Footer with Supporting Copy & Both Actions */}
+            <div className="children-floating-footer">
+              <div className="children-support-col">
+                <p className="children-support-text">
+                  Just want beautiful photographs of your child? You’re welcome
+                  here, too. Book a photoshoot on its own, choose styling for an
+                  occasion, or bring both together. Come just for them, or make
+                  it a family moment.
+                </p>
+              </div>
+
+              <div className="children-actions-col">
+                <Link
+                  href="/appointment?service=children-photoshoot"
+                  className="children-action-btn primary-children-btn"
+                  aria-label="Book a Children's Photoshoot"
+                >
+                  <span className="btn-text">Book a Children’s Photoshoot</span>
+                  <span className="btn-icon" aria-hidden="true">
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.75"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M5 12h14" />
+                      <path d="m12 5 7 7-7 7" />
+                    </svg>
+                  </span>
+                </Link>
+
+                <Link
+                  href="/appointment?service=children-styling"
+                  className="children-action-btn secondary-children-btn"
+                  aria-label="Explore Children's Styling"
+                >
+                  <span className="btn-text">Explore Children’s Styling</span>
+                  <span className="btn-icon" aria-hidden="true">
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.75"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M5 12h14" />
+                      <path d="m12 5 7 7-7 7" />
+                    </svg>
+                  </span>
+                </Link>
               </div>
             </div>
 

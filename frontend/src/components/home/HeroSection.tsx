@@ -51,19 +51,45 @@ export default function HeroSection() {
   const [modelTagOpen, setModelTagOpen] = useState(false);
   const [activePresentation, setActivePresentation] = useState<string>("everyday");
   const heroRef = useRef<HTMLElement>(null);
-  const [mouseOffset, setMouseOffset] = useState({ x: 0, y: 0 });
+  const rafRef = useRef<number | null>(null);
 
-  // Subtle 3D tilt on mouse move
+  // Subtle 3D tilt on mouse move directly injecting CSS custom properties
+  // Completely eliminates 60+ React component re-renders per second!
   const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
     if (!heroRef.current) return;
-    const rect = heroRef.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    setMouseOffset({ x: x * 12, y: y * 12 });
+    const clientX = e.clientX;
+    const clientY = e.clientY;
+    if (rafRef.current) return;
+
+    rafRef.current = requestAnimationFrame(() => {
+      rafRef.current = null;
+      if (!heroRef.current) return;
+      const rect = heroRef.current.getBoundingClientRect();
+      const x = ((clientX - rect.left) / rect.width - 0.5) * 12;
+      const y = ((clientY - rect.top) / rect.height - 0.5) * 12;
+
+      heroRef.current.style.setProperty("--hero-bg-x", `${-x * 0.4}px`);
+      heroRef.current.style.setProperty("--hero-bg-y", `${-y * 0.4}px`);
+      heroRef.current.style.setProperty("--hero-card-x", `${x * 0.5}px`);
+      heroRef.current.style.setProperty("--hero-card-y", `${y * 0.5}px`);
+      heroRef.current.style.setProperty("--hero-model-x", `${x * 1.1}px`);
+      heroRef.current.style.setProperty("--hero-model-y", `${y * 0.8}px`);
+    });
   };
 
   const handleMouseLeave = () => {
-    setMouseOffset({ x: 0, y: 0 });
+    if (rafRef.current) {
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = null;
+    }
+    if (heroRef.current) {
+      heroRef.current.style.setProperty("--hero-bg-x", "0px");
+      heroRef.current.style.setProperty("--hero-bg-y", "0px");
+      heroRef.current.style.setProperty("--hero-card-x", "0px");
+      heroRef.current.style.setProperty("--hero-card-y", "0px");
+      heroRef.current.style.setProperty("--hero-model-x", "0px");
+      heroRef.current.style.setProperty("--hero-model-y", "0px");
+    }
   };
 
   return (
@@ -82,7 +108,7 @@ export default function HeroSection() {
           className="hero-bg-image"
           style={{
             backgroundImage: "url('/pictures/pexels-joerg-hartmann-626385254-28388982.webp')",
-            transform: `scale(1.1) translate3d(${-mouseOffset.x * 0.4}px, ${-mouseOffset.y * 0.4}px, 0)`,
+            transform: "scale(1.1) translate3d(var(--hero-bg-x, 0px), var(--hero-bg-y, 0px), 0)",
           }}
         />
         {/* Warm Golden / Amber Vignette Overlay */}
@@ -140,7 +166,7 @@ export default function HeroSection() {
       <div
         className="hero-glass-card"
         style={{
-          transform: `translate3d(${mouseOffset.x * 0.5}px, ${mouseOffset.y * 0.5}px, 0)`,
+          transform: "translate3d(var(--hero-card-x, 0px), var(--hero-card-y, 0px), 0)",
         }}
       >
         {/* Grain Texture Overlay */}
@@ -350,7 +376,7 @@ export default function HeroSection() {
         <div
           className="model-portrait-wrapper"
           style={{
-            transform: `translate3d(${mouseOffset.x * 1.1}px, ${mouseOffset.y * 0.8}px, 0)`,
+            transform: "translate3d(var(--hero-model-x, 0px), var(--hero-model-y, 0px), 0)",
           }}
         >
           <img

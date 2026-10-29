@@ -124,6 +124,26 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
     let last = 0;
     let points: number[] = [];
     let reach = 0;
+    let isInView = true;
+    let cachedHeights: number[] | null = null;
+
+    const visibilityObserver =
+      typeof IntersectionObserver !== 'undefined'
+        ? new IntersectionObserver(
+            entries => {
+              const intersecting = entries[0].isIntersecting;
+              if (intersecting !== isInView) {
+                isInView = intersecting;
+                if (isInView) schedule();
+              }
+            },
+            { rootMargin: '400px 0px' }
+          )
+        : null;
+
+    if (visibilityObserver) {
+      visibilityObserver.observe(root);
+    }
 
     const readScroll = () => (windowed ? window.scrollY : root.scrollTop);
     const maxScroll = () =>
@@ -142,37 +162,50 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
 
     const update = () => {
       frame = 0;
+      if (!isInView) return;
+
       const settings = settingsRef.current;
       const slots = Array.from(inner.children).filter(child => child.hasAttribute('data-stack-slot')) as HTMLElement[];
       if (!settings || !slots.length) return;
 
+      // PHASE 1: Synchronized Geometry Reads (Batch all DOM reads to avoid layout thrashing)
       const viewHeight = windowed ? window.innerHeight : root.clientHeight;
       const viewTop = windowed ? 0 : root.getBoundingClientRect().top + root.clientTop;
       const stackTop = resolveOffset(settings.stackPosition, viewHeight);
       const offset = settings.itemStackDistance;
-      const heights = slots.map(slot => slot.offsetHeight);
+
+      // Cache card heights to eliminate forced synchronous reflows on every scroll frame
+      if (!cachedHeights || cachedHeights.length !== slots.length) {
+        cachedHeights = slots.map(slot => slot.offsetHeight);
+      }
+      const heights = cachedHeights;
+
+      const innerRectTop = inner.getBoundingClientRect().top;
       const tops = slots.map(slot => slot.getBoundingClientRect().top);
       const lastPin = stackTop + (slots.length - 1) * offset;
       const padTop = windowed ? 0 : stackTop;
       const endHeight =
         settings.holdDistance + (windowed ? 0 : Math.max(0, viewHeight - lastPin - heights[heights.length - 1]));
 
-      let moved = write('padTop', padTop, (value: number) => {
+      // PHASE 2: Apply Layout Dimensions (Cached write - only mutates DOM if values change)
+      write('padTop', padTop, (value: number) => {
         inner.style.paddingTop = `${value}px`;
       });
-      moved =
-        write('endHeight', endHeight, (value: number) => {
-          end.style.height = `${value}px`;
-        }) || moved;
-
-      let flow = inner.getBoundingClientRect().top - viewTop + readScroll() + padTop;
-      points = heights.map((height, i) => {
-        const point = flow - stackTop - i * offset;
-        flow += height + settings.itemDistance;
-        return point;
+      write('endHeight', endHeight, (value: number) => {
+        end.style.height = `${value}px`;
       });
-      reach = Math.max(40, (heights[0] + settings.itemDistance - offset) / 2);
 
+      if (settings.snap) {
+        let flow = innerRectTop - viewTop + readScroll() + padTop;
+        points = heights.map((height, i) => {
+          const point = flow - stackTop - i * offset;
+          flow += height + settings.itemDistance;
+          return point;
+        });
+        reach = Math.max(40, (heights[0] + settings.itemDistance - offset) / 2);
+      }
+
+      // PHASE 3: Card Depth & Transform Calculations
       const depths = slots.map(() => 0);
       let lastCover = 0;
       for (let j = 1; j < slots.length; j++) {
@@ -184,6 +217,7 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
         lastCover = cover;
       }
 
+      // PHASE 4: Write Hardware-Accelerated Transforms (No layout invalidation)
       const dimStep = Math.min(Math.max(settings.dimAmount, 0), 1);
       slots.forEach((slot, i) => {
         const card = slot.firstElementChild as HTMLElement | null;
@@ -215,12 +249,15 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
         complete = done;
         if (done) settings.onStackComplete?.();
       }
-
-      if (moved) schedule();
     };
 
     const schedule = () => {
       if (!frame) frame = requestAnimationFrame(update);
+    };
+
+    const onResize = () => {
+      cachedHeights = null;
+      schedule();
     };
 
     const step = (now: number) => {
@@ -273,6 +310,7 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
     };
 
     const onScroll = () => {
+      if (!isInView) return;
       schedule();
       if (!gliding) settleSoon();
     };
@@ -301,15 +339,20 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
       settleSoon();
     };
 
-    const observer = new ResizeObserver(schedule);
+    const observer = new ResizeObserver(onResize);
     observer.observe(root);
     observer.observe(inner);
     target.addEventListener('scroll', onScroll, { passive: true });
-    target.addEventListener('wheel', onWheel as any, { passive: false });
+
+    // Only attach non-passive wheel interceptor if smoothScroll is explicitly enabled
+    if (settingsRef.current?.smoothScroll) {
+      target.addEventListener('wheel', onWheel as any, { passive: false });
+    }
+
     target.addEventListener('pointerdown', onPress, { passive: true });
     window.addEventListener('pointerup', onRelease, { passive: true });
     window.addEventListener('pointercancel', onRelease, { passive: true });
-    window.addEventListener('resize', schedule);
+    window.addEventListener('resize', onResize);
     scheduleRef.current = schedule;
     update();
 
@@ -318,12 +361,15 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
       cancelAnimationFrame(glide);
       window.clearTimeout(rest);
       observer.disconnect();
+      if (visibilityObserver) visibilityObserver.disconnect();
       target.removeEventListener('scroll', onScroll);
-      target.removeEventListener('wheel', onWheel as any);
+      if (settingsRef.current?.smoothScroll) {
+        target.removeEventListener('wheel', onWheel as any);
+      }
       target.removeEventListener('pointerdown', onPress);
       window.removeEventListener('pointerup', onRelease);
       window.removeEventListener('pointercancel', onRelease);
-      window.removeEventListener('resize', schedule);
+      window.removeEventListener('resize', onResize);
       scheduleRef.current = null;
     };
   }, [useWindowScroll]);
